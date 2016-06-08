@@ -65,7 +65,9 @@ router.get('/addRoute', function(req, res) {
 });
 
 
-
+router.get('/checkFigure', function(req, res) {
+  res.render('checkFigure', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+});
 
 
 

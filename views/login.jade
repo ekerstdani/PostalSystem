@@ -1,3 +1,83 @@
 extends layout
 
 block content
+    nav(class="navbar navbar-default navbar-fixed-top")
+        div(class="container-fluid")
+            div(class="navbar-header")
+                a(class="navbar-brand" href="/") !{title}
+
+            div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+                ul(class="nav navbar-nav")
+                    li
+                        a(href="/") Home
+                    li
+                        a(href="/browse") Browse
+                    if(signedInUser)
+                        li
+                            a(href="/addItem") Sell
+                    else
+                        li
+                            a(href="/login?message=Please login first.&redirect=/addItem") Sell
+
+                
+
+                ul(class="nav navbar-nav navbar-right")
+                    if signedInUser
+                        li
+                            a(href="/profile?user=" + id class="btn-default") Credit:
+                                &nbsp;
+                                span(class="text-info") $!{money}
+
+                        li
+                            a(href="/userPage" class="btn-primary") !{signedInUser}
+                        li
+                            a(href="/logout") Logout
+                    else
+                        li
+                            a(href="/login") Sign In
+                        li
+                            a(href="/signUp") Sign Up
+
+    script(type='text/javascript').
+        function hideMessage() {
+            document.getElementById("message").style.display = 'none';
+        }
+        
+        function showOptions() {
+          document.getElementById('userOptions').style.display = 'block';
+        };
+    
+        function hideOptions() {
+          document.getElementById('userOptions').style.display = 'none';
+        };
+        
+        form(class="navbar-form" role="search" action="/search" style="margin-top:10px;")
+                    div(class="input-group")
+                        input(type="text" class="form-control input-sm" placeholder="Search products..." name="searchTerm" id="searchTerm")
+                        span(class="input-group-btn")
+                            button(class="btn btn-primary btn-sm" type="submit")
+                                span(class="glyphicon glyphicon-search" aria-hidden="true")
+
+    br
+    br
+    br
+    br
+
+    div(class="well" style="margin-left:20%; margin-right:20%;")
+        if message
+            div(class="alert alert-dismissible alert-danger" id="message")
+                button(type="button" class="close" onclick="hideMessage();") &times;
+                p(align="center") !{message}
+
+        div(class="row search")
+            div(class="col-sm-7 col-sm-offset-2")
+                form(role="form" action="/doLogin")
+                    div(class="form-group")
+                        label(for="username" class="col-lg-2 control-label") Username
+                        input(type="text" class="form-control input-sm" placeholder="Username" id="username" name="username")
+                    div(class="form-group")
+                        label(for="password" class="col-lg-2 control-label") Password
+                        input(type="password" class="form-control input-sm" placeholder="Password" id="password" name="password")
+                    div(class="form-group" align="center")
+                            button(type="reset" class="btn btn-default") Cancel
+                            button(type="submit" class="btn btn-primary") Sign In

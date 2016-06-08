@@ -5,24 +5,25 @@ block content
     div(class="container-fluid")
       div(class="navbar-header")
         a(class="navbar-brand" href="/") !{title}
-        form(class="navbar-form navbar-left" role="search" action="/search" style="margin-top:10px;")
-          div(class="input-group")
-            input(type="text" class="form-control input-sm" placeholder="Search Routes" name="searchTerm" id="searchTerm")
-            span(class="input-group-btn")
-              button(class="btn-group.btn-group-justified btn-primary btn-sm" type="submit")
-                span(class="glyphicon glyphicon-search" aria-hidden="true")
-      div(class="btn-group.btn-group-justified" roles="group" id="bs-example-navbar-collapse-1")
-        
-        
-        ul(class="nav navbar-nav nav-bar-left")
+
+      div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+        ul(class="nav navbar-nav")
           li(class="active")
             a(href="/") Home
-          li
+            
+          if(signedInUser)
+           li
+            a(href="/checkFigure") Check Figure
+          else
+           li
+            a(href="/login?message=Please login first.&redirect=/checkFigure") Check Figure
           
           div(class= "btn-group" role="group")
            button(class='btn btn-group.btn-group-justified dropdown-toggle' type' button' id='dropdownmenu'
           data-toggle='dropdown' aria-haspopup='true' aria-expanded='true') Routes
             span(class='caret')
+           
+           
            ul(class='dropdown-menu' aria-labelledby='dropdownmenu')
             li
              a(href='/routes') Routes
@@ -33,21 +34,17 @@ block content
              a(href='/editRoute') Edit Route
             li
              a(href='/addRoute') Add Route
-            
- 
+             
+             
+             
+             
 
-            
-            
-            
-            
-            
-          if(signedInUser)
-                        li
-                            a(href="/checkFigure") Check Figures
-                    else
-                        li
-                            a(href="/login?message=Please login first.&redirect=/checkFigure") Check Figures
-
+        form(class="navbar-form navbar-left" role="search" action="/search" style="margin-top:10px;")
+          div(class="input-group")
+            input(type="text" class="form-control input-sm" placeholder="Search Routes" name="searchTerm" id="searchTerm")
+            span(class="input-group-btn")
+              button(class="btn btn-primary btn-sm" type="submit")
+                span(class="glyphicon glyphicon-search" aria-hidden="true")
 
         ul(class="nav navbar-nav navbar-right")
           if signedInUser
@@ -66,7 +63,7 @@ block content
             li
               a(href="/login") Sign In
             li
-              a(href="/signup") Sign Up
+              a(href="/signUp") Sign Up
 
   script(type='text/javascript').
     function hideMessage() {
@@ -86,7 +83,16 @@ block content
   br
   br
 
-  
+  div(style="margin-left:20%; margin-right:20%;")
+    if message
+      if message == "Cannot +1 yourself"
+        div(class="alert alert-dismissible alert-danger" id="message")
+          button(type="button" class="close" onclick="hideMessage();") &times;
+          p(align="center") !{message}
+      else
+        div(class="alert alert-dismissible alert-success" id="message")
+          button(type="button" class="close" onclick="hideMessage();") &times;
+          p(align="center") !{message}
 
   center
     img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/KPS_Consulting_Logo.svg/500px-KPS_Consulting_Logo.svg.png")
@@ -97,7 +103,47 @@ block content
     div(class="col-sm-6 col-sm-offset-3")
       form(role="form" action="/search")
         div(class="input-group")
-          input(type="text" class="form-control input-sm" placeholder="Search Routes" name="searchTerm" id="searchTerm")
+          input(type="text" class="form-control input-sm" placeholder="Search products..." name="searchTerm" id="searchTerm")
           span(class="input-group-btn")
             button(class="btn btn-primary btn-sm" type="submit")
               span(class="glyphicon glyphicon-search" aria-hidden="true")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
