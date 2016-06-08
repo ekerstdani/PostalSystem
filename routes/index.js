@@ -70,6 +70,10 @@ router.get('/checkFigure', function(req, res) {
 });
 
 
+router.get('/logout', function(req, res) {
+	signedInUser= false
+  res.render('index', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+});
 
 
 
