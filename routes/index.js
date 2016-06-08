@@ -16,7 +16,7 @@ pg.connect(database, function (err) {
   console.log('Connected to database.');
 });
 
-var websiteName = 'Website Name';
+var websiteName = 'KPS';
 var signedInUser = '';
 var signedInUserRealname = '';
 var signedInUserUID = 0;
@@ -33,6 +33,10 @@ router.get('/', function(req, res) {
   res.render('index', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
 });
 
+/* GET deleteRoute page. */
+router.get('/deleteRoute', function(req, res) {
+  res.render('deleteRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+});
 
 
 /* GET routes page. */
@@ -40,12 +44,24 @@ router.get('/routes', function(req, res) {
   res.render('routes', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
 });
 
-
+/* GET signup page. */
+router.get('/signup', function(req, res) {
+  res.render('signup', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+});
 
 
 
 router.get('/login', function(req, res) {
   res.render('login', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+});
+
+router.get('/editRoute', function(req, res) {
+  res.render('editRoute', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+});
+
+
+router.get('/addRoute', function(req, res) {
+  res.render('addRoute', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
 });
 
 
