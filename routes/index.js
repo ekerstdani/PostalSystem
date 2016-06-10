@@ -27,10 +27,13 @@ var money = 0.0;
 
 
 
-
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+});
+/* GET home page. */
+router.get('/mainPage', function(req, res) {
+  res.render('mainPage', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
 });
 
 /* GET deleteRoute page. */
@@ -74,7 +77,7 @@ router.get('/checkFigure', function(req, res) {
 
 router.get('/logout', function(req, res) {
 	signedInUser= false
-  res.render('index', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+  res.render('mainPage', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
 });
 
 
@@ -112,7 +115,7 @@ router.get('/doLogin', function(req, res) {
             signedInUserUID = result.rows[i].uid;
             money = result.rows[i].money;
             
-            res.render('index', { title: websiteName, message: message, signedInUser: signedInUser, id: signedInUserUID, money: parseInt(money) });
+            res.render('mainPage', { title: websiteName, message: message, signedInUser: signedInUser, id: signedInUserUID, money: parseInt(money) });
           }
           else {
             message = "Incorrect password.";
@@ -120,7 +123,7 @@ router.get('/doLogin', function(req, res) {
         }
       }
 
-      res.render('login', { title: websiteName, message: message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+      res.render('index', { title: websiteName, message: message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
     });
   });
 });
@@ -161,7 +164,7 @@ router.get('/doSignUp', function(req, res) {
           return;
         }
 
-        res.render('index', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+        res.render('mainPage', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
       });
     });
   }

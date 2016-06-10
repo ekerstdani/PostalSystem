@@ -81,32 +81,22 @@ block content
   br
   br
 
-    br
-    br
-    br
-    br
+  
+  center
+    img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/KPS_Consulting_Logo.svg/500px-KPS_Consulting_Logo.svg.png")
 
-    div(class="well" style="margin-left:20%; margin-right:20%;")
-        if message
-            div(class="alert alert-dismissible alert-danger" id="message")
-                button(type="button" class="close" onclick="hideMessage();") &times;
-                p(align="center") !{message}
+  br
 
-        div(class="row search")
-            div(class="col-sm-7 col-sm-offset-2")
-                form(role="form" action="/doSignUp")
-                    div(class="form-group")
-                        label(for="username" class="col-lg-2 control-label") Username
-                        input(type="text" class="form-control input-sm" placeholder="Username" id="username" name="username")
-                    div(class="form-group")
-                        label(for="username" class="col-lg-2 control-label") Real Name
-                        input(type="text" class="form-control input-sm" placeholder="Real Name" id="realname" name="realname")
-                    div(class="form-group")
-                        label(for="password" class="col-lg-2 control-label") Password
-                        input(type="password" class="form-control input-sm" placeholder="Password" id="password" name="password")
-                    div(class="form-group")
-                        label(for="confirmPassword" class="col-lg-2 control-label") Confirm Password
-                        input(type="password" class="form-control input-sm" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword")
-                    div(class="form-group" align="center")
-                        button(type="reset" class="btn btn-default") Cancel
-                        button(type="submit" class="btn btn-primary") Sign Up
+  div(class="row search")
+    div(class="col-sm-6 col-sm-offset-3")
+      form(role="form" action="/search")
+        div(class="input-group")
+          input(type="text" class="form-control input-sm" placeholder="Search Routes" name="searchTerm" id="searchTerm")
+          span(class="input-group-btn")
+            button(class="btn btn-primary btn-sm" type="submit")
+              span(class="glyphicon glyphicon-search" aria-hidden="true")
+
+
+
+
+

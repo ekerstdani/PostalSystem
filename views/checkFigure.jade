@@ -9,7 +9,7 @@ block content
       div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
         ul(class="nav navbar-nav")
           li(class="active")
-            a(href="/") Home
+            a(href="/mainPage") Home
             
           if(signedInUser)
            li
@@ -56,11 +56,11 @@ block content
               a(href="/userPage" class="btn-primary" onmouseover="showOptions()" onmouseout="hideOptions()") !{signedInUser} &#x25BC;
               span(id="userOptions" style="display:none; position: absolute;" onmouseover="showOptions()" onmouseout="hideOptions()")
                 a(href="/profile?user=" + id class="btn btn-default btn-sm") Account
-                a(href="/logout" class="btn btn-default btn-sm") Logout
+                a(href="/" class="btn btn-default btn-sm") Logout
               
           else
             li
-              a(href="/login") Sign In
+              a(href="/") Sign In
            
            
 
