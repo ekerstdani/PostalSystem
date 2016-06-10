@@ -8,7 +8,7 @@ block content
 
       div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
         ul(class="nav navbar-nav")
-          li(class="active")
+          li
             a(href="/mainPage") Home
             
           if(signedInUser)
@@ -22,7 +22,7 @@ block content
           
            div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
             ul(class="nav navbar-nav")
-             li(class ="dropdown")
+             li(class ="dropdown" class="active")
               a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") Routes 
                span(class="caret")
               ul(class="dropdown-menu" role="menu")

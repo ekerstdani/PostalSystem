@@ -34,7 +34,7 @@ router.get('/', function(req, res) {
 });
 /* GET home page. */
 router.get('/mainPage', function(req, res) {
-  res.render('mainPage', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
+  res.render('mainPage', { title: websiteName, signedInUser: signedInUser, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money),manager: manager });
 });
 
 /* GET deleteRoute page. */
@@ -56,7 +56,7 @@ router.get('/signup', function(req, res) {
 
 
 router.get('/login', function(req, res) {
-  res.render('login', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money),manager: manager });
+  res.render('login', { title: websiteName, message: req.query.message, signedInUser: signedInUser, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money),manager: manager });
 });
 
 router.get('/editRoute', function(req, res) {
@@ -78,7 +78,7 @@ router.get('/checkFigure', function(req, res) {
 
 router.get('/logout', function(req, res) {
 	signedInUser= false
-  res.render('mainPage', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money),manager: manager });
+  res.render('mainPage', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
 });
 
 
@@ -119,7 +119,7 @@ router.get('/doLogin', function(req, res) {
             
             money = result.rows[i].money;
             
-            res.render('mainPage', { title: websiteName, message: message, signedInUser: signedInUser, id: signedInUserUID, money: parseInt(money), manager: manager });
+            res.render('mainPage', { title: websiteName,signedInUser: signedInUser, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money),manager: manager });
           }
           else {
             message = "Incorrect password.";
@@ -127,7 +127,7 @@ router.get('/doLogin', function(req, res) {
         }
       }
 
-      res.render('index', { title: websiteName, message: message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money), manager: manager  });
+      res.render('index', { title: websiteName,signedInUser: signedInUser, message: message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money), manager: manager});
     });
   });
 });
@@ -139,6 +139,7 @@ router.get('/doLogin', function(req, res) {
 
 router.get('/doSignUp', function(req, res) {
   if (req.query.password != req.query.confirmPassword) {
+  	 console.log("Manager "+req.query.manager);
     res.render('signUp', { title: websiteName, message: "The passwords do not match." });
   }
   else if (req.query.username == "" || req.query.realname == "") {
@@ -159,8 +160,14 @@ router.get('/doSignUp', function(req, res) {
       query += "', '";
       query += req.query.password;
       query += "', '";
-      query += req.query.manager;
-      query += "');";
+      if(req.query.manager!=null){
+			query += req.query.manager;
+      	query += "');"; 
+      }
+      else {
+      	query += "f');";
+      }
+      
 
       client.query(query, function (error, result) {
         done();
@@ -170,7 +177,7 @@ router.get('/doSignUp', function(req, res) {
           return;
         }
 
-        res.render('mainPage', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money), manager: manager  });
+        res.render('mainPage', { title: websiteName,signedInUser: signedInUser, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money),manager: manager });
       });
     });
   }

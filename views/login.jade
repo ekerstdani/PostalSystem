@@ -8,7 +8,7 @@ block content
 
       div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
         ul(class="nav navbar-nav")
-          li(class="active")
+          li
             a(href="/mainPage") Home
             
           if(signedInUser)
@@ -47,11 +47,8 @@ block content
           
             
               
-  ul(class="nav navbar-nav navbar-right")
-        
-          if(manager)
-            li
-              a(href="/signup") Sign Up
+
+        ul(class="nav navbar-nav navbar-right")
           if signedInUser
             
 
@@ -60,6 +57,10 @@ block content
               span(id="userOptions" style="display:none; position: absolute;" onmouseover="showOptions()" onmouseout="hideOptions()")
                 a(href="/profile?user=" + id class="btn btn-default btn-sm") Account
                 a(href="/" class="btn btn-default btn-sm") Logout
+              
+          else
+            li
+              a(href="/") Sign In
            
             
 
