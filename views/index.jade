@@ -39,12 +39,14 @@ block content
            
             
 
-        form(class="navbar-form navbar-left" role="search" action="/search" style="margin-top:10px;")
-          div(class="input-group")
-            input(type="text" class="form-control input-sm" placeholder="Search Routes" name="searchTerm" id="searchTerm")
-            span(class="input-group-btn")
-              button(class="btn btn-primary btn-sm" type="submit")
-                span(class="glyphicon glyphicon-search" aria-hidden="true")
+        form(class="navbar-form navbar-left" role="search")
+         div(class="form-group")
+          input(class="form-control" placeholder="Search Routes" type="text")
+         button(class="btn btn-primary btn-sm" type="submit")
+          span(class="glyphicon glyphicon-search" aria-hidden="true")      
+          
+            
+              
 
         ul(class="nav navbar-nav navbar-right")
           if signedInUser
