@@ -19,6 +19,7 @@ pg.connect(database, function (err) {
 var websiteName = 'KPS';
 var signedInUser = '';
 var signedInUserRealname = '';
+var manager='';
 var signedInUserUID = 0;
 var money = 0.0;
 
@@ -29,55 +30,55 @@ var money = 0.0;
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+  res.render('index', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money),manager: manager });
 });
 /* GET home page. */
 router.get('/mainPage', function(req, res) {
-  res.render('mainPage', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+  res.render('mainPage', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
 });
 
 /* GET deleteRoute page. */
 router.get('/deleteRoute', function(req, res) {
-  res.render('deleteRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+  res.render('deleteRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
 });
 
 
 /* GET routes page. */
 router.get('/routes', function(req, res) {
-  res.render('routes', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+  res.render('routes', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
 });
 
 /* GET signup page. */
 router.get('/signup', function(req, res) {
-  res.render('signup', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+  res.render('signup', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
 });
 
 
 
 router.get('/login', function(req, res) {
-  res.render('login', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+  res.render('login', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money),manager: manager });
 });
 
 router.get('/editRoute', function(req, res) {
-  res.render('editRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+  res.render('editRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
 });
 
 
 router.get('/addRoute', function(req, res) {
-  res.render('addRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+  res.render('addRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
 });
 
 
 /* GET deleteRoute page. */
 router.get('/checkFigure', function(req, res) {
-  res.render('checkFigure', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+  res.render('checkFigure', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
 });
 
 
 
 router.get('/logout', function(req, res) {
 	signedInUser= false
-  res.render('mainPage', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+  res.render('mainPage', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money),manager: manager });
 });
 
 
@@ -87,7 +88,7 @@ router.get('/logout', function(req, res) {
 router.get('/doLogin', function(req, res) {
   var username = req.query.username;
   var password = req.query.password;
-
+ 
   pg.connect(database, function (err, client, done) {
     if (err) {
       console.error('Could not connect to the database.');
@@ -104,18 +105,21 @@ router.get('/doLogin', function(req, res) {
       }
 
       var message = "Invalid username or password.";
-
+		
       for (var i = 0; i < result.rows.length; i++) {
         if (result.rows[i].username == username) {
           if (result.rows[i].password == password) {
             message = "Signed in successfully.";
-
+				
             signedInUser = username;
             signedInUserRealname = result.rows[i].realname;
             signedInUserUID = result.rows[i].uid;
+            manager = result.rows[i].manager;
+            
+            
             money = result.rows[i].money;
             
-            res.render('mainPage', { title: websiteName, message: message, signedInUser: signedInUser, id: signedInUserUID, money: parseInt(money) });
+            res.render('mainPage', { title: websiteName, message: message, signedInUser: signedInUser, id: signedInUserUID, money: parseInt(money), manager: manager });
           }
           else {
             message = "Incorrect password.";
@@ -123,7 +127,7 @@ router.get('/doLogin', function(req, res) {
         }
       }
 
-      res.render('index', { title: websiteName, message: message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+      res.render('index', { title: websiteName, message: message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money), manager: manager  });
     });
   });
 });
@@ -148,12 +152,14 @@ router.get('/doSignUp', function(req, res) {
         return;
       }
 
-      var query = "INSERT INTO Users (username, realname, password) VALUES ('";
+      var query = "INSERT INTO Users (username, realname, password, manager) VALUES ('";
       query += req.query.username;
       query += "', '";
       query += req.query.realname;
       query += "', '";
       query += req.query.password;
+      query += "', '";
+      query += req.query.manager;
       query += "');";
 
       client.query(query, function (error, result) {
@@ -164,7 +170,7 @@ router.get('/doSignUp', function(req, res) {
           return;
         }
 
-        res.render('mainPage', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+        res.render('mainPage', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money), manager: manager  });
       });
     });
   }

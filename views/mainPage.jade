@@ -49,6 +49,10 @@ block content
               
 
         ul(class="nav navbar-nav navbar-right")
+        
+          if(manager)
+            li
+              a(href="/signup") Sign Up
           if signedInUser
             
 
@@ -58,9 +62,7 @@ block content
                 a(href="/profile?user=" + id class="btn btn-default btn-sm") Account
                 a(href="/" class="btn btn-default btn-sm") Logout
               
-          else
-            li
-              a(href="/") Sign In
+           
            
 
   script(type='text/javascript').

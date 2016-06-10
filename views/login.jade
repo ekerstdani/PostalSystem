@@ -47,8 +47,11 @@ block content
           
             
               
-
-        ul(class="nav navbar-nav navbar-right")
+  ul(class="nav navbar-nav navbar-right")
+        
+          if(manager)
+            li
+              a(href="/signup") Sign Up
           if signedInUser
             
 
@@ -57,10 +60,6 @@ block content
               span(id="userOptions" style="display:none; position: absolute;" onmouseover="showOptions()" onmouseout="hideOptions()")
                 a(href="/profile?user=" + id class="btn btn-default btn-sm") Account
                 a(href="/" class="btn btn-default btn-sm") Logout
-              
-          else
-            li
-              a(href="/") Sign In
            
             
 
