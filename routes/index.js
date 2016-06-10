@@ -56,18 +56,20 @@ router.get('/login', function(req, res) {
 });
 
 router.get('/editRoute', function(req, res) {
-  res.render('editRoute', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+  res.render('editRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
 });
 
 
 router.get('/addRoute', function(req, res) {
-  res.render('addRoute', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+  res.render('addRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
 });
 
 
+/* GET deleteRoute page. */
 router.get('/checkFigure', function(req, res) {
-  res.render('checkFigure', { title: websiteName, message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, money: parseInt(money) });
+  res.render('checkFigure', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
 });
+
 
 
 router.get('/logout', function(req, res) {

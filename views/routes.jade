@@ -39,12 +39,14 @@ block content
            
             
 
-        form(class="navbar-form navbar-left" role="search" action="/search" style="margin-top:10px;")
-          div(class="input-group")
-            input(type="text" class="form-control input-sm" placeholder="Search Routes" name="searchTerm" id="searchTerm")
-            span(class="input-group-btn")
-              button(class="btn btn-primary btn-sm" type="submit")
-                span(class="glyphicon glyphicon-search" aria-hidden="true")
+        form(class="navbar-form navbar-left" role="search")
+         div(class="form-group")
+          input(class="form-control" placeholder="Search Routes" type="text")
+         button(class="btn btn-primary btn-sm" type="submit")
+          span(class="glyphicon glyphicon-search" aria-hidden="true")      
+          
+            
+              
 
         ul(class="nav navbar-nav navbar-right")
           if signedInUser
@@ -59,8 +61,7 @@ block content
           else
             li
               a(href="/login") Sign In
-            li
-              a(href="/signUp") Sign Up
+           
 
   script(type='text/javascript').
     function hideMessage() {
@@ -74,3 +75,30 @@ block content
     function hideOptions() {
       document.getElementById('userOptions').style.display = 'none';
     };
+
+  br
+  br  
+  br 
+  br
+  br
+  
+  center
+   form(class='form-horizontal',action='/login',method='POST',id='loginForm')
+        fieldset
+            div#legand
+                legend Login
+            div.control-group
+                label(for='username',class='control-label') Username
+                div.controls
+                    input(type='text',id='username',name='username',placeholder='Username',class='input-xlarge')
+            div.control-group
+                label(for='password',class='control-label') Password
+                div.controls
+                    input(type='text',id='password',name='password',placeholder='Password',class='input-xlarge')
+            div.control-group
+                label(for="rememberme",class="control-label") Remember Me
+                div.controls
+                    input(type="checkbox",name="rememberme")
+            div.control-group
+                div.controls
+                    input(type="submit",class="btn btn-success", value="Login")
