@@ -1,3 +1,106 @@
 extends layout
 
 block content
+  nav(class="navbar navbar-default navbar-fixed-top")
+    div(class="container-fluid")
+      div(class="navbar-header")
+        a(class="navbar-brand" href="/") !{title}
+
+      div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+        ul(class="nav navbar-nav")
+          li(class="active")
+            a(href="/") Home
+            
+          if(signedInUser)
+           li
+            a(href="/checkFigure") Check Figure
+          else
+           li
+            a(href="/login?message=Please login first.&redirect=/checkFigure") Check Figure
+          
+          li
+          
+           div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+            ul(class="nav navbar-nav")
+             li(class ="dropdown")
+              a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") Routes 
+               span(class="caret")
+              ul(class="dropdown-menu" role="menu")
+               li
+                a(href="/routes") Routes
+               li
+                a(href="/addRoute") Add Routes
+               li
+                a(href="/editRoute") Edit Route
+               li
+                a(href="/deleteRoute") Delete Route
+           
+           
+           
+            
+
+        form(class="navbar-form navbar-left" role="search" action="/search" style="margin-top:10px;")
+          div(class="input-group")
+            input(type="text" class="form-control input-sm" placeholder="Search Routes" name="searchTerm" id="searchTerm")
+            span(class="input-group-btn")
+              button(class="btn btn-primary btn-sm" type="submit")
+                span(class="glyphicon glyphicon-search" aria-hidden="true")
+
+        ul(class="nav navbar-nav navbar-right")
+          if signedInUser
+            
+
+            li
+              a(href="/userPage" class="btn-primary" onmouseover="showOptions()" onmouseout="hideOptions()") !{signedInUser} &#x25BC;
+              span(id="userOptions" style="display:none; position: absolute;" onmouseover="showOptions()" onmouseout="hideOptions()")
+                a(href="/profile?user=" + id class="btn btn-default btn-sm") Account
+                a(href="/logout" class="btn btn-default btn-sm") Logout
+              
+          else
+            li
+              a(href="/login") Sign In
+            li
+              a(href="/signUp") Sign Up
+
+  script(type='text/javascript').
+    function hideMessage() {
+      document.getElementById("message").style.display = 'none';
+    }
+    
+    function showOptions() {
+      document.getElementById('userOptions').style.display = 'block';
+    };
+    
+    function hideOptions() {
+      document.getElementById('userOptions').style.display = 'none';
+    };
+
+    br
+    br
+    br
+    br
+
+    div(class="well" style="margin-left:20%; margin-right:20%;")
+        if message
+            div(class="alert alert-dismissible alert-danger" id="message")
+                button(type="button" class="close" onclick="hideMessage();") &times;
+                p(align="center") !{message}
+
+        div(class="row search")
+            div(class="col-sm-7 col-sm-offset-2")
+                form(role="form" action="/doSignUp")
+                    div(class="form-group")
+                        label(for="username" class="col-lg-2 control-label") Username
+                        input(type="text" class="form-control input-sm" placeholder="Username" id="username" name="username")
+                    div(class="form-group")
+                        label(for="username" class="col-lg-2 control-label") Real Name
+                        input(type="text" class="form-control input-sm" placeholder="Real Name" id="realname" name="realname")
+                    div(class="form-group")
+                        label(for="password" class="col-lg-2 control-label") Password
+                        input(type="password" class="form-control input-sm" placeholder="Password" id="password" name="password")
+                    div(class="form-group")
+                        label(for="confirmPassword" class="col-lg-2 control-label") Confirm Password
+                        input(type="password" class="form-control input-sm" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword")
+                    div(class="form-group" align="center")
+                        button(type="reset" class="btn btn-default") Cancel
+                        button(type="submit" class="btn btn-primary") Sign Up

@@ -123,4 +123,45 @@ router.get('/doLogin', function(req, res) {
   });
 });
 
+
+
+
+
+
+router.get('/doSignUp', function(req, res) {
+  if (req.query.password != req.query.confirmPassword) {
+    res.render('signUp', { title: websiteName, message: "The passwords do not match." });
+  }
+  else if (req.query.username == "" || req.query.realname == "") {
+    res.render('signUp', { title: websiteName, message: "Please fill out the entire form." });
+  }
+  else {
+    pg.connect(database, function (err, client, done) {
+      if (err) {
+        console.error('Could not connect to the database.');
+        console.error(err);
+        return;
+      }
+
+      var query = "INSERT INTO Users (username, realname, password) VALUES ('";
+      query += req.query.username;
+      query += "', '";
+      query += req.query.realname;
+      query += "', '";
+      query += req.query.password;
+      query += "');";
+
+      client.query(query, function (error, result) {
+        done();
+        if (error) {
+          console.error('Failed to execute query.');
+          console.error(error);
+          return;
+        }
+
+        res.render('index', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) });
+      });
+    });
+  }
+});
 module.exports = router;

@@ -7,56 +7,58 @@ block content
                 a(class="navbar-brand" href="/") !{title}
 
             div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-                ul(class="nav navbar-nav")
-                    li
-                        a(href="/") Home
-                    li
-                        a(href="/browse") Browse
-                    if(signedInUser)
-                        li
-                            a(href="/addItem") Sell
-                    else
-                        li
-                            a(href="/login?message=Please login first.&redirect=/addItem") Sell
+             ul(class="nav navbar-nav")
+              li(class="active")
+               a(href="/") Home
+            
+              if(signedInUser)
+               li
+                a(href="/checkFigure") Check Figure
+              else
+               li
+                a(href="/login?message=Please login first.&redirect=/checkFigure") Check Figure
+          
+             div(class= "btn-group" role="group")
+              button(class='btn btn-group.btn-group-justified dropdown-toggle' type' button' id='dropdownmenu'
+              data-toggle='dropdown' aria-haspopup='true' aria-expanded='true') Routes
+               span(class='caret')
+           
+              ul(class='dropdown-menu' aria-labelledby='dropdownmenu')
+               li
+                a(href='/routes') Routes
+               <li role="separator" class="divider"></li>
+               li
+                a(href='/addRoute') Add Route
+               li
+                a(href='/editRoute') Edit Route
+               li
+                a(href='/deleteRoute') Delete Routes  
 
-                
+              form(class="navbar-form navbar-left" role="search" action="/search" style="margin-top:10px;")
+                  div(class="input-group")
+                      input(type="text" class="form-control input-sm" placeholder="Search Routes" name="searchTerm" id="searchTerm")
+                      span(class="input-group-btn")
+                          button(class="btn btn-primary btn-sm" type="submit")
+                              span(class="glyphicon glyphicon-search" aria-hidden="true")
 
-                ul(class="nav navbar-nav navbar-right")
-                    if signedInUser
-                        li
-                            a(href="/profile?user=" + id class="btn-default") Credit:
-                                &nbsp;
-                                span(class="text-info") $!{money}
-
-                        li
-                            a(href="/userPage" class="btn-primary") !{signedInUser}
-                        li
-                            a(href="/logout") Logout
-                    else
-                        li
-                            a(href="/login") Sign In
-                        li
-                            a(href="/signUp") Sign Up
+             ul(class="nav navbar-nav navbar-right")
+                 li
+                     a(href="/login") Sign In
+                 li
+                     a(href="/signUp") Sign Up
 
     script(type='text/javascript').
         function hideMessage() {
             document.getElementById("message").style.display = 'none';
         }
-        
+
         function showOptions() {
-          document.getElementById('userOptions').style.display = 'block';
+            document.getElementById('userOptions').style.display = 'block';
         };
-    
+
         function hideOptions() {
-          document.getElementById('userOptions').style.display = 'none';
+            document.getElementById('userOptions').style.display = 'none';
         };
-        
-        form(class="navbar-form" role="search" action="/search" style="margin-top:10px;")
-                    div(class="input-group")
-                        input(type="text" class="form-control input-sm" placeholder="Search products..." name="searchTerm" id="searchTerm")
-                        span(class="input-group-btn")
-                            button(class="btn btn-primary btn-sm" type="submit")
-                                span(class="glyphicon glyphicon-search" aria-hidden="true")
 
     br
     br
