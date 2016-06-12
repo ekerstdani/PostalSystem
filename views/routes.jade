@@ -10,13 +10,11 @@ block content
         ul(class="nav navbar-nav")
           li
             a(href="/mainPage") Home
-            
-          if(signedInUser)
+
+          if(manager)
            li
             a(href="/checkFigure") Check Figure
-          else
-           li
-            a(href="/login?message=Please login first.&redirect=/checkFigure") Check Figure
+
           
           li
           

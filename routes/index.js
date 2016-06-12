@@ -1,11 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-//var pg = require('pg');
+//At Uni
 var pg = require('pg').native;
-
-//var database = "postgres://postgres:admin@localhost:5432/swen303";
 var database = "postgres://depot:5432/Swen301";
+
+//At Home
+//var pg = require('pg');
+//var database = "postgres://postgres:w2sybb57@localhost:5432/swen301";
+
 pg.connect(database, function (err) {
   if (err) {
     console.error('Could not connect to the database.');
@@ -139,7 +142,6 @@ router.get('/doLogin', function(req, res) {
 
 router.get('/doSignUp', function(req, res) {
   if (req.query.password != req.query.confirmPassword) {
-  	 console.log("Manager "+req.query.manager);
     res.render('signUp', { title: websiteName, message: "The passwords do not match." });
   }
   else if (req.query.username == "" || req.query.realname == "") {
