@@ -47,18 +47,22 @@ block content
               
 
         ul(class="nav navbar-nav navbar-right")
-        
           if(manager)
             li
               a(href="/signup") Sign Up
           if signedInUser
-            
-
-            li
-              a(href="/userPage" class="btn-primary" onmouseover="showOptions()" onmouseout="hideOptions()") !{signedInUser} &#x25BC;
-              span(id="userOptions" style="display:none; position: absolute;" onmouseover="showOptions()" onmouseout="hideOptions()")
-                a(href="/profile?user=" + id class="btn btn-default btn-sm") Account
-                a(href="/" class="btn btn-default btn-sm") Logout
+          li
+          
+           div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+            ul(class="nav navbar-nav")
+             li(class ="dropdown" class="btn-primary")
+              a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") !{signedInUser}
+               span(class="caret")
+              ul(class="dropdown-menu" role="menu")
+               li
+                a(href="/" class="btn-sm") Logout
+                
+                
 
     script(type='text/javascript').
         function hideMessage() {
