@@ -184,4 +184,93 @@ router.get('/doSignUp', function(req, res) {
     });
   }
 });
+
+
+
+router.get('/doAddRoute', function(req,res){
+	var AddressOrigin=req.query.AddressOrigin; 	
+	var SuburbOrigin=req.query.SuburbOrigin; 
+	var RegionOrigin=req.query.RegionOrigin; 
+	var CountryOrigin=req.query.CountryOrigin; 
+	var AddressDes=req.query.AddressDes; 
+	var SuburbDes=req.query.SuburbDes;
+	var RegionDes=req.query.RegionDes; 
+	var CountryDes=req.query.CountryDes;
+	var Priority= req.query.Priority
+	var Land = req.query.Land
+	var Sea = req.query.Sea
+   var Air= req.query.Air
+	
+	pg.connect(database, function (err,client,done) {
+  if (err) {
+    console.error('Could not connect to the database.');
+    console.error(err);
+    return;
+  }
+   var query = "INSERT INTO Routes (addressorigin, suburborigin, regionorigin, countryorigin, addressdes,suburbdes,regiondes,countrydes,priority,land,sea,air) VALUES ('";
+      query += AddressOrigin
+      query += "', '";
+      query += SuburbOrigin
+      query += "', '";
+      query += RegionOrigin
+      query += "', '";
+      query += CountryOrigin
+      query += "', '";
+      query += AddressDes
+      query += "', '";
+      query += SuburbDes
+      query += "', '";
+      query += RegionDes
+      query += "', '";
+      query += CountryDes
+      query += "', '";
+      query += Priority
+      query += "', '";
+      
+      if(req.query.Land!=null){
+			query += req.query.Land;
+      	query += "', '";
+      }
+      else {
+      	query += "f', '";
+      }
+      
+		if(req.query.Sea!=null){
+			query += req.query.Sea;
+      	query += "', '";
+      }
+      else {
+      	query += "f', '";
+      }
+      
+      if(req.query.Air!=null){
+			query += req.query.Air;
+      	query += "');"; 
+      }
+      else {
+      	query += "f');";
+      }
+  
+  console.log(AddressOrigin+" "+SuburbOrigin+" "+RegionOrigin+" "+CountryOrigin+" "+AddressDes+" "+SuburbDes+" "+RegionDes+" "+CountryDes+ " "+Priority+" "+Land+" "+Sea+" "+Air); 
+
+	client.query(query, function (error, result) {
+        done();
+        if (error) {
+          console.error('Failed to execute query.');
+          console.error(error);
+          return;
+        }
+        
+	res.render('addRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
+  
+  });
+  });
+  
+	
+	
+	
+	
+	
+	});
+	
 module.exports = router;
