@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 //At Uni
-var pg = require('pg').native;
-var database = "postgres://depot:5432/Swen301";
+//var pg = require('pg').native;
+//var database = "postgres://depot:5432/Swen301";
 
 //At Home
-//var pg = require('pg');
-//var database = "postgres://postgres:w2sybb57@localhost:5432/swen301";
+var pg = require('pg');
+var database = "postgres://postgres:w2sybb57@localhost:5432/swen301";
 
 pg.connect(database, function (err) {
   if (err) {
@@ -48,7 +48,24 @@ router.get('/deleteRoute', function(req, res) {
 
 /* GET routes page. */
 router.get('/routes', function(req, res) {
-  res.render('routes', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
+    pg.connect(database, function (err, client, done) {
+        if (err) {
+            console.error('Could not connect to the database.');
+            console.error(err);
+            return;
+        }
+
+        var query = "SELECT * FROM Routes" ;
+        client.query(query, function (error, result) {
+            done();
+            if (error) {
+                console.error('Failed to execute query.');
+                console.error(error);
+                return;
+            }
+            res.render('routes', { title: websiteName, list: result.rows, message: req.query.message, signedInUser: signedInUser, redirect: req.query.redirect, id: signedInUserUID,manager: manager });
+        });
+    });
 });
 
 /* GET signup page. */
@@ -251,26 +268,80 @@ router.get('/doAddRoute', function(req,res){
       	query += "f');";
       }
   
-  console.log(AddressOrigin+" "+SuburbOrigin+" "+RegionOrigin+" "+CountryOrigin+" "+AddressDes+" "+SuburbDes+" "+RegionDes+" "+CountryDes+ " "+Priority+" "+Land+" "+Sea+" "+Air); 
+
 
 	client.query(query, function (error, result) {
         done();
         if (error) {
-          console.error('Failed to execute query.');
-          console.error(error);
-          return;
+            console.error('Failed to execute query.');
+            console.error(error);
+            return;
         }
-        
-	res.render('addRoute', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
-  
+
+        client.query("SELECT * FROM Routes;", function (error, result) {
+            done();
+            if (error) {
+                console.error('Failed to execute query.');
+                console.error(error);
+                return;
+            }
+
+
+            res.render('routes', {
+                title: websiteName,
+                list: result.rows,
+                message: req.query.message,
+                signedInUser: signedInUser,
+                redirect: req.query.redirect,
+                id: signedInUserUID,
+                manager: manager,
+                product: result.rows[0]
+            });
+
+        });
+    });
   });
-  });
-  
-	
-	
-	
-	
-	
-	});
+});
+
+router.get('/doDeleteRoute', function(req, res) {
+    pg.connect(database, function (err, client, done) {
+        if (err) {
+            console.error('Could not connect to the database.');
+            console.error(err);
+            return;
+        }
+
+        client.query("DELETE FROM Routes WHERE sid=" + req.query.sid + ";", function (error, result) {
+            done();
+            if (error) {
+                console.error('Failed to execute query.');
+                console.error(error);
+                return;
+            }
+
+            client.query("SELECT * FROM Routes;", function (error, result) {
+                done();
+                if (error) {
+                    console.error('Failed to execute query.');
+                    console.error(error);
+                    return;
+                }
+
+
+                res.render('routes', {
+                    title: websiteName,
+                    list: result.rows,
+                    message: "Deleted Succesfully",
+                    signedInUser: signedInUser,
+                    redirect: req.query.redirect,
+                    id: signedInUserUID,
+                    manager: manager
+                });
+
+            });
+        });
+        });
+    });
+
 	
 module.exports = router;

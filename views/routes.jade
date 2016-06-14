@@ -41,7 +41,7 @@ block content
          div(class="form-group")
           input(class="form-control" placeholder="Search Routes" type="text")
          button(class="btn btn-primary btn-sm" type="submit")
-          span(class="glyphicon glyphicon-search" aria-hidden="true")      
+          span(class="glyphicon glyphicon-search" aria-hidden="true")
           
             
               
@@ -80,24 +80,33 @@ block content
   br 
   br
   br
-  
-  center
-   form(class='form-horizontal',action='/login',method='POST',id='loginForm')
-        fieldset
-            div#legand
-                legend Login
-            div.control-group
-                label(for='username',class='control-label') Username
-                div.controls
-                    input(type='text',id='username',name='username',placeholder='Username',class='input-xlarge')
-            div.control-group
-                label(for='password',class='control-label') Password
-                div.controls
-                    input(type='text',id='password',name='password',placeholder='Password',class='input-xlarge')
-            div.control-group
-                label(for="rememberme",class="control-label") Remember Me
-                div.controls
-                    input(type="checkbox",name="rememberme")
-            div.control-group
-                div.controls
-                    input(type="submit",class="btn btn-success", value="Login")
+
+
+  table(class="table table-striped table-hover")
+
+    thead
+        tr(class="info")
+            th(width="30%") Origin Address
+            th(width="30%") Destination Address
+            th(width="20%") Priority
+            th(width="20%") Transportation
+            th(width="5%") Actions
+
+        tr
+
+    tbody
+        each val in list
+            tr
+                th !{val.addressorigin} !{val.suburborigin} !{val.regionorigin} !{val.countryorigin}
+                th !{val.addressdes} !{val.suburbdes} !{val.regiondes} !{val.countrydes}
+                th !{val.priority}
+                th Land: !{val.land}  Sea: !{val.sea}  Air: !{val.air}
+                th
+                    if (manager)
+                        a(class="btn btn-primary btn-xs", href="/editRoute?id=" + id + "&sid=" + val.sid) Edit
+                        a(class="btn btn-primary btn-xs", href="/doDeleteRoute?sid=" + val.sid) Delete
+                    else
+                        span(class="label label-primary") Manager Account Needed
+
+center
+    a(href="/routes") Back to Top
