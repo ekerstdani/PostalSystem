@@ -28,10 +28,7 @@ block content
                 a(href="/routes") Routes
                li
                 a(href="/addRoute") Add Routes
-               li
-                a(href="/editRoute") Edit Route
-               li
-                a(href="/deleteRoute") Delete Route
+
            
            
            
@@ -50,6 +47,8 @@ block content
           if(manager)
             li
               a(href="/signup") Sign Up
+            li
+              a(href="/editAccount") Edit Accounts
           if signedInUser
           li
           
@@ -76,11 +75,20 @@ block content
       document.getElementById('userOptions').style.display = 'none';
     };
 
+
+
   br
   br  
   br 
   br
   br
+
+  div( style="margin-left:20%; margin-right:20%;")
+    if message
+      div(class="alert alert-dismissible alert-danger" id="message")
+        button(type="button" class="close" onclick="hideMessage();") &times;
+        p(align="center") !{message}
+
   div(class="well" style="margin-left:15%; margin-right:15%;")
    form.form-horizontal(action="/doAddRoute")
       fieldset
@@ -88,23 +96,15 @@ block content
         .form-group(role=form action="/doAddRoute")
           label.col-lg-2.control-label(for='inputOrigin') Route Origin
           .col-lg-10
-            input#inputDes.form-control(type='text', placeholder='Address Line' name="AddressOrigin")   
-            input#inputDes.form-control(type='text', placeholder='Suburb' name="SuburbOrigin") 
-         
+            input#inputDes.form-control(type='text', placeholder='Address Line' name="AddressOrigin")
+            input#inputDes.form-control(type='text', placeholder='Suburb' name="SuburbOrigin")
+
+
+
           label.col-lg-2.control-label(for='select')
           .col-lg-10
-           select#select.form-control(type='text' name="RegionOrigin")
-            option Auckland
-            option Hamilton
-            option Rotorua
-            option Palmerston North
-            option Wellington
-            option Christchurch
-            option Dunedin
-            
-          label.col-lg-2.control-label(for='select')  
-          .col-lg-10
-            select#select.form-control(type='text' name= "CountryOrigin")
+            select#select.form-control( type='text' name= "CountryOrigin" onChange="func(this)" )
+              option(hidden) Select your country
               option New Zealand
               option Afghanistan
               option Albania
@@ -117,7 +117,7 @@ block content
               option Australia
               option Austria
               option Azerbaijan
-              option Bahamas 
+              option Bahamas
               option Bahrain
               option Bahamas
               option Bahrain
@@ -303,32 +303,35 @@ block content
               option Vietnam
               option Yemen
               option Zambia
-              option Zimbabwe  
-              
-        br
-     
+              option Zimbabwe
 
-                   
+          label.col-lg-2.control-label(for='select')
+          .col-lg-10
+            select#select.form-control(type='text' name="RegionOrigin")
+              option(hidden) Select your region
+              option Auckland
+              option Hamilton
+              option Rotorua
+              option Palmerston North
+              option Wellington
+              option Christchurch
+              option Dunedin
+        br
+
+
+
         .form-group
           label.col-lg-2.control-label(for='inputDes') Route Destination
           .col-lg-10
-            input#inputDes.form-control(type='text', placeholder='Address Line' name="AddressDes")      
-            input#inputDes.form-control(type='text', placeholder='Suburb' name="SuburbDes")    
-         
-          label.col-lg-2.control-label(for='select')  
-          .col-lg-10
-           select#select.form-control(type='text' name="RegionDes")  
-            option Auckland
-            option Hamilton
-            option Rotorua
-            option Palmerston North
-            option Wellington
-            option Christchurch
-            option Dunedin   
-            
-          label.col-lg-2.control-label(for='select')  
+            input#inputDes.form-control(type='text', placeholder='Address Line' name="AddressDes")
+            input#inputDes.form-control(type='text', placeholder='Suburb' name="SuburbDes")
+
+
+
+          label.col-lg-2.control-label(for='select')
           .col-lg-10
             select#select.form-control(type='text' name="CountryDes")
+              option(hidden) Select your country
               option New Zealand
               option Afghanistan
               option Albania
@@ -341,7 +344,7 @@ block content
               option Australia
               option Austria
               option Azerbaijan
-              option Bahamas 
+              option Bahamas
               option Bahrain
               option Bahamas
               option Bahrain
@@ -527,12 +530,22 @@ block content
               option Vietnam
               option Yemen
               option Zambia
-              option Zimbabwe  
-              
-      
-     
-     
-                     
+              option Zimbabwe
+
+          label.col-lg-2.control-label(for='select')
+          .col-lg-10
+            select#select.form-control(type='text' name="RegionDes")
+              option(hidden) Select your region
+              option Auckland
+              option Hamilton
+              option Rotorua
+              option Palmerston North
+              option Wellington
+              option Christchurch
+              option Dunedin
+
+
+
             br
             span.help-block
               |What form of transportation were you after
@@ -548,22 +561,22 @@ block content
               label
                 input(type='checkbox' name="Air",checked=(true==false ? "checked" :undefined))
                 |  Air
-                
-              
-       
+
+
+
         .form-group
-          label.col-lg-2.control-label(for='select') Priority  
+          label.col-lg-2.control-label(for='select') Priority
           .col-lg-10
             select#select.form-control(name="Priority")
+              option(hidden) Select your priority
               option International Air Priority
               option International Standard Priority
               option Domestic Air Priority (Same Price As Standard)
               option Domestic Standard Priority (Same Price As Air)
-              
+
         .form-group
           .col-lg-10.col-lg-offset-2
             button.btn.btn-default(type='reset') Cancel
             button.btn.btn-primary(type='submit') Submit
 
-  
-  
+
