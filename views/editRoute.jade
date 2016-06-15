@@ -6,7 +6,7 @@ block content
       div(class="navbar-header")
         a(class="navbar-brand" href="/") !{title}
 
-      div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+      div(class="collapse navbar-collapse")
         ul(class="nav navbar-nav")
           li
             a(href="/mainPage") Home
@@ -18,7 +18,7 @@ block content
           
           li
           
-           div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+           div( class="collapse navbar-collapse")
             ul(class="nav navbar-nav")
              li(class ="dropdown" class="active")
               a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") Routes 
@@ -29,10 +29,6 @@ block content
                li
                 a(href="/addRoute") Add Routes
 
-           
-           
-           
-            
 
         form(class="navbar-form navbar-left" role="search")
          div(class="form-group")
@@ -52,7 +48,7 @@ block content
           if signedInUser
           li
           
-           div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+           div( class="collapse navbar-collapse")
             ul(class="nav navbar-nav")
              li(class ="dropdown" class="btn-primary")
               a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") !{signedInUser}
@@ -75,6 +71,26 @@ block content
       document.getElementById('userOptions').style.display = 'none';
     };
 
+    function populate(s1,s2){
+        var s1 = document.getElementById(s1);
+        var s2 = document.getElementById(s2);
+        s2.innerHTML ="";
+        if(s1.value =="New Zealand"){
+            var optionArray =["Auckland","Hamilton","Rotorua","Palmerston North",
+                "Wellington","Christchurch","Dunedin"];
+
+        }
+        if (s1.value != "New Zealand") {
+            var optionArray = ["Region Not Needed"];
+
+        }
+        for(var option in optionArray){
+            var newOption= document.createElement("option");
+            newOption.innerHTML = optionArray[option];
+            s2.options.add(newOption);
+        }
+    };
+
   br
   br
   br
@@ -93,17 +109,18 @@ block content
         .form-group(role=form action="/doEditRoute")
           label.col-lg-2.control-label(for='inputOrigin') Route Origin
           .col-lg-10
-            input#inputDes.form-control(type='text', placeholder=product.addressorigin,
-            name="AddressOrigin")
-            input#inputDes.form-control(type='text', placeholder=product.suburborigin name="SuburbOrigin")
+            input.form-control(type='text', placeholder=product.addressorigin,
+            name="AddressOrigin", value=product.addressorigin)
+            input.form-control(type='text', placeholder=product.suburborigin name="SuburbOrigin", value=
+            product.suburborigin)
 
 
 
           label.col-lg-2.control-label(for='select')
           .col-lg-10
-            select#select.form-control( type='text' name= "CountryOrigin" onChange="func(this)" )
+            select.form-control(type='text', name="CountryOrigin", id="slct1", onchange="populate(this.id,'slct2')")
                 option(hidden) Select your country
-                option New Zealand
+                option(value="New Zealand") New Zealand
                 option Afghanistan
                 option Albania
                 option Algeria
@@ -305,15 +322,8 @@ block content
 
           label.col-lg-2.control-label(for='select')
           .col-lg-10
-             select#select.form-control(type='text' name="RegionOrigin")
+             select.form-control(type='text' name="RegionOrigin" id="slct2" onchange="populate(this.id,'slct4')")
                 option(hidden) Select your region
-                option Auckland
-                option Hamilton
-                option Rotorua
-                option Palmerston North
-                option Wellington
-                option Christchurch
-                option Dunedin
                 br
 
 
@@ -321,16 +331,18 @@ block content
         .form-group
             label.col-lg-2.control-label(for='inputDes') Route Destination
             .col-lg-10
-                input#inputDes.form-control(type='text', placeholder=product.addressdes name="AddressDes")
-                input#inputDes.form-control(type='text', placeholder=product.suburbdes name="SuburbDes")
+                input#inputDes.form-control(type='text', placeholder=product.addressdes name="AddressDes",
+                value=product.addressdes)
+                input#inputDes.form-control(type='text', placeholder=product.suburbdes name="SuburbDes",
+                value=product.suburbdes)
 
 
 
             label.col-lg-2.control-label(for='select')
             .col-lg-10
-                select#select.form-control(type='text' name="CountryDes")
+                select.form-control(type='text' name="CountryDes", id="slct3", onchange="populate(this.id,'slct4')")
                     option(hidden) Select your country
-                    option New Zealand
+                    option(value="New Zealand") New Zealand
                     option Afghanistan
                     option Albania
                     option Algeria
@@ -532,17 +544,8 @@ block content
 
             label.col-lg-2.control-label(for='select')
             .col-lg-10
-                select#select.form-control(type='text' name="RegionDes")
+                select.form-control(type='text' name="RegionDes",id="slct4")
                     option(hidden) Select your region
-                    option Auckland
-                    option Hamilton
-                    option Rotorua
-                    option Palmerston North
-                    option Wellington
-                    option Christchurch
-                    option Dunedin
-
-
 
                 br
                 span.help-block

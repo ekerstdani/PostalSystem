@@ -7,7 +7,12 @@ var router = express.Router();
 
 //At Home
 var pg = require('pg');
+//Daniel
 var database = "postgres://postgres:w2sybb57@localhost:5432/swen301";
+//Pas
+//var database = "postgres://postgres:pasi1105@localhost:5432/postgres";
+//Alex
+//var database = "postgres://postgres:123456@localhost:5432/postgres";
 
 pg.connect(database, function (err) {
   if (err) {
