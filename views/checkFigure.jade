@@ -28,8 +28,15 @@ block content
                 a(href="/routes") Routes
                li
                 a(href="/addRoute") Add Routes
+               li
+                a(href="/editRoute") Edit Route
+               li
+                a(href="/deleteRoute") Delete Route
+ 
+
 
            
+
            
            
             
@@ -95,3 +102,39 @@ block content
         function hideOptions() {
             document.getElementById('userOptions').style.display = 'none';
         };
+  br
+  br
+  br
+  br
+  br
+  br
+  br
+  br
+  div(class="well" style="margin-left:15%; margin-right:15%;")
+    .row
+        .col-sm-6.col-md-4
+          .thumbnail
+            img(src='...', alt='...')
+            .caption
+              h3 Number of Routes
+              p !{numberofroutes}
+              p
+                
+        .col-sm-6.col-md-4
+          .thumbnail
+            img(src='...', alt='...')
+            .caption
+              h3 Revenue
+              p !{totalRev}
+              p
+                
+        .col-sm-6.col-md-4
+          .thumbnail
+            img(src='...', alt='...')
+            .caption
+              h3 Expendeture
+              p !{totalExpendeture}
+              p
+                
+
+    
