@@ -382,54 +382,78 @@ router.get('/doDeleteRoute', function(req, res) {
 
 router.get('/doEditRoute', function(req, res) {
     pg.connect(database, function (err, client, done) {
+
+
         if (err) {
             console.error('Could not connect to the database.');
             console.error(err);
             return;
         }
 
-        var query = "UPDATE route SET " +
-            "uid = " + signedInUserUID + ", " +
-            "addressorigin="+ req.query.AddressOrigin +","+
-            "suburborigin=" + req.query.SuburbOrigin+","+
-            "regionorigin=" +req.query.RegionOrigin+","+
-            "countryorigin="+req.query.CountryOrigin+","+
-            "addressdes="+req.query.AddressDes+","+
-            "suburbdes="+req.query.SuburbDes+","+
-            "regiondes="+req.query.RegionDes+","+
-            "countrydes="+req.query.CountryDes+","+
-            "priority="+req.query.Priority+","+
-            "land="+req.query.Land+","+
-            "sea="+req.query.Sea+","+
-            "air="+req.query.Air+
-            ";"
-
-
         if(req.query.Land!=null){
-            query += req.query.Land;
-            query += "', '";
+
+            var land='t';
         }
         else {
-            query += "f', '";
+            var land= "f";
         }
 
         if(req.query.Sea!=null){
-            query += req.query.Sea;
-            query += "', '";
+
+            var sea='t';
         }
         else {
-            query += "f', '";
+            var sea= "f";
+        }
+        if(req.query.Air!=null){
+
+            var air='t';
+        }
+        else {
+            var air= "f";
         }
 
-        if(req.query.Air!=null){
-            query += req.query.Air;
-            query += "');"+"' WHERE sid=" + req.query.sid + " " +
-                "RETURNING sid;";;
-        }
-        else {
-            query += "f');"+"' WHERE sid=" + req.query.sid + " " +
-                "RETURNING sid;";;
-        }
+        var AddressOrigin=req.query.AddressOrigin;
+        var SuburbOrigin=req.query.SuburbOrigin;
+        var RegionOrigin=req.query.RegionOrigin;
+        var CountryOrigin=req.query.CountryOrigin;
+        var AddressDes=req.query.AddressDes;
+        var SuburbDes=req.query.SuburbDes;
+        var RegionDes=req.query.RegionDes;
+        var CountryDes=req.query.CountryDes;
+        var Priority= req.query.Priority;
+
+        console.log(req.query.sid)
+        console.log(AddressOrigin);
+        console.log(SuburbOrigin);
+        console.log(RegionOrigin);
+        console.log(CountryOrigin);
+        console.log(AddressDes);
+        console.log(SuburbDes);
+        console.log(RegionDes);
+        console.log(CountryDes);
+        console.log(Priority);
+        console.log(land);
+        console.log(sea);
+        console.log(air);
+
+        var query = "UPDATE routes SET " +
+            "addressorigin = '"+ req.query.AddressOrigin +"', "+
+            "suburborigin='" + req.query.SuburbOrigin+"', "+
+            "regionorigin='" +req.query.RegionOrigin+"', "+
+            "countryorigin='"+req.query.CountryOrigin+"', "+
+            "addressdes='"+req.query.AddressDes+"', "+
+            "suburbdes='"+req.query.SuburbDes+"', "+
+            "regiondes='"+req.query.RegionDes+"', "+
+            "countrydes='"+req.query.CountryDes+"', "+
+            "priority='"+req.query.Priority+"', "+
+            "land='"+land+"', "+
+            "sea='"+sea+"', "+
+            "air='"+air+
+            "' WHERE sid=" + req.query.sid + " " +
+            "RETURNING sid;";
+
+
 
 
         client.query(query, function (error, result) {
@@ -440,7 +464,7 @@ router.get('/doEditRoute', function(req, res) {
                 return;
             }
 
-            client.query("SELECT * FROM route WHERE sid=" + result.rows[0].sid, function (error, result) {
+            client.query("SELECT * FROM routes", function (error, result) {
                 done();
                 if (error) {
                     console.error('Failed to execute query.');
@@ -448,18 +472,10 @@ router.get('/doEditRoute', function(req, res) {
                     return;
                 }
 
-                client.query("SELECT * FROM route WHERE uid=" + signedInUserUID + ";", function (error, result) {
-                    done();
-                    if (error) {
-                        console.error('Failed to execute query.');
-                        console.error(error);
-                        return;
-                    }
 
-
-                        res.render('routes', {title: websiteName, signedInUser: signedInUser, list: result.rows, id: signedInUserUID, user: result2.rows[0] });
+                        res.render('routes', { title: websiteName, list: result.rows, message: req.query.message, signedInUser: signedInUser, redirect: req.query.redirect, id: signedInUserUID,manager: manager });
                     });
-            });
+
         });
     });
 });

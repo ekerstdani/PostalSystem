@@ -103,10 +103,15 @@ block content
         p(align="center") !{message}
 
   div(class="well" style="margin-left:15%; margin-right:15%;")
-    form.form-horizontal(action="/doAddRoute")
+    form.form-horizontal(action="/doEditRoute")
       fieldset
         legend Edit Route
         .form-group(role=form action="/doEditRoute")
+          div(class="form-group" style="display:none;")
+            label(for="sid" class="col-lg-2 control-label") Sid
+            input(type="number" readonly class="form-control input-sm" value=product.sid placeholder=product.sid
+                 id="sid" name="sid")
+
           label.col-lg-2.control-label(for='inputOrigin') Route Origin
           .col-lg-10
             input.form-control(type='text', placeholder=product.addressorigin,
@@ -552,8 +557,9 @@ block content
                     | What form of transportation were you after
                 .checkbox(name="transport")
                     label
-                        input(type='checkbox' name="Land",checked=(true == false ? "checked" : undefined))
+                        input(type='checkbox' name="Land", checked=(true == false ? "checked" : undefined))
                         |  Land
+
                     &nbsp
                     label
                         input(type='checkbox' name="Sea", checked=(true == false ? "checked" : undefined))
