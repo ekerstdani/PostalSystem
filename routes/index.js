@@ -47,7 +47,7 @@ router.get('/deleteRoute', function(req, res) {
 
 
 /* GET routes page. */
-router.get('/routes', function(req, res) {
+router.get('/routes', function(req, res){
     pg.connect(database, function (err, client, done) {
         if (err) {
             console.error('Could not connect to the database.');
@@ -65,7 +65,7 @@ router.get('/routes', function(req, res) {
             }
             res.render('routes', { title: websiteName, list: result.rows, message: req.query.message, signedInUser: signedInUser, redirect: req.query.redirect, id: signedInUserUID,manager: manager });
         });
-    });
+    }); 
 });
 
 /* GET signup page. */
@@ -89,9 +89,67 @@ router.get('/addRoute', function(req, res) {
 });
 
 
-/* GET deleteRoute page. */
-router.get('/checkFigure', function(req, res) {
-  res.render('checkFigure', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
+// /* GET deleteRoute page. */
+// router.get('/checkFigure', function(req, res) {
+//   res.render('checkFigure', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager});
+// });
+
+router.get('/checkFigure', function(req, res){
+  var routes = 0;
+  var revenue = 0;
+  var expendeture = 0;
+    pg.connect(database, function (err, client, done) {
+        if (err) {
+            console.error('Could not connect to the database.');
+            console.error(err);
+            return;
+        }
+
+        var query = "SELECT COUNT(*) FROM Routes" ;
+        client.query(query, function (error, result) {
+            done();
+            if (error) {
+                console.error('Failed to execute query.');
+                console.error(error);
+                return;
+            }
+            else{
+              routes = result.rows[0].count;
+            }    
+        });
+
+        var query = "SELECT * FROM Expendeture" ;
+        client.query(query, function (error, result) {
+            done();
+            if (error) {
+                console.error('Failed to execute query.');
+                console.error(error);
+                return;
+            }
+            else{
+              expendeture = result.rows[0].expendeture;
+            }         
+        });
+
+        var query = "SELECT * FROM Revenue" ;
+          client.query(query, function (error, result) {
+            done();
+            if (error) {
+                console.error('Failed to execute query.');
+                console.error(error);
+                return;
+            }
+            else{
+              revenue = result.rows[0].revenue;
+             
+               res.render('checkFigure', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager, numberofroutes:routes, totalRev:revenue,totalExpendeture:expendeture});
+
+            }
+            });
+          
+         
+    }); 
+
 });
 
 
