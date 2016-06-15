@@ -6,7 +6,7 @@ block content
       div(class="navbar-header")
         a(class="navbar-brand" href="/") !{title}
 
-      div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+      div(class="collapse navbar-collapse")
         ul(class="nav navbar-nav")
           li
             a(href="/mainPage") Home
@@ -18,7 +18,7 @@ block content
           
           li
           
-           div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+           div( class="collapse navbar-collapse")
             ul(class="nav navbar-nav")
              li(class ="dropdown" class="active")
               a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") Routes 
@@ -28,14 +28,7 @@ block content
                 a(href="/routes") Routes
                li
                 a(href="/addRoute") Add Routes
-               li
-                a(href="/editRoute") Edit Route
-               li
-                a(href="/deleteRoute") Delete Route
-           
-           
-           
-            
+
 
         form(class="navbar-form navbar-left" role="search")
          div(class="form-group")
@@ -49,10 +42,13 @@ block content
           if(manager)
             li
               a(href="/signup") Sign Up
+            li
+                a(href="/editAccount") Edit Accounts
+
           if signedInUser
           li
           
-           div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+           div( class="collapse navbar-collapse")
             ul(class="nav navbar-nav")
              li(class ="dropdown" class="btn-primary")
               a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") !{signedInUser}
@@ -75,7 +71,511 @@ block content
       document.getElementById('userOptions').style.display = 'none';
     };
 
+    function populate(s1,s2){
+        var s1 = document.getElementById(s1);
+        var s2 = document.getElementById(s2);
+        s2.innerHTML ="";
+        if(s1.value =="New Zealand"){
+            var optionArray =["Auckland","Hamilton","Rotorua","Palmerston North",
+                "Wellington","Christchurch","Dunedin"];
+
+        }
+        if (s1.value != "New Zealand") {
+            var optionArray = ["Region Not Needed"];
+
+        }
+        for(var option in optionArray){
+            var newOption= document.createElement("option");
+            newOption.innerHTML = optionArray[option];
+            s2.options.add(newOption);
+        }
+    };
+
   br
   br
   br
   br
+
+  div( style="margin-left:20%; margin-right:20%;")
+    if message
+      div(class="alert alert-dismissible alert-danger" id="message")
+        button(type="button" class="close" onclick="hideMessage();") &times;
+        p(align="center") !{message}
+
+  div(class="well" style="margin-left:15%; margin-right:15%;")
+    form.form-horizontal(action="/doAddRoute")
+      fieldset
+        legend Edit Route
+        .form-group(role=form action="/doEditRoute")
+          label.col-lg-2.control-label(for='inputOrigin') Route Origin
+          .col-lg-10
+            input.form-control(type='text', placeholder=product.addressorigin,
+            name="AddressOrigin", value=product.addressorigin)
+            input.form-control(type='text', placeholder=product.suburborigin name="SuburbOrigin", value=
+            product.suburborigin)
+
+
+
+          label.col-lg-2.control-label(for='select')
+          .col-lg-10
+            select.form-control(type='text', name="CountryOrigin", id="slct1", onchange="populate(this.id,'slct2')")
+                option(hidden) Select your country
+                option(value="New Zealand") New Zealand
+                option Afghanistan
+                option Albania
+                option Algeria
+                option Andorra
+                option Angola
+                option Antigua and Barbuda
+                option Argentina
+                option Armenia
+                option Australia
+                option Austria
+                option Azerbaijan
+                option Bahamas
+                option Bahrain
+                option Bahamas
+                option Bahrain
+                option Bangladesh
+                option Barbados
+                option Belarus
+                option Belgium
+                option Belize
+                option Benin
+                option Bhutan
+                option Bolivia
+                option Bosnia and Herzegovina
+                option Botswana
+                option Brazil
+                option Brunei
+                option Bulgaria
+                option Burkina Faso
+                option Burundi
+                option Cabo Verde
+                option Cambodia
+                option Cameroon
+                option Canada
+                option Central African Republic
+                option Chad
+                option Chile
+                option China
+                option Colombia
+                option Comoros
+                option Congo, Republic of the
+                option Congo, Democratic Republic of the
+                option Costa Rica
+                option Cote d'Ivoire
+                option Croatia
+                option Cuba
+                option Cyprus
+                option Czech Republic
+                option Denmark
+                option Djibouti
+                option Dominica
+                option Dominican Republic
+                option Ecuador
+                option Egypt
+                option El Salvador
+                option Equatorial Guinea
+                option Eritrea
+                option Estonia
+                option  Ethiopia
+                option  Fiji
+                option Finland
+                option France
+                option Gabon
+                option Gambia
+                option Georgia
+                option Germany
+                option Ghana
+                option Greece
+                option Grenada
+                option Guatemala
+                option Guinea
+                option Guinea-Bissau
+                option Guyana
+                option Haiti
+                option Honduras
+                option Hungary
+                option Iceland
+                option India
+                option Indonesia
+                option Iran
+                option Iraq
+                option Ireland
+                option Israel
+                option Italy
+                option Jamaica
+                option Japan
+                option Jordan
+                option Kazakhstan
+                option Kenya
+                option Kiribati
+                option Kosovo
+                option Kuwait
+                option Kyrgyzstan
+                option Laos
+                option Latvia
+                option Lebanon
+                option Lesotho
+                option Liberia
+                option Libya
+                option Liechtenstein
+                option Lithuania
+                option Luxembourg
+                option Macedonia
+                option Madagascar
+                option Malawi
+                option Malaysia
+                option Maldives
+                option Mali
+                option Malta
+                option Marshall Islands
+                option Mauritania
+                option Mauritius
+                option Mexico
+                option Micronesia
+                option Moldova
+                option Monaco
+                option Mongolia
+                option Montenegro
+                option Morocco
+                option Mozambique
+                option Myanmar (Burma)
+                option Namibia
+                option Nauru
+                option Nepal
+                option Netherlands
+                option Nicaragua
+                option Niger
+                option Nigeria
+                option North Korea
+                option Norway
+                option Oman
+                option Pakistan
+                option Palau
+                option Palestine
+                option Panama
+                option Papua New Guinea
+                option Paraguay
+                option Peru
+                option Philippines
+                option Poland
+                option Portugal
+                option Qatar
+                option Romania
+                option Russia
+                option Rwanda
+                option St. Kitts and Nevis
+                option St. Lucia
+                option St. Vincent and The Grenadines
+                option Samoa
+                option San Marino
+                option Sao Tome and Principe
+                option Saudi Arabia
+                option Senegal
+                option Serbia
+                option Seychelles
+                option Sierra Leone
+                option Singapore
+                option Slovakia
+                option Slovenia
+                option Solomon Islands
+                option Somalia
+                option South Africa
+                option South Korea
+                option South Sudan
+                option Spain
+                option Sri Lanka
+                option Sudan
+                option Suriname
+                option Swaziland
+                option Sweden
+                option Switzerland
+                option Syria
+                option Taiwan
+                option Tajikistan
+                option Tanzania
+                option Thailand
+                option Timor-Leste
+                option Togo
+                option Tonga
+                option Trinidad and Tobago
+                option Tunisia
+                option Turkey
+                option Turkmenistan
+                option Tuvalu
+                option Uganda
+                option Ukraine
+                option United Arab Emirates
+                option United Kingdom (UK)
+                option United States of America (USA)
+                option Uruguay
+                option Uzbekistan
+                option Vanuatu
+                option Vatican City (Holy See)
+                option Venezuela
+                option Vietnam
+                option Yemen
+                option Zambia
+                option Zimbabwe
+
+          label.col-lg-2.control-label(for='select')
+          .col-lg-10
+             select.form-control(type='text' name="RegionOrigin" id="slct2" onchange="populate(this.id,'slct4')")
+                option(hidden) Select your region
+                br
+
+
+
+        .form-group
+            label.col-lg-2.control-label(for='inputDes') Route Destination
+            .col-lg-10
+                input#inputDes.form-control(type='text', placeholder=product.addressdes name="AddressDes",
+                value=product.addressdes)
+                input#inputDes.form-control(type='text', placeholder=product.suburbdes name="SuburbDes",
+                value=product.suburbdes)
+
+
+
+            label.col-lg-2.control-label(for='select')
+            .col-lg-10
+                select.form-control(type='text' name="CountryDes", id="slct3", onchange="populate(this.id,'slct4')")
+                    option(hidden) Select your country
+                    option(value="New Zealand") New Zealand
+                    option Afghanistan
+                    option Albania
+                    option Algeria
+                    option Andorra
+                    option Angola
+                    option Antigua and Barbuda
+                    option Argentina
+                    option Armenia
+                    option Australia
+                    option Austria
+                    option Azerbaijan
+                    option Bahamas
+                    option Bahrain
+                    option Bahamas
+                    option Bahrain
+                    option Bangladesh
+                    option Barbados
+                    option Belarus
+                    option Belgium
+                    option Belize
+                    option Benin
+                    option Bhutan
+                    option Bolivia
+                    option Bosnia and Herzegovina
+                    option Botswana
+                    option Brazil
+                    option Brunei
+                    option Bulgaria
+                    option Burkina Faso
+                    option Burundi
+                    option Cabo Verde
+                    option Cambodia
+                    option Cameroon
+                    option Canada
+                    option Central African Republic
+                    option Chad
+                    option Chile
+                    option China
+                    option Colombia
+                    option Comoros
+                    option Congo, Republic of the
+                    option Congo, Democratic Republic of the
+                    option Costa Rica
+                    option Cote d'Ivoire
+                    option Croatia
+                    option Cuba
+                    option Cyprus
+                    option Czech Republic
+                    option Denmark
+                    option Djibouti
+                    option Dominica
+                    option Dominican Republic
+                    option Ecuador
+                    option Egypt
+                    option El Salvador
+                    option Equatorial Guinea
+                    option Eritrea
+                    option Estonia
+                    option  Ethiopia
+                    option  Fiji
+                    option Finland
+                    option France
+                    option Gabon
+                    option Gambia
+                    option Georgia
+                    option Germany
+                    option Ghana
+                    option Greece
+                    option Grenada
+                    option Guatemala
+                    option Guinea
+                    option Guinea-Bissau
+                    option Guyana
+                    option Haiti
+                    option Honduras
+                    option Hungary
+                    option Iceland
+                    option India
+                    option Indonesia
+                    option Iran
+                    option Iraq
+                    option Ireland
+                    option Israel
+                    option Italy
+                    option Jamaica
+                    option Japan
+                    option Jordan
+                    option Kazakhstan
+                    option Kenya
+                    option Kiribati
+                    option Kosovo
+                    option Kuwait
+                    option Kyrgyzstan
+                    option Laos
+                    option Latvia
+                    option Lebanon
+                    option Lesotho
+                    option Liberia
+                    option Libya
+                    option Liechtenstein
+                    option Lithuania
+                    option Luxembourg
+                    option Macedonia
+                    option Madagascar
+                    option Malawi
+                    option Malaysia
+                    option Maldives
+                    option Mali
+                    option Malta
+                    option Marshall Islands
+                    option Mauritania
+                    option Mauritius
+                    option Mexico
+                    option Micronesia
+                    option Moldova
+                    option Monaco
+                    option Mongolia
+                    option Montenegro
+                    option Morocco
+                    option Mozambique
+                    option Myanmar (Burma)
+                    option Namibia
+                    option Nauru
+                    option Nepal
+                    option Netherlands
+                    option Nicaragua
+                    option Niger
+                    option Nigeria
+                    option North Korea
+                    option Norway
+                    option Oman
+                    option Pakistan
+                    option Palau
+                    option Palestine
+                    option Panama
+                    option Papua New Guinea
+                    option Paraguay
+                    option Peru
+                    option Philippines
+                    option Poland
+                    option Portugal
+                    option Qatar
+                    option Romania
+                    option Russia
+                    option Rwanda
+                    option St. Kitts and Nevis
+                    option St. Lucia
+                    option St. Vincent and The Grenadines
+                    option Samoa
+                    option San Marino
+                    option Sao Tome and Principe
+                    option Saudi Arabia
+                    option Senegal
+                    option Serbia
+                    option Seychelles
+                    option Sierra Leone
+                    option Singapore
+                    option Slovakia
+                    option Slovenia
+                    option Solomon Islands
+                    option Somalia
+                    option South Africa
+                    option South Korea
+                    option South Sudan
+                    option Spain
+                    option Sri Lanka
+                    option Sudan
+                    option Suriname
+                    option Swaziland
+                    option Sweden
+                    option Switzerland
+                    option Syria
+                    option Taiwan
+                    option Tajikistan
+                    option Tanzania
+                    option Thailand
+                    option Timor-Leste
+                    option Togo
+                    option Tonga
+                    option Trinidad and Tobago
+                    option Tunisia
+                    option Turkey
+                    option Turkmenistan
+                    option Tuvalu
+                    option Uganda
+                    option Ukraine
+                    option United Arab Emirates
+                    option United Kingdom (UK)
+                    option United States of America (USA)
+                    option Uruguay
+                    option Uzbekistan
+                    option Vanuatu
+                    option Vatican City (Holy See)
+                    option Venezuela
+                    option Vietnam
+                    option Yemen
+                    option Zambia
+                    option Zimbabwe
+
+            label.col-lg-2.control-label(for='select')
+            .col-lg-10
+                select.form-control(type='text' name="RegionDes",id="slct4")
+                    option(hidden) Select your region
+
+                br
+                span.help-block
+                    | What form of transportation were you after
+                .checkbox(name="transport")
+                    label
+                        input(type='checkbox' name="Land",checked=(true == false ? "checked" : undefined))
+                        |  Land
+                    &nbsp
+                    label
+                        input(type='checkbox' name="Sea", checked=(true == false ? "checked" : undefined))
+                        |  Sea
+                    &nbsp
+                    label
+                        input(type='checkbox' name="Air",checked=(true == false ? "checked" : undefined))
+                        |  Air
+
+
+
+        .form-group
+            label.col-lg-2.control-label(for='select') Priority
+            .col-lg-10
+                select#select.form-control(name="Priority")
+                    option(hidden) Select your priority
+                    option International Air Priority
+                    option International Standard Priority
+                    option Domestic Air Priority (Same Price As Standard)
+                    option Domestic Standard Priority (Same Price As Air)
+
+        .form-group
+            .col-lg-10.col-lg-offset-2
+                button.btn.btn-default(type='reset') Cancel
+                button.btn.btn-primary(type='submit') Submit

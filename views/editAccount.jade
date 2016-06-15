@@ -10,14 +10,11 @@ block content
         ul(class="nav navbar-nav")
           li
             a(href="/mainPage") Home
-
+            
           if(manager)
            li
             a(href="/checkFigure") Check Figure
 
-
-
-          
           li
           
            div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
@@ -40,7 +37,7 @@ block content
          div(class="form-group")
           input(class="form-control" placeholder="Search Routes" type="text")
          button(class="btn btn-primary btn-sm" type="submit")
-          span(class="glyphicon glyphicon-search" aria-hidden="true")
+          span(class="glyphicon glyphicon-search" aria-hidden="true")      
           
             
               
@@ -48,9 +45,9 @@ block content
           if(manager)
             li
               a(href="/signup") Sign Up
-
             li
                 a(href="/editAccount") Edit Accounts
+
           if signedInUser
           li
           
@@ -78,8 +75,7 @@ block content
     };
 
   br
-  br  
-  br 
+  br
   br
   br
 
@@ -92,35 +88,27 @@ block content
 
   table(class="table table-striped table-hover")
 
-    thead
-        tr(class="info")
-            th(width="30%") Origin Address
-            th(width="30%") Destination Address
-            th(width="20%") Priority
-            th(width="20%") Transportation
-            th(width="5%") Actions
+      thead
+          tr(class="info")
+              th(width="30%") Username
+              th(width="30%") RealName
+              th(width="20%") Manager
+              th(width="5%") Actions
 
-        tr
+          tr
 
-    tbody
-        each val in list
-            tr
-                th !{val.addressorigin} !{val.suburborigin} !{val.regionorigin} !{val.countryorigin}
-                th !{val.addressdes} !{val.suburbdes} !{val.regiondes} !{val.countrydes}
-                th !{val.priority}
-                th
-                    if val.land
-                        p Land
-                    if val.sea
-                        p Sea
-                    if val.air
-                        p Air
-                th
-                    if (manager)
-                        a(class="btn btn-primary btn-xs", href="/editRoute?id=" + id + "&sid=" + val.sid) Edit
-                        a(class="btn btn-primary btn-xs", href="/doDeleteRoute?sid=" + val.sid) Delete
-                    else
-                        span(class="label label-primary") Manager Account Needed
+      tbody
+          each val in list
+              tr
+                  th !{val.username}
+                  th !{val.realname}
+                  th !{val.manager}
+                  th
+                      if (manager)
+                          a(class="btn btn-primary btn-xs", href="/doEditAccount?uid=" + val.uid) Edit
+                          a(class="btn btn-primary btn-xs", href="/doDeleteAccount?uid=" + val.uid) Delete
+                      else
+                          span(class="label label-primary") Manager Account Needed
 
   center
-    a(href="/routes") Back to Top
+      a(href="/editAccount") Back to Top

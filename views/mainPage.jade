@@ -28,10 +28,7 @@ block content
                 a(href="/routes") Routes
                li
                 a(href="/addRoute") Add Routes
-               li
-                a(href="/editRoute") Edit Route
-               li
-                a(href="/deleteRoute") Delete Route
+
            
            
            
@@ -50,6 +47,9 @@ block content
           if(manager)
             li
               a(href="/signup") Sign Up
+
+            li
+              a(href="/editAccount") Edit Accounts
           if signedInUser
           li
           
@@ -88,6 +88,12 @@ block content
   br
   br
   br
+
+  div( style="margin-left:20%; margin-right:20%;")
+      if message
+          div(class="alert alert-dismissible alert-success" id="message")
+              button(type="button" class="close" onclick="hideMessage();") &times;
+              p(align="center") !{message}
 
   
   center

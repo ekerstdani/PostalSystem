@@ -11,6 +11,5 @@ INSERT INTO Users (Username,Realname,Password,manager) VALUES
 ('admin','Sally Smith','admin','t');
 
 INSERT INTO Revenue(UID ,revenue ) VALUES (0,100);
-
 INSERT INTO Expendeture(expendeture ) VALUES (10000);
 INSERT INTO  DeliveryTime(Route,time ) VALUES (0,3.5);
