@@ -1,6 +1,4 @@
-extends layout
-
-block content
+block navbar  
   nav(class="navbar navbar-default navbar-fixed-top")
     div(class="container-fluid")
       div(class="navbar-header")
@@ -26,30 +24,22 @@ block content
                li
                 a(href="/routes") Routes
                li
-                a(href="/addRoute") Add Routes
-
-           
-           
-           
-            
+                a(href="/routes/add") Add Routes
 
         form(class="navbar-form navbar-left" role="search")
          div(class="form-group")
           input(class="form-control" placeholder="Search Routes" type="text")
          button(class="btn btn-primary btn-sm" type="submit")
           span(class="glyphicon glyphicon-search" aria-hidden="true")      
-          
-            
-              
+                               
         ul(class="nav navbar-nav navbar-right")
           if(manager)
             li
               a(href="/signup") Sign Up
             li
-                a(href="/editAccount") Edit Accounts
+                a(href="/users/edit") Edit Accounts
           if signedInUser
-          li
-          
+          li       
            div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
             ul(class="nav navbar-nav")
              li(class ="dropdown" class="btn-primary")
@@ -58,22 +48,3 @@ block content
               ul(class="dropdown-menu" role="menu")
                li
                 a(href="/" class="btn-sm") Logout
-           
-
-  script(type='text/javascript').
-    function hideMessage() {
-      document.getElementById("message").style.display = 'none';
-    }
-    
-    function showOptions() {
-      document.getElementById('userOptions').style.display = 'block';
-    };
-    
-    function hideOptions() {
-      document.getElementById('userOptions').style.display = 'none';
-    };
-
-  br
-  br
-  br
-  br

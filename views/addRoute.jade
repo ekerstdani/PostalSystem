@@ -1,87 +1,6 @@
 extends layout
 
 block content
-  nav(class="navbar navbar-default navbar-fixed-top")
-    div(class="container-fluid")
-      div(class="navbar-header")
-        a(class="navbar-brand" href="/") !{title}
-
-      div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-        ul(class="nav navbar-nav")
-          li
-            a(href="/mainPage") Home
-            
-          if(manager)
-           li
-            a(href="/checkFigure") Check Figure
-
-          
-          li
-          
-           div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-            ul(class="nav navbar-nav")
-             li(class ="dropdown" class="active")
-              a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") Routes 
-               span(class="caret")
-              ul(class="dropdown-menu" role="menu")
-               li
-                a(href="/routes") Routes
-               li
-                a(href="/addRoute") Add Routes
-
-           
-           
-           
-            
-
-        form(class="navbar-form navbar-left" role="search")
-         div(class="form-group")
-          input(class="form-control" placeholder="Search Routes" type="text")
-         button(class="btn btn-primary btn-sm" type="submit")
-          span(class="glyphicon glyphicon-search" aria-hidden="true")      
-          
-            
-              
-
-        ul(class="nav navbar-nav navbar-right")
-          if(manager)
-            li
-              a(href="/signup") Sign Up
-            li
-              a(href="/editAccount") Edit Accounts
-          if signedInUser
-          li
-          
-           div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-            ul(class="nav navbar-nav")
-             li(class ="dropdown" class="btn-primary")
-              a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") !{signedInUser}
-               span(class="caret")
-              ul(class="dropdown-menu" role="menu")
-               li
-                a(href="/" class="btn-sm") Logout
-           
-
-  script(type='text/javascript').
-    function hideMessage() {
-      document.getElementById("message").style.display = 'none';
-    }
-    
-    function showOptions() {
-      document.getElementById('userOptions').style.display = 'block';
-    };
-    
-    function hideOptions() {
-      document.getElementById('userOptions').style.display = 'none';
-    };
-
-
-
-  br
-  br  
-  br 
-  br
-  br
 
   div( style="margin-left:20%; margin-right:20%;")
     if message
@@ -90,10 +9,10 @@ block content
         p(align="center") !{message}
 
   div(class="well" style="margin-left:15%; margin-right:15%;")
-   form.form-horizontal(action="/doAddRoute")
+   form.form-horizontal(role=form method="post" action="/routes/add")
       fieldset
         legend Add Route
-        .form-group(role=form action="/doAddRoute")
+        .form-group
           label.col-lg-2.control-label(for='inputOrigin') Route Origin
           .col-lg-10
             input#inputDes.form-control(type='text', placeholder='Address Line' name="AddressOrigin")

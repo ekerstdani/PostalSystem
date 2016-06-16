@@ -1,69 +1,15 @@
 extends layout
 
-block content
+block navbar
   nav(class="navbar navbar-default navbar-fixed-top")
-  
-   a(class="navbar-brand" href="/") !{title}
+   a(class="navbar-brand" href="/") KPS
 
-             
-
-    script(type='text/javascript').
-        function hideMessage() {
-            document.getElementById("message").style.display = 'none';
-        }
-
-        function showOptions() {
-            document.getElementById('userOptions').style.display = 'block';
-        };
-
-        function hideOptions() {
-            document.getElementById('userOptions').style.display = 'none';
-        };
-
-    script(type='text/javascript').
-        function hideMessage() {
-            document.getElementById("message").style.display = 'none';
-        }
-
-        function showOptions() {
-            document.getElementById('userOptions').style.display = 'block';
-        };
-
-        function hideOptions() {
-            document.getElementById('userOptions').style.display = 'none';
-        };
-
-  br
-  br
-  br
-  br
-
-
+block content
   center
     img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/KPS_Consulting_Logo.svg/500px-KPS_Consulting_Logo.svg.png")
-  
-  br
-  br
-  
-  
-  div(class="well" style="margin-left:20%; margin-right:20%;")
-        if message
-            div(class="alert alert-dismissible alert-success" id="message")
-                button(type="button" class="close" onclick="hideMessage();") &times;
-                p(align="center") !{message}
 
-        div(class="row search")
-            div(class="col-sm-7 col-sm-offset-2")
-                form(role="form" action="/doLogin")
-                    div(class="form-group")
-                        label(for="username" class="col-lg-2 control-label") Username
-                        input(type="text" class="form-control input-sm" placeholder="Username" id="username" name="username")
-                    div(class="form-group")
-                        label(for="password" class="col-lg-2 control-label") Password
-                        input(type="password" class="form-control input-sm" placeholder="Password" id="password" name="password")
-                    div(class="form-group" align="center")
-                            button(type="reset" class="btn btn-default") Cancel
-                            button(type="submit" class="btn btn-primary") Sign In
+  include ./includes/loginform.jade
+
 
 
 

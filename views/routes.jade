@@ -1,88 +1,6 @@
 extends layout
 
 block content
-  nav(class="navbar navbar-default navbar-fixed-top")
-    div(class="container-fluid")
-      div(class="navbar-header")
-        a(class="navbar-brand" href="/") !{title}
-
-      div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-        ul(class="nav navbar-nav")
-          li
-            a(href="/mainPage") Home
-
-          if(manager)
-           li
-            a(href="/checkFigure") Check Figure
-
-
-
-          
-          li
-          
-           div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-            ul(class="nav navbar-nav")
-             li(class ="dropdown" class="active")
-              a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") Routes 
-               span(class="caret")
-              ul(class="dropdown-menu" role="menu")
-               li
-                a(href="/routes") Routes
-               li
-                a(href="/addRoute") Add Routes
-
-           
-           
-           
-            
-
-        form(class="navbar-form navbar-left" role="search")
-         div(class="form-group")
-          input(class="form-control" placeholder="Search Routes" type="text")
-         button(class="btn btn-primary btn-sm" type="submit")
-          span(class="glyphicon glyphicon-search" aria-hidden="true")
-          
-            
-              
-        ul(class="nav navbar-nav navbar-right")
-          if(manager)
-            li
-              a(href="/signup") Sign Up
-
-            li
-                a(href="/editAccount") Edit Accounts
-          if signedInUser
-          li
-          
-           div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-            ul(class="nav navbar-nav")
-             li(class ="dropdown" class="btn-primary")
-              a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") !{signedInUser}
-               span(class="caret")
-              ul(class="dropdown-menu" role="menu")
-               li
-                a(href="/" class="btn-sm") Logout
-           
-
-  script(type='text/javascript').
-    function hideMessage() {
-      document.getElementById("message").style.display = 'none';
-    }
-    
-    function showOptions() {
-      document.getElementById('userOptions').style.display = 'block';
-    };
-    
-    function hideOptions() {
-      document.getElementById('userOptions').style.display = 'none';
-    };
-
-  br
-  br  
-  br 
-  br
-  br
-
   div( style="margin-left:20%; margin-right:20%;")
       if message
           div(class="alert alert-dismissible alert-success" id="message")
@@ -103,24 +21,26 @@ block content
         tr
 
     tbody
+      if list != null
         each val in list
-            tr
-                th !{val.addressorigin} !{val.suburborigin} !{val.regionorigin} !{val.countryorigin}
-                th !{val.addressdes} !{val.suburbdes} !{val.regiondes} !{val.countrydes}
-                th !{val.priority}
-                th
-                    if val.land
-                        p Land
-                    if val.sea
-                        p Sea
-                    if val.air
-                        p Air
-                th
-                    if (manager)
-                        a(class="btn btn-primary btn-xs", href="/editRoute?id=" + id + "&sid=" + val.sid) Edit
-                        a(class="btn btn-primary btn-xs", href="/doDeleteRoute?sid=" + val.sid) Delete
-                    else
-                        span(class="label label-primary") Manager Account Needed
+          tr
+            th !{val.addressorigin} !{val.suburborigin} !{val.regionorigin} !{val.countryorigin}
+            th !{val.addressdes} !{val.suburbdes} !{val.regiondes} !{val.countrydes}
+            th !{val.priority}
+            th
+                if val.land
+                    p Land
+                if val.sea
+                    p Sea
+                if val.air
+                    p Air
+            th
+                if (!manager)
+                    a(class="btn btn-primary btn-xs", href="/routes/edit/" + val.id) Edit
+                    form(action="/routes/delete/" + val.id, method="post")
+                      button(name="delete" value="delete") Delete
+                else
+                    span(class="label label-primary") Manager Account Needed
 
   center
     a(href="/routes") Back to Top
