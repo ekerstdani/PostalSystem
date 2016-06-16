@@ -44,7 +44,7 @@ router.get('/mainPage', function(req, res) {
 router.get('/checkFigure', function(req, res){
   var routes = 0;
   var revenue = 0;
-  var expendeture = 0;
+  var expenditure = 0;
     pg.connect(database, function (err, client, done) {
         if (err) {
             console.error('Could not connect to the database.');
@@ -74,7 +74,7 @@ router.get('/checkFigure', function(req, res){
                 return;
             }
             else{
-              expendeture = result.rows[0].expendeture;
+              expenditure = result.rows[0].expenditure;
             }         
         });
 
@@ -89,7 +89,7 @@ router.get('/checkFigure', function(req, res){
             else{
               revenue = result.rows[0].revenue;
              
-               res.render('checkFigure', { title: websiteName, signedInUser: signedInUser, message: "", id: signedInUserUID, money: parseInt(money) ,manager: manager, numberofroutes:routes, totalRev:revenue,totalExpendeture:expendeture});
+               res.render('checkFigure', {  numberofroutes:routes, totalRev:revenue,totalExpenditure:expenditure});
 
             }
             });

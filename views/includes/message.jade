@@ -1,0 +1,5 @@
+div( style="margin-left:20%; margin-right:20%;")
+  if message
+    div(class="alert alert-dismissible alert-success" id="message")
+      button(type="button" class="close" onclick="hideMessage();") &times;
+      p(align="center") !{message}

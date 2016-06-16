@@ -3,7 +3,7 @@ var router = express.Router();
 
 var queries = require('../queries');
 
-/* GET routes page. */
+/* GET locations page. */
 router.get('/', function(req, res) {
   queries.getAllLocations(function(err, result){
     if(err){
@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
   });
 });
 
-/* GET edit routes page. */
+/* GET edit locations page. */
 router.get('/edit/:id', function(req, res) {
   queries.getLocationById(req.params.id, function(err, result){
     if(err){
@@ -26,7 +26,7 @@ router.get('/edit/:id', function(req, res) {
   });
 });
 
-/* POST edit route. */
+/* POST edit location. */
 router.post('/edit/:id', function(req, res) {
   queries.editLocationById(req.params.id, req.body.LocationName, function(err){
     if(err){

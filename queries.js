@@ -208,6 +208,29 @@ exports.editLocationById = function(id, name, callback){
   });
 }
 
+exports.getAllMail = function(callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+
+    var query = "SELECT * FROM Mail ORDER BY creation_date ASC;";
+    client.query(query, function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(error)
+        return;
+      }
+      callback(null, result.rows);
+    });
+  });
+}
+
 exports.login = function(username, password, callback){
   pg.connect(database, function (err, client, done) {
     if (err) {
