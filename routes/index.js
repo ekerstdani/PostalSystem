@@ -65,7 +65,7 @@ router.get('/checkFigure', function(req, res){
             }    
         });
 
-        var query = "SELECT * FROM Expendeture" ;
+        var query = "SELECT * FROM Expenditure" ;
         client.query(query, function (error, result) {
             done();
             if (error) {

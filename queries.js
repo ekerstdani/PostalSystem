@@ -111,7 +111,7 @@ exports.editRouteById = function(route, callback){
         callback(err);
         return;
       }
-      callback(err);   
+      callback(null);   
     });
   });
 }
@@ -133,6 +133,77 @@ exports.removeRouteById = function(id, callback){
         return;
       }
       callback(null);
+    });
+  });
+}
+
+exports.getAllLocations = function(callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+
+    var query = "SELECT * FROM Locations ORDER BY name ASC;";
+    client.query(query, function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(error)
+        return;
+      }
+      callback(null, result.rows);
+    });
+  });
+}
+
+exports.getLocationById = function(id, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+
+    var query = "SELECT * FROM Locations WHERE id=" + id + ";";
+    client.query(query, function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null, result.rows[0]);
+    });
+  });
+}
+
+exports.editLocationById = function(id, name, callback){
+  pg.connect(database, function (err,client,done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+
+    var query = `UPDATE Locations SET name='${name}'`;
+    query += 'WHERE id=' + id + ";"
+
+    client.query(query, function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null);   
     });
   });
 }

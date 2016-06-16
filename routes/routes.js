@@ -7,7 +7,7 @@ var queries = require('../queries');
 router.get('/', function(req, res) {
   queries.getAllRoutes(function(err, result){
     if(err){
-      res.render('routes', { list: routes, message: req.query.message, redirect: req.query.redirect });
+      console.log(err);
     } else {
       res.render('routes', { list: result, message: req.query.message, redirect: req.query.redirect });
     }
@@ -43,7 +43,7 @@ router.post('/edit/:id', function(req, res) {
     Air: req.body.Air
   };
 
-  queries.editRoute(route, function(err){
+  queries.editRouteById(route, function(err){
     if(err){
       res.render('editRoute', { signedInUser: signedInUser, product: product, inStock: false, id: signedInUserUID });
     } else {
