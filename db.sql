@@ -6,17 +6,31 @@ DROP TABLE Expenditure;
 DROP TABLE DeliveryTime;
 
 
-CREATE TABLE Locations(ID SERIAL PRIMARY KEY, name VARCHAR(50));
+CREATE TABLE Locations(name VARCHAR(50) PRIMARY KEY);
 CREATE TABLE Revenue(UID SERIAL,revenue INT);
 CREATE TABLE Expenditure(expenditure INT);
 CREATE TABLE DeliveryTime(Route SERIAL,time INT);
-CREATE TABLE Mail(ID SERIAL PRIMARY KEY, creation_date DATE, origin_id SERIAL, destination_id SERIAL,
-priority VARCHAR, weight NUMERIC, volume NUMERIC);
+CREATE TABLE Mail (
+	ID SERIAL PRIMARY KEY, 
+	creation_date DATE, 
+	origin_name VARCHAR(50) REFERENCES Locations(name),
+	destination_name VARCHAR(50) REFERENCES Locations(name),
+	priority VARCHAR, 
+	weight NUMERIC, 
+	volume NUMERIC
+);
 
 CREATE TABLE Users (Uid SERIAL, Username VARCHAR(50),
 RealName VARCHAR(100), Password VARCHAR(50), manager boolean);
 
-CREATE TABLE Routes(id SERIAL, addressorigin VARCHAR(50), suburborigin VARCHAR(50), regionorigin VARCHAR(50), countryorigin VARCHAR(50), addressdes VARCHAR(50),suburbdes VARCHAR(50),regiondes VARCHAR(50),countrydes VARCHAR(50),priority VARCHAR(50),land VARCHAR(50),sea VARCHAR(50),air VARCHAR(50));
+CREATE TABLE Routes (
+	id SERIAL PRIMARY KEY,
+	origin_name VARCHAR(50) REFERENCES Locations(name),
+	destination_name VARCHAR(50) REFERENCES Locations(name),
+	land BOOLEAN,
+	sea BOOLEAN,
+	air BOOLEAN
+);
 
 INSERT INTO Users (Username,Realname,Password,manager) VALUES
 ('admin','Sally Smith','admin','t');
