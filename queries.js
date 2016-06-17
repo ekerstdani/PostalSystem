@@ -331,7 +331,7 @@ exports.getNeighbouringLocations = function(location, callback){
         callback(err);
         return;
       }
-      callback(err);   
+      callback(err, result);   
     });
   });
 }
