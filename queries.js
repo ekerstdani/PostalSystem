@@ -61,12 +61,8 @@ exports.addRoute = function(route, callback){
       return;
     }
 
-    var query = `INSERT INTO Routes (addressorigin, suburborigin, regionorigin, 
-    countryorigin, addressdes,suburbdes, regiondes, countrydes, priority, land,
-    sea, air) VALUES ('${route.AddressOrigin}', '${route.SuburbOrigin}', 
-    '${route.RegionOrigin}', '${route.CountryOrigin}', 
-    '${route.AddressDes}', '${route.SuburbDes}', '${route.RegionDes}', '${route.CountryDes}', 
-    '${route.Priority}', '`;
+    var query = `INSERT INTO Routes (origin_name, destination_name, land,
+    sea, air) VALUES ('${route.AddressOrigin}', '${route.AddressDes}','`;
 
     route.Land!=null ? query += route.Land + "', '" : query += "f', '";
     route.Sea!=null ? query += route.Sea + "', '" : query += "f', '";
@@ -295,12 +291,12 @@ exports.addMail = function(route, callback){
     }
 
     var query = `INSERT INTO Mail ( creation_date , origin_id , destination_id ,
-priority , weight , volume ) VALUES ('${route.creatinDate}', '${route.originID}', 
+priority , weight , volume ) VALUES ('${route.creationDate}', '${route.originID}', 
     '${route.destinationID}', '${route.priority}', 
-    '${route.weight}', '${route.volume}', `;
+    '${route.weight}', '${route.volume}' `;
 
-    
     query += " RETURNING id;";
+ 
 
     console.log(query);
 

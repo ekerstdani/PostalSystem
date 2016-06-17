@@ -22,10 +22,10 @@ router.get('/add', function(req, res) {
 /* POST add route */
 router.post('/add', function(req,res) {
 	var mail = {
-		creatinDate: req.body.creation_date,
-		originID: req.body.origin_id,
-		destinationID: req.body.destination_ID, 
-		priority: req.body.priority,
+		creationDate: req.body.creation_date,
+		originID: req.body.originID,
+		destinationID: req.body.destinationID, 
+		priority: req.body.Priority,
 		weight: req.body.weight, 
 		volume: req.body.volume
 	}

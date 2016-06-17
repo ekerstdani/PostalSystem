@@ -5,17 +5,15 @@ block content
     thead
         tr(class="info")
             th(width="30%") Origin Address
-            th(width="30%") Destination Address
-            th(width="20%") Priority
+            th(width="30%") Destination Address          
             th(width="20%") Transportation
             th(width="10%") Actions
     tbody
       if list != null
         each val in list
           tr
-            td !{val.addressorigin} !{val.suburborigin} !{val.regionorigin} !{val.countryorigin}
-            td !{val.addressdes} !{val.suburbdes} !{val.regiondes} !{val.countrydes}
-            td !{val.priority}
+            td !{val.origin_name}
+            td !{val.destination_name}        
             td
                 if val.land
                     p Land
