@@ -4,6 +4,7 @@ DROP TABLE Locations;
 DROP TABLE Revenue;
 DROP TABLE Expenditure;
 DROP TABLE DeliveryTime;
+DROP TABLE Mail;
 
 
 CREATE TABLE Locations(name VARCHAR(50) PRIMARY KEY);
@@ -32,13 +33,18 @@ CREATE TABLE Routes (
 	air BOOLEAN
 );
 
+INSERT INTO Locations VALUES
+('Algeria'), ('Russia'), ('Hungary'), ('Quebec'), ('China');
+
+INSERT INTO Routes VALUES 
+(1, 'Algeria', 'Russia', TRUE, FALSE, FALSE), 
+(2, 'Russia', 'Algeria', TRUE, FALSE, FALSE);
+
 INSERT INTO Users (Username,Realname,Password,manager) VALUES
 ('admin','Sally Smith','admin','t');
 
-INSERT INTO Locations VALUES
-(1, 'Algeria'), (2, 'Russia'), (3, 'Hungary'), (4, 'Quebec'), (5, 'China');
 INSERT INTO Revenue(UID, revenue) VALUES (1, 100);
 INSERT INTO Expenditure(expenditure) VALUES (10000);
 INSERT INTO DeliveryTime(Route, time) VALUES (1, 3.5);
 
-INSERT INTO Mail VALUES (1, '2012-04-25', 1, 2, 'Standard', 2.0, 1.5);
+INSERT INTO Mail VALUES (1, '2012-04-25', 'Algeria', 'Russia', 'Standard', 2.0, 1.5);

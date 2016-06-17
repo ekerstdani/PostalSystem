@@ -309,6 +309,33 @@ exports.editAccount = function(id, username, realname, password, manager, callba
   });
 }
 
+/* -------- EXPERIMENTAL ROUTING -------- */
+
+/* current location, callback constructs graph for neighbours */
+exports.getNeighbouringLocations = function(location, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      return;
+    }
+    var query = "SElECT * FROM Locations l " + 
+    "LEFT JOIN routes r ON l.name = r.destination_name WHERE r.origin_name = '" +
+    location + "';";
+
+    client.query(query, function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(err);   
+    });
+  });
+}
+
 exports.getSignedInUser = function(){
   return signedInUser;
 }
