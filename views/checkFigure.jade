@@ -1,11 +1,11 @@
 extends layout
 
 block content
-  div(class="well" style="margin-left:15%; margin-right:15%;")
+  div(class="well" style="margin-left:15%; margin-right:15%; margin-top: 2%")
     .row
         .col-sm-6.col-md-4
           .thumbnail
-            img(src='#', alt='')
+            
             .caption
               h3(align='center') Number of Routes
               p(align='center') !{numberofroutes}
@@ -13,7 +13,7 @@ block content
                 
         .col-sm-6.col-md-4
           .thumbnail
-            img(src='#', alt='')
+            
             .caption
               h3(align='center') Revenue
               p(align='center') !{totalRev}
@@ -21,11 +21,35 @@ block content
                 
         .col-sm-6.col-md-4
           .thumbnail
-            img(src='#', alt='')
+            
             .caption
               h3(align='center') Expenditure
               p(align='center') !{totalExpenditure}
               p
-                
-              
-    
+      .row
+        .col-sm-6.col-md-4
+          .thumbnail
+           
+            .caption
+              h3(align='center') Amount Of mail
+              p 
+        .col-sm-6.col-md-4
+          .thumbnail
+            
+            .caption
+              h3(align='center') Average Delivery Time
+              p(align='center') !{totalExpenditure}
+              p 
+
+        .col-sm-6.col-md-4
+          .thumbnail
+            
+            .caption
+              h3(align='center') #Events
+              p(align='center') !{totalExpenditure}
+              p
+      .row
+        div(align = 'center')
+         .thumbnail
+            .caption
+              h3 Critical Routes

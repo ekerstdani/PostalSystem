@@ -45,6 +45,7 @@ router.get('/checkFigure', function(req, res){
   var routes = 0;
   var revenue = 0;
   var expenditure = 0;
+  var mail = 0;
   pg.connect(database, function (err, client, done) {
     if (err) {
         console.error('Could not connect to the database.');
@@ -63,6 +64,18 @@ router.get('/checkFigure', function(req, res){
         else{
           routes = result.rows[0].count;
       }    
+  });
+    var query = "SELECT COUNT(*) FROM Mail" ;
+    client.query(query, function (error, result) {
+        done();
+        if (error) {
+            console.error('Failed to execute query.');
+            console.error(error);
+            return;
+        }
+        else{
+         mail= result.rows[0].countl;
+      }         
   });
 
     var query = "SELECT * FROM Expenditure" ;
@@ -89,7 +102,7 @@ router.get('/checkFigure', function(req, res){
         else{
           revenue = result.rows[0].revenue;
 
-          res.render('checkFigure', {  numberofroutes:routes, totalRev:revenue,totalExpenditure:expenditure});
+          res.render('checkFigure', {  numberofroutes:routes, totalRev:revenue,totalExpenditure:expenditure,totalMail: mail});
 
       }
   });
