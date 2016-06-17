@@ -21,30 +21,28 @@ router.get('/add', function(req, res) {
 
 /* POST add route */
 router.post('/add', function(req,res) {
-  var route = {
-    AddressOrigin: req.body.AddressOrigin,
-    SuburbOrigin: req.body.SuburbOrigin,
-    RegionOrigin: req.body.RegionOrigin, 
-    CountryOrigin: req.body.CountryOrigin,
-    AddressDes: req.body.AddressDes, 
-    SuburbDes: req.body.SuburbDes,
-    RegionDes: req.body.RegionDes,
-    CountryDes: req.body.CountryDes,
-    Priority: req.body.Priority,
-    Land: req.body.Land,
-    Sea: req.body.Sea,
-    Air: req.body.Air
-  };
+  var mail = {
+    creatinDate: req.body.creation_date,
+    originID: req.body.origin_id,
+    destinationID: req.body.destination_ID, 
+    priority: req.body.priority,
+    weight: req.body.weight, 
+    volume: req.body.volume
+//  // queries.addMail(mail, function(err) {
+//  //    if(err){
+//  //      res.render('addMail', { message: "Failed to add Route." });
+//  //    } else {
+//  //      res.redirect('/mail');
+//  //    }
+//  //  });
+// });
+};
 
-  if (req.body.Land === null && req.body.Sea === null && req.body.Air === null) {
-    res.render('addRoute', { message: "Choose a Transpostation" });
-  }
-
-  queries.addRoute(route, function(err) {
+  queries.addMail(mail, function(err) {
     if(err){
-      res.render('addRoute', { message: "Failed to add Route." });
+      res.render('addMail', { message: "Failed to add Mail." });
     } else {
-      res.redirect('/routes');
+      res.redirect('/mail');
     }
   });
 });
