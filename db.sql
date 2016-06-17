@@ -1,6 +1,10 @@
 DROP TABLE Users;
 DROP TABLE Routes;
 DROP TABLE Locations;
+DROP TABLE Revenue;
+DROP TABLE Expenditure;
+DROP TABLE DeliveryTime;
+
 
 CREATE TABLE Locations(ID SERIAL PRIMARY KEY, name VARCHAR(50));
 CREATE TABLE Revenue(UID SERIAL,revenue INT);
