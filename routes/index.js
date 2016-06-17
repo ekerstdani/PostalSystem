@@ -74,7 +74,7 @@ router.get('/checkFigure', function(req, res){
             return;
         }
         else{
-         mail= result.rows[0].countl;
+         mail= result.rows[0].count;
       }         
   });
 
