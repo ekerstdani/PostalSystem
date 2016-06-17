@@ -1,4 +1,4 @@
-var pg = require('pg').native;
+var pg = require('pg');
 
 var database = "postgres://postgres:postgres@localhost:5432/swen301";
 
@@ -50,6 +50,7 @@ exports.getAllRoutes = function(callback){
     });
   });
 }
+
 
 exports.addRoute = function(route, callback){
   pg.connect(database, function (err,client,done) {
@@ -284,6 +285,38 @@ exports.signup = function(username, realname, password, manager, callback){
   });
 }
 
+exports.addMail = function(route, callback){
+  pg.connect(database, function (err,client,done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+
+    var query = `INSERT INTO Mail ( creation_date , origin_id , destination_id ,
+priority , weight , volume ) VALUES ('${route.creatinDate}', '${route.originID}', 
+    '${route.destinationID}', '${route.priority}', 
+    '${route.weight}', '${route.volume}', `;
+
+    
+    query += " RETURNING id;";
+
+    console.log(query);
+
+    client.query(query, function(error, result){
+      done();
+      if(error){
+        console.error('Failed to add route.');
+        console.error(error);
+        return;
+      }
+      callback(null);
+    });
+  });
+}
+
+
 exports.editAccount = function(id, username, realname, password, manager, callback){
   pg.connect(database, function (err, client, done) {
     if (err) {
@@ -308,6 +341,8 @@ exports.editAccount = function(id, username, realname, password, manager, callba
     });
   });
 }
+
+
 
 exports.getSignedInUser = function(){
   return signedInUser;
