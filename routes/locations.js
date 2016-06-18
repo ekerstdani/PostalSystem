@@ -14,6 +14,11 @@ router.get('/', function(req, res) {
   });
 });
 
+/* GET add location page. */
+router.get('/add', function(req, res) {
+  res.render('addLocation', { });
+});
+
 /* GET edit locations page. */
 router.get('/edit/:id', function(req, res) {
   queries.getLocationById(req.params.id, function(err, result){
@@ -33,6 +38,21 @@ router.post('/edit/:id', function(req, res) {
       console.log(err);
     } else {
       res.redirect('/locations')
+    }
+  });
+});
+
+/* POST add location */
+router.post('/add', function(req,res) {
+  var mail = {
+    location: req.body.name
+  }
+  
+  queries.addLocation(mail, function(err) {
+    if(err){
+      res.render('addLocation', { message: "Failed to add Location." });
+    } else {
+      res.redirect('/locations');
     }
   });
 });

@@ -180,6 +180,29 @@ exports.getLocationById = function(id, callback){
   });
 }
 
+exports.addLocation = function(location, callback){
+  pg.connect(database, function (err,client,done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+
+    var query = `INSERT INTO Locations VALUES ('${location.name}');`;
+    client.query(query, function(error, result){
+      done();
+      if(error){
+        console.error('Failed to add location.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null);
+    });
+  });
+}
+
 exports.editLocationById = function(id, name, callback){
   pg.connect(database, function (err,client,done) {
     if (err) {
