@@ -281,32 +281,28 @@ exports.signup = function(username, realname, password, manager, callback){
   });
 }
 
-exports.addMail = function(route, callback){
-  pg.connect(database, function (err,client,done) {
+exports.getAccountById = function(id, callback){
+  pg.connect(database, function (err, client, done) {
     if (err) {
       console.error('Could not connect to the database.');
       console.error(err);
       callback(err);
       return;
     }
-    var query = `INSERT INTO Mail ( creation_date , origin_name , destination_name ,
-    priority , weight , volume) VALUES ('${route.creationDate}', '${route.originID}', 
-    '${route.destinationID}', '${route.priority}', 
-    '${route.weight}', '${route.volume}') RETURNING id;`
 
-    client.query(query, function(error, result){
+    var query = "SELECT * FROM Users WHERE uid=" + id + ";";
+    client.query(query, function (error, result) {
       done();
-      if(error){
-        console.error('Failed to add route.');
+      if (error) {
+        console.error('Failed to execute query.');
         console.error(error);
         callback(err);
         return;
       }
-      callback(null);
+      callback(null, result.rows[0]);
     });
   });
 }
-
 
 exports.editAccount = function(id, username, realname, password, manager, callback){
   pg.connect(database, function (err, client, done) {
@@ -329,6 +325,32 @@ exports.editAccount = function(id, username, realname, password, manager, callba
         return;
       }
       callback(err);   
+    });
+  });
+}
+
+exports.addMail = function(mail, callback){
+  pg.connect(database, function (err,client,done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+    var query = `INSERT INTO Mail (creation_date, origin_name, destination_name,
+    priority , weight , volume) VALUES ('${mail.creationDate}', '${mail.originID}', 
+    '${mail.destinationID}', '${mail.priority}', 
+    '${mail.weight}', '${mail.volume}') RETURNING id;`
+
+    client.query(query, function(error, result){
+      done();
+      if(error){
+        console.error('Failed to add mail.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null);
     });
   });
 }

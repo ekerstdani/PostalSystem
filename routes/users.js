@@ -54,11 +54,11 @@ router.post('/signup', function(req, res) {
 
 /* GET edit account page. */
 router.get('/edit/:id', function(req, res) {
-  queries.getRouteById(req.params.id, function(err, result){
+  queries.getAccountById(req.params.id, function(err, result){
     if(err){
-      res.render('editAccount', { signedInUser: signedInUser, product: product, inStock: false, id: signedInUserUID });
+      res.redirect('/users/edit');
     } else {
-      res.render('editAccount', { signedInUser: signedInUser, product: product, inStock: true, id: signedInUserUID });
+      res.render('editAccount', { user: result });
     }
   });
 });

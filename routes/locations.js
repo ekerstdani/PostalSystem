@@ -28,7 +28,7 @@ router.get('/edit/:id', function(req, res) {
 
 /* POST edit location. */
 router.post('/edit/:id', function(req, res) {
-  queries.editLocationById(req.params.id, req.body.LocationName, function(err){
+  queries.editLocationById(req.params.id, req.body.location_name, function(err){
     if(err){
       console.log(err);
     } else {
