@@ -307,6 +307,34 @@ exports.addMail = function(route, callback){
   });
 }
 
+exports.addLocation = function(route, callback){
+  pg.connect(database, function (err,client,done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+
+    var query = `INSERT INTO Locations (name) VALUES ('${route.location}')`
+
+   // query += " RETURNING id;";
+ 
+
+    console.log(query);
+
+    client.query(query, function(error, result){
+      done();
+      if(error){
+        console.error('Failed to add route.');
+        console.error(error);
+        return;
+      }
+      callback(null);
+    });
+  });
+}
+
 
 exports.editAccount = function(id, username, realname, password, manager, callback){
   pg.connect(database, function (err, client, done) {

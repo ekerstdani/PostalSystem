@@ -37,4 +37,26 @@ router.post('/edit/:id', function(req, res) {
   });
 });
 
+/* GET addRoute page. */
+router.get('/add', function(req, res) {
+  res.render('addLocation', { });
+});
+
+/* POST add route */
+router.post('/add', function(req,res) {
+  var mail = {
+   // primarykey: req.body.creation_date,
+    location: req.body.name
+   
+  }
+    queries.addLocation(mail, function(err) {
+      if(err){
+        res.render('addLocation', { message: "Failed to add Location." });
+      } else {
+        res.redirect('/locations');
+      }
+    });
+  });
+
+
 module.exports = router;

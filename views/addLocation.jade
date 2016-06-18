@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  div(class="well" style="margin-left:15%; margin-right:15%;")
+   form.form-horizontal(role=form method="post" action="/locations/add")
+      fieldset
+        legend Add Location
+        .form-group New Locations
+          label.col-lg-2.control-label(for='inputOrigin') 
+          .col-lg-10
+            input#inputDes.form-control(type='text', placeholder='name' name="name")         
+
+
+        .form-group
+          .col-lg-10.col-lg-offset-2
+            button.btn.btn-default(type='reset') Cancel
+            button.btn.btn-primary(type='submit') Submit
+
+
