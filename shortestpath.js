@@ -4,7 +4,7 @@ var queries = require('../queries');
 
 exports.calculateRoute(from, to, transport){
 	var graph = constructRouteGraph();
-	return pathCost = graph.path(from, to,{ cost: true });
+	return pathCost = graph.path(from, to, { cost: true });
 }
 
 function constructRouteGraph(){

@@ -53,7 +53,7 @@ router.get('/metrics', function(req, res){
         return;
     }
 
-    var query = "SELECT COUNT(*) FROM Routes" ;
+    var query = "SELECT COUNT(*) FROM Routes";
     client.query(query, function (error, result) {
         done();
         if (error) {
@@ -64,51 +64,48 @@ router.get('/metrics', function(req, res){
         else{
           routes = result.rows[0].count;
       }    
-  });
-    var query = "SELECT COUNT(*) FROM Mail" ;
+    });
+    
+    var query = "SELECT COUNT(*) FROM Mail";
     client.query(query, function (error, result) {
-        done();
-        if (error) {
-            console.error('Failed to execute query.');
-            console.error(error);
-            return;
-        }
-        else{
-         mail= result.rows[0].count;
-      }         
-  });
-
-    var query = "SELECT * FROM Expenditure" ;
-    client.query(query, function (error, result) {
-        done();
-        if (error) {
-            console.error('Failed to execute query.');
-            console.error(error);
-            return;
-        }
-        else{
-          expenditure = result.rows[0].expenditure;
-      }         
-  });
-
-    var query = "SELECT * FROM Revenue" ;
-    client.query(query, function (error, result) {
-        done();
-        if (error) {
-            console.error('Failed to execute query.');
-            console.error(error);
-            return;
-        }
-        else{
-          revenue = result.rows[0].revenue;
-
-          res.render('checkFigure', {  numberofroutes:routes, totalRev:revenue,totalExpenditure:expenditure,totalMail: mail});
-
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        return;
       }
-  });
+      else{
+       mail= result.rows[0].count;
+      }         
+    });
 
+    var query = "SELECT * FROM Expenditure";
+    client.query(query, function (error, result) {
+      done();
+      if (error) {
+          console.error('Failed to execute query.');
+          console.error(error);
+          return;
+      }
+      else{
+        expenditure = result.rows[0].expenditure;
+      }         
+    });
 
-}); 
+    var query = "SELECT * FROM Revenue";
+    client.query(query, function (error, result) {
+      done();
+      if (error) {
+          console.error('Failed to execute query.');
+          console.error(error);
+          return;
+      }
+      else{
+        revenue = result.rows[0].revenue;
+        res.render('checkFigure', {  numberofroutes:routes, totalRev:revenue,totalExpenditure:expenditure,totalMail: mail});
+      }
+    });
+  }); 
 });
 
 /* GET routes page. */

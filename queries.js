@@ -1,4 +1,5 @@
 var pg = require('pg');
+var eventlogger = require('./eventlogger');
 
 var database = "postgres://postgres:postgres@localhost:5432/swen301";
 
@@ -198,6 +199,7 @@ exports.addLocation = function(location, callback){
         callback(err);
         return;
       }
+      eventlogger.logEvent(JSON.stringify(location));
       callback(null);
     });
   });

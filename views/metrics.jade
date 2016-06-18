@@ -1,56 +1,50 @@
 extends layout
 
 block content
-  div(class="well" style="margin-left:15%; margin-right:15%; margin-top: 2%")
+  div(class="well" style="margin-left:15%; margin-right:15%")
     .row
         .col-sm-6.col-md-4
-          .thumbnail
-            
+          .thumbnail       
             .caption
               h3(align='center') Number of Routes
               p(align='center') !{numberofroutes}
               p
                 
         .col-sm-6.col-md-4
-          .thumbnail
-            
+          .thumbnail           
             .caption
               h3(align='center') Revenue
               p(align='center') !{totalRev}
               p
                 
         .col-sm-6.col-md-4
-          .thumbnail
-            
+          .thumbnail           
             .caption
               h3(align='center') Expenditure
               p(align='center') !{totalExpenditure}
               p
       .row
         .col-sm-6.col-md-4
-          .thumbnail
-           
+          .thumbnail          
             .caption
               h3(align='center') Amount Of mail
               p(align='center') !{totalMail}
               p 
         .col-sm-6.col-md-4
-          .thumbnail
-            
+          .thumbnail            
             .caption
               h3(align='center') Average Delivery Time
               p(align='center') !{totalExpenditure}
               p 
 
         .col-sm-6.col-md-4
-          .thumbnail
-            
+          .thumbnail           
             .caption
               h3(align='center') #Events
               p(align='center') !{totalExpenditure}
               p
-      .row
-        div(align = 'center')
-         .thumbnail
-            .caption
-              h3 Critical Routes
+    .row
+      div(align='center')
+       .thumbnail
+          .caption
+            h3 Critical Routes

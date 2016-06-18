@@ -45,7 +45,7 @@ router.post('/edit/:id', function(req, res) {
 /* POST add location */
 router.post('/add', function(req,res) {
   var location = {
-    location: req.body.name
+    name: req.body.name
   }
 
   queries.addLocation(location, function(err) {
