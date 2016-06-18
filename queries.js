@@ -290,10 +290,10 @@ exports.addMail = function(route, callback){
       return;
     }
 
-    var query = `INSERT INTO Mail ( creation_date , origin_id , destination_id ,
-priority , weight , volume ) VALUES ('${route.creationDate}', '${route.originID}', 
+    var query = `INSERT INTO Mail ( creation_date , origin_name , destination_name ,
+priority , weight , volume) VALUES ('${route.creationDate}', '${route.originID}', 
     '${route.destinationID}', '${route.priority}', 
-    '${route.weight}', '${route.volume}' `;
+    '${route.weight}', '${route.volume}') `
 
     query += " RETURNING id;";
  
