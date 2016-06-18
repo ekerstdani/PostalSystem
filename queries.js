@@ -289,22 +289,17 @@ exports.addMail = function(route, callback){
       callback(err);
       return;
     }
-
     var query = `INSERT INTO Mail ( creation_date , origin_name , destination_name ,
-priority , weight , volume) VALUES ('${route.creationDate}', '${route.originID}', 
+    priority , weight , volume) VALUES ('${route.creationDate}', '${route.originID}', 
     '${route.destinationID}', '${route.priority}', 
-    '${route.weight}', '${route.volume}') `
-
-    query += " RETURNING id;";
- 
-
-    console.log(query);
+    '${route.weight}', '${route.volume}') RETURNING id;`
 
     client.query(query, function(error, result){
       done();
       if(error){
         console.error('Failed to add route.');
         console.error(error);
+        callback(err);
         return;
       }
       callback(null);

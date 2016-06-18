@@ -30,7 +30,11 @@ CREATE TABLE Routes (
 	destination_name VARCHAR(50) REFERENCES Locations(name),
 	land BOOLEAN,
 	sea BOOLEAN,
-	air BOOLEAN
+	air BOOLEAN,
+	trans_weight_cost MONEY,
+	trans_volume_cost MONEY,
+	cust_weight_cost MONEY,
+	cust_volume_cost MONEY
 );
 
 INSERT INTO Locations VALUES

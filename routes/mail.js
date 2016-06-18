@@ -14,12 +14,12 @@ router.get('/', function(req, res) {
 	});
 });
 
-/* GET addRoute page. */
+/* GET add mail page. */
 router.get('/add', function(req, res) {
 	res.render('addMail', { });
 });
 
-/* POST add route */
+/* POST add mail */
 router.post('/add', function(req,res) {
 	var mail = {
 		creationDate: req.body.creation_date,
@@ -29,16 +29,13 @@ router.post('/add', function(req,res) {
 		weight: req.body.weight, 
 		volume: req.body.volume
 	}
-		queries.addMail(mail, function(err) {
-			if(err){
-				res.render('addMail', { message: "Failed to add Route." });
-			} else {
-				res.redirect('/mail');
-			}
-		});
+	queries.addMail(mail, function(err) {
+		if(err){
+			res.render('addMail', { message: "Failed to add Route." });
+		} else {
+			res.redirect('/mail');
+		}
 	});
-
-
-
+});
 
 module.exports = router;
