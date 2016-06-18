@@ -28,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 function loggedInUser(req, res, next){
   res.locals.signedInUser = queries.getSignedInUser();
+  res.locals.isManager = queries.isManager();
   console.log(res.locals.signedInUser);
   next();
 }

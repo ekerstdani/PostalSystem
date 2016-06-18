@@ -9,14 +9,14 @@ router.get('/', function(req, res) {
     if(err){
       console.log(err);
     } else {
-      res.render('routes', { list: result, message: req.query.message, redirect: req.query.redirect });
+      res.render('routes', { routes: result, message: req.query.message, redirect: req.query.redirect });
     }
   });
 });
 
 /* GET addRoute page. */
 router.get('/add', function(req, res) {
-  res.render('addRoute', { });
+  res.render('addRoute');
 });
 
 /* GET edit routes page. */

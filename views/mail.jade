@@ -8,21 +8,21 @@ block content
             th(width="20%") Origin Address
             th(width="30%") Destination Address
             th(width="20%") Priority
-            th(width="10%") Weight
-            th(width="10%") Volume
+            th(width="5%") Weight
+            th(width="5%") Volume
             th(width="10%") Actions
     tbody
       if mail != null
         each val in mail
           tr
-            td !{val.creation_date}
-            td !{val.origin_name}
-            td !{val.destination_name}
-            td !{val.priority}
-            td !{val.weight}
-            td !{val.volume}
+            td #{val.creation_date}
+            td #{val.origin_name}
+            td #{val.destination_name}
+            td #{val.priority}
+            td #{val.weight}
+            td #{val.volume}
             td
-                if (!manager)
+                if isManager
                   a(class="btn btn-primary btn-xs", href="/mail/edit/" + val.id) Edit
                   form(action="/mail/delete/" + val.id, method="post")
                     button(name="delete" value="delete") Delete

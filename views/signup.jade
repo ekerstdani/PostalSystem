@@ -2,26 +2,26 @@ extends layout
 
 block content
   div(class="row search")
-      div(class="col-sm-7 col-sm-offset-2")
-          form(role="form" action="/doSignUp")
-              div(class="form-group")
-                  label(for="username" class="col-lg-2 control-label") Username
-                  input(type="text" class="form-control input-sm" placeholder="Username" id="username" name="username")
-              div(class="form-group")
-                  label(for="username" class="col-lg-2 control-label") Real Name
-                  input(type="text" class="form-control input-sm" placeholder="Real Name" id="realname" name="realname")
-              div(class="form-group")
-                  label(for="password" class="col-lg-2 control-label") Password
-                  input(type="password" class="form-control input-sm" placeholder="Password" id="password" name="password")
-              div(class="form-group")
-                  label(for="confirmPassword" class="col-lg-2 control-label") Confirm Password
-                  input(type="password" class="form-control input-sm" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword")
+    div(class="col-sm-7 col-sm-offset-2")
+      form(role="form" action="/doSignUp")
+        div(class="form-group")
+          label(for="username" class="col-lg-2 control-label") Username
+          input(type="text" class="form-control input-sm" placeholder="Username" id="username" name="username")
+        div(class="form-group")
+          label(for="username" class="col-lg-2 control-label") Real Name
+          input(type="text" class="form-control input-sm" placeholder="Real Name" id="realname" name="realname")
+        div(class="form-group")
+          label(for="password" class="col-lg-2 control-label") Password
+          input(type="password" class="form-control input-sm" placeholder="Password" id="password" name="password")
+        div(class="form-group")
+          label(for="confirmPassword" class="col-lg-2 control-label") Confirm Password
+          input(type="password" class="form-control input-sm" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword")
 
-              .checkbox(name="manager")
-                  label
-                      input(type='checkbox' name="manager",checked=(true == false ? "checked" : undefined))
-                      |  Manager
-       
-              div(class="form-group" align="center")
-                  button(type="reset" class="btn btn-default") Cancel
-                  button(type="submit" class="btn btn-primary") Sign Up
+        .checkbox(name="manager")
+          label
+            input(type='checkbox' name="manager",checked=(true == false ? "checked" : undefined))
+            |  Manager
+     
+        div(class="form-group" align="center")
+          button(type="reset" class="btn btn-default") Cancel
+          button(type="submit" class="btn btn-primary") Sign Up

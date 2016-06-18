@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 
 /* GET add mail page. */
 router.get('/add', function(req, res) {
-	res.render('addMail', { });
+	res.render('addMail');
 });
 
 /* POST add mail */
@@ -29,9 +29,10 @@ router.post('/add', function(req,res) {
 		weight: req.body.weight, 
 		volume: req.body.volume
 	}
+  
 	queries.addMail(mail, function(err) {
 		if(err){
-			res.render('addMail', { message: "Failed to add Route." });
+			res.render('addMail', { message: "Failed to add Mail." });
 		} else {
 			res.redirect('/mail');
 		}

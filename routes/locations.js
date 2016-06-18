@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 
 /* GET add location page. */
 router.get('/add', function(req, res) {
-  res.render('addLocation', { });
+  res.render('addLocation');
 });
 
 /* GET edit locations page. */
@@ -25,7 +25,6 @@ router.get('/edit/:id', function(req, res) {
     if(err){
       res.redirect('/locations');
     } else {
-    	console.log(result);
       res.render('editLocation', { location: result });
     }
   });
@@ -36,6 +35,7 @@ router.post('/edit/:id', function(req, res) {
   queries.editLocationById(req.params.id, req.body.location_name, function(err){
     if(err){
       console.log(err);
+      res.redirect('/');
     } else {
       res.redirect('/locations')
     }
@@ -44,11 +44,11 @@ router.post('/edit/:id', function(req, res) {
 
 /* POST add location */
 router.post('/add', function(req,res) {
-  var mail = {
+  var location = {
     location: req.body.name
   }
-  
-  queries.addLocation(mail, function(err) {
+
+  queries.addLocation(location, function(err) {
     if(err){
       res.render('addLocation', { message: "Failed to add Location." });
     } else {

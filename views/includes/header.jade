@@ -11,9 +11,8 @@ block navbar
             
           if(manager)
            li
-            a(href="/checkFigure") Check Figure
+            a(href="/metrics") Check Key Figures
           
-
           li  
             div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
               ul(class="nav navbar-nav")
@@ -36,8 +35,7 @@ block navbar
                   a(href="/mail") Mail
                  li
                   a(href="/mail/add") Add Mail
-          li
-          
+          li   
            div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
             ul(class="nav navbar-nav")
              li(class ="dropdown")
@@ -47,13 +45,7 @@ block navbar
                li
                 a(href="/routes") Routes
                li
-                a(href="/routes/add") Add Routes
-
-        form(class="navbar-form navbar-left" role="search")
-         div(class="form-group")
-          input(class="form-control" placeholder="Search Routes" type="text")
-         button(class="btn btn-primary btn-sm" type="submit")
-          span(class="glyphicon glyphicon-search" aria-hidden="true")      
+                a(href="/routes/add") Add Route    
                                
         ul(class="nav navbar-nav navbar-right")
           if(manager)
@@ -61,6 +53,7 @@ block navbar
               a(href="/signup") Sign Up
             li
                 a(href="/users/edit") Edit Accounts
+
           if signedInUser
           li       
            div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")

@@ -41,7 +41,7 @@ router.get('/mainPage', function(req, res) {
   res.render('mainPage', { message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, manager: manager,items:items });
 });
 
-router.get('/checkFigure', function(req, res){
+router.get('/metrics', function(req, res){
   var routes = 0;
   var revenue = 0;
   var expenditure = 0;

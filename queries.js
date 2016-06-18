@@ -181,7 +181,7 @@ exports.getLocationById = function(id, callback){
 }
 
 exports.addLocation = function(location, callback){
-  pg.connect(database, function (err,client,done) {
+  pg.connect(database, function (err, client, done) {
     if (err) {
       console.error('Could not connect to the database.');
       console.error(err);
@@ -247,6 +247,36 @@ exports.getAllMail = function(callback){
         return;
       }
       callback(null, result.rows);
+    });
+  });
+}
+
+exports.addMail = function(mail, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+    var query = `INSERT INTO Mail (creation_date, origin_name, destination_name,
+    priority , weight , volume, trans_weight_cost, trans_volume_cost, 
+    cust_weight_cost, cust_volume_cost) 
+    VALUES ('${mail.creationDate}', '${mail.originID}', 
+    '${mail.destinationID}', '${mail.priority}', 
+    '${mail.weight}', '${mail.volume}', '${mail.trans_weight_cost}', 
+    '${mail.trans_volume_cost}', '${mail.cust_weight_cost}', 
+    '${mail.cust_volume_cost}') RETURNING id;`;
+
+    client.query(query, function(error, result){
+      done();
+      if(error){
+        console.error('Failed to add mail.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null);
     });
   });
 }
@@ -352,32 +382,6 @@ exports.editAccount = function(id, username, realname, password, manager, callba
   });
 }
 
-exports.addMail = function(mail, callback){
-  pg.connect(database, function (err,client,done) {
-    if (err) {
-      console.error('Could not connect to the database.');
-      console.error(err);
-      callback(err);
-      return;
-    }
-    var query = `INSERT INTO Mail (creation_date, origin_name, destination_name,
-    priority , weight , volume) VALUES ('${mail.creationDate}', '${mail.originID}', 
-    '${mail.destinationID}', '${mail.priority}', 
-    '${mail.weight}', '${mail.volume}') RETURNING id;`
-
-    client.query(query, function(error, result){
-      done();
-      if(error){
-        console.error('Failed to add mail.');
-        console.error(error);
-        callback(err);
-        return;
-      }
-      callback(null);
-    });
-  });
-}
-
 /* -------- EXPERIMENTAL ROUTING -------- */
 
 /* current location, callback constructs graph for neighbours */
@@ -388,10 +392,10 @@ exports.getNeighbouringLocations = function(location, callback){
       console.error(err);
       return;
     }
+
     var query = "SElECT * FROM Locations l " + 
     "LEFT JOIN routes r ON l.name = r.destination_name WHERE r.origin_name = '" +
     location + "';";
-
     client.query(query, function (error, result) {
       done();
       if (error) {
@@ -407,4 +411,8 @@ exports.getNeighbouringLocations = function(location, callback){
 
 exports.getSignedInUser = function(){
   return signedInUser;
+}
+
+exports.isManager = function(){
+  return manager;
 }
