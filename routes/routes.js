@@ -87,6 +87,7 @@ router.post('/add', function(req,res) {
 /* POST delete route */
 router.post('/delete/:id', function(req, res) {
   var id = req.params.id;
+  console.log(id)
   queries.removeRouteById(id, function(err) {
     if(err){
       res.render('deleteRoute', { message: "Failed to remove Route." });

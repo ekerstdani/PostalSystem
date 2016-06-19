@@ -39,4 +39,17 @@ router.post('/add', function(req,res) {
 	});
 });
 
+/* POST delete mail */
+router.post('/delete/:id', function(req, res) {
+  var id = req.params.id;
+  console.log(id)
+  queries.removeMail(id, function(err) {
+    if(err){
+      res.render('deleteRoute', { message: "Failed to remove Route." });
+    } else {
+      res.redirect('/routes');
+    }
+  });
+});
+
 module.exports = router;

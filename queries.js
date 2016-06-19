@@ -63,11 +63,11 @@ exports.addRoute = function(route, callback){
     }
 
     var query = `INSERT INTO Routes (origin_name, destination_name, land,
-    sea, air) VALUES ('${route.AddressOrigin}', '${route.AddressDes}','`;
+    sea, air,trans_weight_cost,trans_volume_cost,cust_weight_cost,cust_volume_cost) VALUES ('${route.AddressOrigin}', '${route.AddressDes}','`;
 
     route.Land!=null ? query += route.Land + "', '" : query += "f', '";
     route.Sea!=null ? query += route.Sea + "', '" : query += "f', '";
-    route.Air!=null ? query += route.Air + "')" : query += "f')"
+    route.Air!=null ? query += route.Air + "')" : query += "f')",
     query += " RETURNING id;";
 
     console.log(query);
@@ -123,6 +123,27 @@ exports.removeRouteById = function(id, callback){
     }
 
     client.query("DELETE FROM Routes WHERE id=" + id + ";", function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null);
+    });
+  });
+}
+
+exports.removeMail = function(id, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      return;
+    }
+
+    client.query("DELETE FROM Mail WHERE id=" + id + ";", function (error, result) {
       done();
       if (error) {
         console.error('Failed to execute query.');
@@ -261,13 +282,10 @@ exports.addMail = function(mail, callback){
       return;
     }
     var query = `INSERT INTO Mail (creation_date, origin_name, destination_name,
-    priority , weight , volume, trans_weight_cost, trans_volume_cost, 
-    cust_weight_cost, cust_volume_cost) 
+    priority , weight , volume) 
     VALUES ('${mail.creationDate}', '${mail.originID}', 
     '${mail.destinationID}', '${mail.priority}', 
-    '${mail.weight}', '${mail.volume}', '${mail.trans_weight_cost}', 
-    '${mail.trans_volume_cost}', '${mail.cust_weight_cost}', 
-    '${mail.cust_volume_cost}') RETURNING id;`;
+    '${mail.weight}', '${mail.volume}') RETURNING id;`;
 
     client.query(query, function(error, result){
       done();
@@ -358,7 +376,6 @@ exports.getAccountById = function(id, callback){
     });
   });
 }
-
 exports.editAccount = function(id, username, realname, password, manager, callback){
   pg.connect(database, function (err, client, done) {
     if (err) {
@@ -407,6 +424,26 @@ exports.getNeighbouringLocations = function(location, callback){
         return;
       }
       callback(err, result);   
+    });
+  });
+}
+exports.deleteLocation = function(name, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      return;
+    }
+
+    client.query("DELETE FROM Locations WHERE name=" + name+ ";", function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null);
     });
   });
 }
