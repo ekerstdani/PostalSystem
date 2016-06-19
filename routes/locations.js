@@ -59,4 +59,19 @@ router.post('/add', function(req,res) {
   });
 
 
+
+router.post('/delete/:name', function(req,res) {
+   var id =req.params.name;
+  //  console.log(req);
+    console.log('calling delete query' + id)
+    queries.deleteLocation(id, function(err) {
+      if(err){
+        res.render('locations', { message: "Failed to delete Location." });
+      } else {
+        res.redirect('/locations');
+      }
+    });
+  });
+
+
 module.exports = router;

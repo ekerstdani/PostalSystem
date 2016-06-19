@@ -14,7 +14,7 @@ block content
             td
                 if (!manager)
                     a(class="btn btn-primary btn-xs", href="/locations/edit/" + val.id) Edit
-                    form(action="/locations/delete/" + val.id, method="post")
+                    form(action="/locations/delete/" + val.name, method="post")
                       button(name="delete" value="delete") Delete
                 else
                     span(class="label label-primary") Manager Account Needed

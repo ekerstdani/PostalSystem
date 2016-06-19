@@ -134,6 +134,27 @@ exports.removeRouteById = function(id, callback){
   });
 }
 
+exports.removeMail = function(id, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      return;
+    }
+
+    client.query("DELETE FROM Mail WHERE id=" + id + ";", function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null);
+    });
+  });
+}
+
 exports.getAllLocations = function(callback){
   pg.connect(database, function (err, client, done) {
     if (err) {
@@ -335,6 +356,26 @@ exports.addLocation = function(route, callback){
   });
 }
 
+exports.deleteLocation = function(name, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      return;
+    }
+
+    client.query("DELETE FROM Locations WHERE name=" + name+ ";", function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null);
+    });
+  });
+}
 
 exports.editAccount = function(id, username, realname, password, manager, callback){
   pg.connect(database, function (err, client, done) {
