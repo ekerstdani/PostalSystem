@@ -9,7 +9,7 @@ router.get('/mail', function(req, res) {
     if(err){
       console.log(err);
     } else {
-      res.render('mailevent', { event: result });
+      res.render('mailevent', { events: JSON.stringify(result) });
     }
   });
 });
@@ -20,7 +20,7 @@ router.get('/cost', function(req, res) {
     if(err){
       console.log(err);
     } else {
-      res.render('costevent', { event: result });
+      res.render('costevent', { events: result });
     }
   });
 });
@@ -31,7 +31,7 @@ router.get('/price', function(req, res) {
     if(err){
       console.log(err);
     } else {
-      res.render('priceevent', { event: result });
+      res.render('priceevent', { events: result });
     }
   });
 });
@@ -42,7 +42,7 @@ router.get('/discontinue', function(req, res) {
     if(err){
       console.log(err);
     } else {
-      res.render('discontinueevent', { event: result });
+      res.render('discontinueevent', { events: result });
     }
   });
 });

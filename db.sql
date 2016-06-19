@@ -6,7 +6,6 @@ DROP TABLE Expenditure;
 DROP TABLE DeliveryTime;
 DROP TABLE Mail;
 
-
 CREATE TABLE Locations (
   name VARCHAR(50) PRIMARY KEY
 );
@@ -29,7 +28,6 @@ CREATE TABLE Mail (
 	volume NUMERIC
 );
 
-
 CREATE TABLE Users (
   UID SERIAL PRIMARY KEY,
   username VARCHAR(50),
@@ -37,6 +35,7 @@ CREATE TABLE Users (
   password VARCHAR(50),
   manager boolean
 );
+
 CREATE TABLE Routes (
 	id SERIAL PRIMARY KEY,
 	origin_name VARCHAR(50) REFERENCES Locations(name),

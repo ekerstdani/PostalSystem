@@ -21,7 +21,7 @@ block content
                     p Sea
                 else if route.air
                     p Air
-            th
+            td
                 if isManager
                     a(class="btn btn-primary btn-xs", href="/routes/edit/" + route.id) Edit
                     form(action="/routes/delete/" + route.id, method="post")

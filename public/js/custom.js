@@ -28,4 +28,20 @@ function populate(s1,s2){
      newOption.innerHTML = optionArray[option];
      s2.options.add(newOption);
   }
-}
+} 
+
+$(document).ready(function(){
+  $("#prev").click(function() {
+    var count = parseInt($('#index').text())-1;
+     $('#index').text(count);
+     loadTable()
+  });
+
+  $("#next").click(function() {
+    var count = parseInt($('#index').text())+1;
+     $('#index').text(count);
+     loadTable()
+  });
+
+  loadTable();
+});
