@@ -33,14 +33,18 @@ function populate(s1,s2){
 $(document).ready(function(){
   $("#prev").click(function() {
     var count = parseInt($('#index').text())-1;
-     $('#index').text(count);
-     loadTable()
+    if(count >= 0){
+    	$('#index').text(count);
+    	loadTable()
+    }
   });
 
   $("#next").click(function() {
     var count = parseInt($('#index').text())+1;
-     $('#index').text(count);
-     loadTable()
+    if(count >= 0){
+    	$('#index').text(count);
+    	loadTable()
+    }
   });
 
   loadTable();
