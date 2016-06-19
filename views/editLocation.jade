@@ -4,12 +4,12 @@ block content
   div(class="well" style="margin-left:15%; margin-right:15%;")
     form.form-horizontal(action="/locations/edit/" + location.id, method="post")
       fieldset
-        legend Edit Route
+        legend Edit Location
         .form-group
-          label.col-lg-2.control-label(for='inputOrigin') Route Origin
+          label.col-lg-2.control-label(for='location_name') Route Origin
           .col-lg-10
             input.form-control(type='text', placeholder=location.name,
-            name="LocationName", value=location.name)
+            name="location_name", value=location.name)
 
         .form-group
             .col-lg-10.col-lg-offset-2

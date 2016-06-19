@@ -7,34 +7,46 @@ DROP TABLE DeliveryTime;
 DROP TABLE Mail;
 
 
-CREATE TABLE Locations(name VARCHAR(50) PRIMARY KEY);
-CREATE TABLE Revenue(UID SERIAL,revenue INT);
-CREATE TABLE Expenditure(expenditure INT);
-CREATE TABLE DeliveryTime(Route SERIAL,time INT);
-CREATE TABLE Mail (
-	ID SERIAL PRIMARY KEY, 
-	creation_date DATE, 
-	origin_name VARCHAR(50) REFERENCES Locations(name),
-	destination_name VARCHAR(50) REFERENCES Locations(name),
-	priority VARCHAR, 
-	weight NUMERIC, 
-	volume NUMERIC
+CREATE TABLE Locations (
+  name VARCHAR(50) PRIMARY KEY
 );
 
-CREATE TABLE Users (Uid SERIAL, Username VARCHAR(50),
-RealName VARCHAR(100), Password VARCHAR(50), manager boolean);
+CREATE TABLE Revenue (
+  ID SERIAL PRIMARY KEY,
+  revenue MONEY,
+  expenditure MONEY
+);
+
+CREATE TABLE Mail (
+  ID SERIAL PRIMARY KEY, 
+  creation_date DATE, 
+  origin_name VARCHAR(50) REFERENCES Locations(name),
+  destination_name VARCHAR(50) REFERENCES Locations(name),
+  priority VARCHAR, 
+  weight NUMERIC, 
+  volume NUMERIC
+);
+
+CREATE TABLE Users (
+  UID SERIAL PRIMARY KEY,
+  username VARCHAR(50),
+  realname VARCHAR(100),
+  password VARCHAR(50),
+  manager boolean
+);
 
 CREATE TABLE Routes (
-	id SERIAL PRIMARY KEY,
-	origin_name VARCHAR(50) REFERENCES Locations(name),
-	destination_name VARCHAR(50) REFERENCES Locations(name),
-	land BOOLEAN,
-	sea BOOLEAN,
-	air BOOLEAN,
-	trans_weight_cost MONEY,
-	trans_volume_cost MONEY,
-	cust_weight_cost MONEY,
-	cust_volume_cost MONEY
+  id SERIAL PRIMARY KEY,
+  transport_firm: VARCHAR(50),
+  origin_name VARCHAR(50) REFERENCES Locations(name),
+  destination_name VARCHAR(50) REFERENCES Locations(name),
+  land BOOLEAN,
+  sea BOOLEAN,
+  air BOOLEAN,
+  trans_weight_cost MONEY,
+  trans_volume_cost MONEY,
+  cust_weight_cost MONEY,
+  cust_volume_cost MONEY
 );
 
 INSERT INTO Locations VALUES

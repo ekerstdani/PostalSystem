@@ -14,13 +14,17 @@ router.get('/', function(req, res) {
   });
 });
 
+/* GET add location page. */
+router.get('/add', function(req, res) {
+  res.render('addLocation');
+});
+
 /* GET edit locations page. */
 router.get('/edit/:id', function(req, res) {
   queries.getLocationById(req.params.id, function(err, result){
     if(err){
       res.redirect('/locations');
     } else {
-    	console.log(result);
       res.render('editLocation', { location: result });
     }
   });
@@ -28,36 +32,30 @@ router.get('/edit/:id', function(req, res) {
 
 /* POST edit location. */
 router.post('/edit/:id', function(req, res) {
-  queries.editLocationById(req.params.id, req.body.LocationName, function(err){
+  queries.editLocationById(req.params.id, req.body.location_name, function(err){
     if(err){
       console.log(err);
+      res.redirect('/');
     } else {
       res.redirect('/locations')
     }
   });
 });
 
-/* GET addRoute page. */
-router.get('/add', function(req, res) {
-  res.render('addLocation', { });
-});
-
-/* POST add route */
+/* POST add location */
 router.post('/add', function(req,res) {
-  var mail = {
-   // primarykey: req.body.creation_date,
-    location: req.body.name
-   
+  var location = {
+    name: req.body.name
   }
-    queries.addLocation(mail, function(err) {
-      if(err){
-        res.render('addLocation', { message: "Failed to add Location." });
-      } else {
-        res.redirect('/locations');
-      }
-    });
-  });
 
+  queries.addLocation(location, function(err) {
+    if(err){
+      res.render('addLocation', { message: "Failed to add Location." });
+    } else {
+      res.redirect('/locations');
+    }
+  });
+});
 
 
 router.post('/delete/:name', function(req,res) {

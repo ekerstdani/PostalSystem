@@ -12,12 +12,14 @@
     "debug": "~2.2.0",
     "eslint": "*",
     "express": "~4.13.1",
+    "fs": "0.0.2",
     "jade": "~1.11.0",
     "jade-bootstrap": "*",
     "morgan": "~1.6.1",
     "node-dijkstra": "^2.2.1",
     "pg": "*",
     "pg-native": "*",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "xml2js": "^0.4.16"
   }
 }
