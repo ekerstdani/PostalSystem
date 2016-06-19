@@ -199,7 +199,6 @@ exports.addLocation = function(location, callback){
         callback(err);
         return;
       }
-      eventlogger.logEvent(JSON.stringify(location));
       callback(null);
     });
   });
@@ -278,6 +277,7 @@ exports.addMail = function(mail, callback){
         callback(err);
         return;
       }
+      eventlogger.logEvent(mail, 'mail');
       callback(null);
     });
   });
