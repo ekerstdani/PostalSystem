@@ -1,4 +1,5 @@
 var pg = require('pg');
+var eventlogger = require('./eventlogger');
 
 var database = "postgres://postgres:postgres@localhost:5432/swen301";
 
@@ -201,6 +202,30 @@ exports.getLocationById = function(id, callback){
   });
 }
 
+exports.addLocation = function(location, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+
+    var query = `INSERT INTO Locations VALUES ('${location.name}');`;
+    client.query(query, function(error, result){
+      done();
+      if(error){
+        console.error('Failed to add location.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      eventlogger.logEvent(JSON.stringify(location));
+      callback(null);
+    });
+  });
+}
+
 exports.editLocationById = function(id, name, callback){
   pg.connect(database, function (err,client,done) {
     if (err) {
@@ -245,6 +270,36 @@ exports.getAllMail = function(callback){
         return;
       }
       callback(null, result.rows);
+    });
+  });
+}
+
+exports.addMail = function(mail, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+    var query = `INSERT INTO Mail (creation_date, origin_name, destination_name,
+    priority , weight , volume, trans_weight_cost, trans_volume_cost, 
+    cust_weight_cost, cust_volume_cost) 
+    VALUES ('${mail.creationDate}', '${mail.originID}', 
+    '${mail.destinationID}', '${mail.priority}', 
+    '${mail.weight}', '${mail.volume}', '${mail.trans_weight_cost}', 
+    '${mail.trans_volume_cost}', '${mail.cust_weight_cost}', 
+    '${mail.cust_volume_cost}') RETURNING id;`;
+
+    client.query(query, function(error, result){
+      done();
+      if(error){
+        console.error('Failed to add mail.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null);
     });
   });
 }
@@ -302,69 +357,17 @@ exports.signup = function(username, realname, password, manager, callback){
   });
 }
 
-exports.addMail = function(route, callback){
-  pg.connect(database, function (err,client,done) {
-    if (err) {
-      console.error('Could not connect to the database.');
-      console.error(err);
-      callback(err);
-      return;
-    }
-    var query = `INSERT INTO Mail ( creation_date , origin_name , destination_name ,
-    priority , weight , volume) VALUES ('${route.creationDate}', '${route.originID}', 
-    '${route.destinationID}', '${route.priority}', 
-    '${route.weight}', '${route.volume}') RETURNING id;`
-
-    client.query(query, function(error, result){
-      done();
-      if(error){
-        console.error('Failed to add route.');
-        console.error(error);
-        callback(err);
-        return;
-      }
-      callback(null);
-    });
-  });
-}
-
-exports.addLocation = function(route, callback){
-  pg.connect(database, function (err,client,done) {
-    if (err) {
-      console.error('Could not connect to the database.');
-      console.error(err);
-      callback(err);
-      return;
-    }
-
-    var query = `INSERT INTO Locations (name) VALUES ('${route.location}')`
-
-   // query += " RETURNING id;";
- 
-
-    console.log(query);
-
-    client.query(query, function(error, result){
-      done();
-      if(error){
-        console.error('Failed to add route.');
-        console.error(error);
-        return;
-      }
-      callback(null);
-    });
-  });
-}
-
-exports.deleteLocation = function(name, callback){
+exports.getAccountById = function(id, callback){
   pg.connect(database, function (err, client, done) {
     if (err) {
       console.error('Could not connect to the database.');
       console.error(err);
+      callback(err);
       return;
     }
 
-    client.query("DELETE FROM Locations WHERE name=" + name+ ";", function (error, result) {
+    var query = "SELECT * FROM Users WHERE uid=" + id + ";";
+    client.query(query, function (error, result) {
       done();
       if (error) {
         console.error('Failed to execute query.');
@@ -372,10 +375,11 @@ exports.deleteLocation = function(name, callback){
         callback(err);
         return;
       }
-      callback(null);
+      callback(null, result.rows[0]);
     });
   });
 }
+
 
 exports.editAccount = function(id, username, realname, password, manager, callback){
   pg.connect(database, function (err, client, done) {
@@ -412,10 +416,10 @@ exports.getNeighbouringLocations = function(location, callback){
       console.error(err);
       return;
     }
+
     var query = "SElECT * FROM Locations l " + 
     "LEFT JOIN routes r ON l.name = r.destination_name WHERE r.origin_name = '" +
     location + "';";
-
     client.query(query, function (error, result) {
       done();
       if (error) {
@@ -428,7 +432,31 @@ exports.getNeighbouringLocations = function(location, callback){
     });
   });
 }
+exports.deleteLocation = function(name, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      return;
+    }
+
+    client.query("DELETE FROM Locations WHERE name=" + name+ ";", function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      callback(null);
+    });
+  });
+}
 
 exports.getSignedInUser = function(){
   return signedInUser;
+}
+
+exports.isManager = function(){
+  return manager;
 }
