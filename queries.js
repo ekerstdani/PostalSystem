@@ -225,6 +225,32 @@ exports.addLocation = function(location, callback){
   });
 }
 
+exports.addUser = function(user, callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+    console.log(user.username);
+    var query = `INSERT INTO Users VALUES ('${user.username}','${user.realname}','${user.password}','${user.manager}') RETURNING id;`;
+
+
+    client.query(query, function(error, result){
+      done();
+      if(error){
+        console.error('Failed to add user.');
+        console.error(error);
+        callback(err);
+        return;
+      }
+      console.log('added query')
+      callback(null);
+    });
+  });
+}
+
 exports.editLocationById = function(id, name, callback){
   pg.connect(database, function (err,client,done) {
     if (err) {
