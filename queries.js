@@ -63,11 +63,11 @@ exports.addRoute = function(route, callback){
     }
 
     var query = `INSERT INTO Routes (origin_name, destination_name, land,
-    sea, air) VALUES ('${route.AddressOrigin}', '${route.AddressDes}','`;
+    sea, air,trans_weight_cost,trans_volume_cost,cust_weight_cost,cust_volume_cost) VALUES ('${route.AddressOrigin}', '${route.AddressDes}','`;
 
     route.Land!=null ? query += route.Land + "', '" : query += "f', '";
     route.Sea!=null ? query += route.Sea + "', '" : query += "f', '";
-    route.Air!=null ? query += route.Air + "')" : query += "f')"
+    route.Air!=null ? query += route.Air + "')" : query += "f')",
     query += " RETURNING id;";
 
     console.log(query);
@@ -283,13 +283,10 @@ exports.addMail = function(mail, callback){
       return;
     }
     var query = `INSERT INTO Mail (creation_date, origin_name, destination_name,
-    priority , weight , volume, trans_weight_cost, trans_volume_cost, 
-    cust_weight_cost, cust_volume_cost) 
+    priority , weight , volume) 
     VALUES ('${mail.creationDate}', '${mail.originID}', 
     '${mail.destinationID}', '${mail.priority}', 
-    '${mail.weight}', '${mail.volume}', '${mail.trans_weight_cost}', 
-    '${mail.trans_volume_cost}', '${mail.cust_weight_cost}', 
-    '${mail.cust_volume_cost}') RETURNING id;`;
+    '${mail.weight}', '${mail.volume}') RETURNING id;`;
 
     client.query(query, function(error, result){
       done();
@@ -379,8 +376,6 @@ exports.getAccountById = function(id, callback){
     });
   });
 }
-
-
 exports.editAccount = function(id, username, realname, password, manager, callback){
   pg.connect(database, function (err, client, done) {
     if (err) {

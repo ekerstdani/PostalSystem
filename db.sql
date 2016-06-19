@@ -17,15 +17,18 @@ CREATE TABLE Revenue (
   expenditure MONEY
 );
 
+CREATE TABLE Expenditure(expenditure INT);
+CREATE TABLE DeliveryTime(Route SERIAL,time INT);
 CREATE TABLE Mail (
-  ID SERIAL PRIMARY KEY, 
-  creation_date DATE, 
-  origin_name VARCHAR(50) REFERENCES Locations(name),
-  destination_name VARCHAR(50) REFERENCES Locations(name),
-  priority VARCHAR, 
-  weight NUMERIC, 
-  volume NUMERIC
+	ID SERIAL PRIMARY KEY, 
+	creation_date DATE, 
+	origin_name VARCHAR(50) REFERENCES Locations(name),
+	destination_name VARCHAR(50) REFERENCES Locations(name),
+	priority VARCHAR, 
+	weight NUMERIC, 
+	volume NUMERIC
 );
+
 
 CREATE TABLE Users (
   UID SERIAL PRIMARY KEY,
@@ -34,23 +37,21 @@ CREATE TABLE Users (
   password VARCHAR(50),
   manager boolean
 );
-
 CREATE TABLE Routes (
-  id SERIAL PRIMARY KEY,
-  transport_firm: VARCHAR(50),
-  origin_name VARCHAR(50) REFERENCES Locations(name),
-  destination_name VARCHAR(50) REFERENCES Locations(name),
-  land BOOLEAN,
-  sea BOOLEAN,
-  air BOOLEAN,
-  trans_weight_cost MONEY,
-  trans_volume_cost MONEY,
-  cust_weight_cost MONEY,
-  cust_volume_cost MONEY
+	id SERIAL PRIMARY KEY,
+	origin_name VARCHAR(50) REFERENCES Locations(name),
+	destination_name VARCHAR(50) REFERENCES Locations(name),
+	land BOOLEAN,
+	sea BOOLEAN,
+	air BOOLEAN,
+	trans_weight_cost MONEY,
+	trans_volume_cost MONEY,
+	cust_weight_cost MONEY,
+	cust_volume_cost MONEY
 );
 
 INSERT INTO Locations VALUES
-('Algeria'), ('Russia'), ('Hungary'), ('Quebec'), ('China');
+('Algeria'), ('Russia'), ('Hungary'), ('Quebec'), ('China'),('Auckland'), ('Hamilton'), ('Rotorua'), ('Palmerston North'), ('Wellington'), ('Christchurch'),('Dunedin');
 
 INSERT INTO Routes VALUES 
 (1, 'Algeria', 'Russia', TRUE, FALSE, FALSE), 
