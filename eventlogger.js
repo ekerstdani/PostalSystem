@@ -34,3 +34,51 @@ exports.logEvent = function(event, type) {
     });
   });
 }
+
+exports.getAllMailEvents = function(callback) {
+  fs.readFile('event_log.xml', function(err, data) {
+    parser.parseString(data, function (err, result) {
+      if(err){
+        callback(err);
+        return;
+      }
+      callback(null, result.simulation.mail);
+    });
+  });
+}
+
+exports.getAllCostEvents = function(callback) {
+  fs.readFile('event_log.xml', function(err, data) {
+    parser.parseString(data, function (err, result) {
+      if(err){
+        callback(err);
+        return;
+      }
+      callback(null, result.simulation.cost);
+    });
+  });
+}
+
+exports.getAllPriceEvents = function(callback) {
+  fs.readFile('event_log.xml', function(err, data) {
+    parser.parseString(data, function (err, result) {
+      if(err){
+        callback(err);
+        return;
+      }
+      callback(null, result.simulation.price);
+    });
+  });
+}
+
+exports.getAllDiscontinueEvents = function(callback) {
+  fs.readFile('event_log.xml', function(err, data) {
+    parser.parseString(data, function (err, result) {
+      if(err){
+        callback(err);
+        return;
+      }
+      callback(null, result.simulation.discontinue);
+    });
+  });
+}
