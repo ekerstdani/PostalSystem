@@ -41,6 +41,31 @@ router.get('/mainPage', function(req, res) {
   res.render('mainPage', { message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, manager: manager,items:items });
 });
 
+router.get('/signup', function(req, res) {
+  res.render('signup' );
+});
+
+router.get('/doSignUp', function(req, res) {
+  
+  var user = {
+    username: req.query.username,
+   
+    realname: req.query.realname,
+    password: req.query.password, 
+    manager: req.query.manager,    
+  }
+  
+  queries.addUser(user, function(err, result){
+    if(err){
+      res.redirect('/');
+    } else {          
+      res.render('mainPage');
+    }
+  });
+ 
+});
+
+
 router.get('/metrics', function(req, res){
   var routes = 0;
   var revenue = 0;
@@ -102,7 +127,7 @@ router.get('/metrics', function(req, res){
       }
       else{
         revenue = result.rows[0].revenue;
-        res.render('checkFigure', {  numberofroutes:routes, totalRev:revenue,totalExpenditure:expenditure,totalMail: mail});
+        res.render('metrics', {  numberofroutes:routes, totalRev:revenue,totalExpenditure:expenditure,totalMail: mail});
       }
     });
   }); 
