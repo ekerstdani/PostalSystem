@@ -1,9 +1,6 @@
 block navbar  
   nav(class="navbar navbar-default navbar-fixed-top")
     div(class="container-fluid")
-      div(class="navbar-header")
-        a(class="navbar-brand" href="/") !{title}
-
       div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
         ul(class="nav navbar-nav")
           li
@@ -48,9 +45,9 @@ block navbar
                 a(href="/routes/add") Add Route    
                                
         ul(class="nav navbar-nav navbar-right")
-          if(manager)
+          if isManager
             li
-              a(href="/signup") Sign Up
+              a(href="/users/signup") Create new User
             li
                 a(href="/users/edit") Edit Accounts
 
