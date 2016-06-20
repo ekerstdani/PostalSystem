@@ -13,9 +13,9 @@ var pg = require('pg');
 //Pas
 //var database = "postgres://postgres:pasi1105@localhost:5432/postgres";
 //Alex
-//var database = "postgres://postgres:123456@localhost:5432/postgres";
+var database = "postgres://postgres:123456@localhost:5432/swen301";
 //var pg = require('pg');
-var database = "postgres://postgres:postgres@localhost:5432/swen301";
+///var database = "postgres://postgres:postgres@localhost:5432/swen301";
 var items = [];
 pg.connect(database, function (err) {
   if (err) {
@@ -33,7 +33,10 @@ var signedInUserUID = 0;
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { message: "Logged Out", id: signedInUserUID, manager: manager });
+    if(req.query.loggedOut == "true"){
+        res.render('index', { message: "Logged Out", id: signedInUserUID, manager: manager });
+    }
+    res.render('index', { message: "Welcome to KPS system", id: signedInUserUID, manager: manager });
 });
 
 /* GET home page. */
