@@ -1,7 +1,7 @@
 var pg = require('pg');
 var eventlogger = require('./eventlogger');
 
-var database = "postgres://postgres:123456@localhost:5432/swen301";
+var database = "postgres://postgres:postgres@localhost:5432/swen301";
 
 var signedInUser = '';
 var manager = false;

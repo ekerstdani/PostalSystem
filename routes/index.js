@@ -25,21 +25,17 @@ pg.connect(database, function (err) {
 console.log('Connected to database.');
 });
 
-var signedInUserRealname = '';
-var manager='';
-var signedInUserUID = 0;
-
 /* GET home page. */
 router.get('/', function(req, res) {
-    if(req.query.loggedOut == "true"){
-        res.render('index', { message: "Logged Out", id: signedInUserUID, manager: manager });
-    }
-    res.render('index', { message: "Welcome to KPS system", id: signedInUserUID, manager: manager });
+  if(req.query.loggedOut == "true"){
+    res.render('index', { message: "Logged Out" });
+  }
+  res.render('index', { message: "Welcome to KPS system"});
 });
 
 /* GET home page. */
 router.get('/mainPage', function(req, res) {
-  res.render('mainPage', { message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, manager: manager,items:items });
+  res.render('mainPage', { message: req.query.message });
 });
 
 router.get('/metrics', function(req, res){
