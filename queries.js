@@ -1,7 +1,7 @@
 var pg = require('pg');
 var eventlogger = require('./eventlogger');
 
-var database = "postgres://postgres:postgres@localhost:5432/swen301";
+var database = "postgres://postgres:123456@localhost:5432/swen301";
 
 var signedInUser = '';
 var manager = false;
@@ -234,7 +234,7 @@ exports.addUser = function(user, callback){
       return;
     }
     console.log(user.username);
-    var query = `INSERT INTO Users VALUES ('${user.username}','${user.realname}','${user.password}','${user.manager}') RETURNING id;`;
+    var query = `INSERT INTO Users VALUES ('${user.username}','${user.realname}','${user.password}','${user.manager}') `;
 
 
     client.query(query, function(error, result){

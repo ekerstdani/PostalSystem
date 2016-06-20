@@ -1,10 +1,11 @@
 DROP TABLE Users;
 DROP TABLE Routes;
-DROP TABLE Locations;
+
 DROP TABLE Revenue;
 DROP TABLE Expenditure;
 DROP TABLE DeliveryTime;
 DROP TABLE Mail;
+DROP TABLE Locations;
 
 CREATE TABLE Locations (
   name VARCHAR(50) PRIMARY KEY
@@ -28,8 +29,7 @@ CREATE TABLE Mail (
 	volume NUMERIC
 );
 
-CREATE TABLE Users (
-  UID SERIAL PRIMARY KEY,
+CREATE TABLE Users ( 
   username VARCHAR(50),
   realname VARCHAR(100),
   password VARCHAR(50),
@@ -59,7 +59,7 @@ INSERT INTO Routes VALUES
 INSERT INTO Users (Username,Realname,Password,manager) VALUES
 ('admin','Sally Smith','admin','t');
 
-INSERT INTO Revenue(UID, revenue) VALUES (1, 100);
+INSERT INTO Revenue( revenue) VALUES (100);
 INSERT INTO Expenditure(expenditure) VALUES (10000);
 INSERT INTO DeliveryTime(Route, time) VALUES (1, 3.5);
 

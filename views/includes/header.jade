@@ -5,10 +5,8 @@ block navbar
         ul(class="nav navbar-nav")
           li
             a(href="/mainPage") Home
-            
-          if(manager)
-           li
-            a(href="/metrics") Check Key Figures
+           
+          
           
           li  
             div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
@@ -42,7 +40,11 @@ block navbar
                li
                 a(href="/routes") Routes
                li
-                a(href="/routes/add") Add Route    
+                a(href="/routes/add") Add Route   
+          li
+            a(href="/events/mail") Events
+          li
+            a(href="/metrics") Check Key Figures
                                
         ul(class="nav navbar-nav navbar-right")
           if isManager
@@ -60,4 +62,4 @@ block navbar
                span(class="caret")
               ul(class="dropdown-menu" role="menu")
                li
-                a(href="/" class="btn-sm") Logout
+                a(href="/?loggedOut=true" class="btn-sm") Logout
