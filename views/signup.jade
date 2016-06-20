@@ -3,7 +3,7 @@ extends layout
 block content
   div(class="row search")
     div(class="col-sm-7 col-sm-offset-2")
-      form(role="form" action="/doSignUp")
+      form(role="form" action="/users/signup")
         div(class="form-group")
           label(for="username" class="col-lg-2 control-label") Username
           input(type="text" class="form-control input-sm" placeholder="Username" id="username" name="username")
@@ -19,7 +19,7 @@ block content
 
         .checkbox(name="manager")
           label
-            input(type='checkbox' name="manager",checked=(true == false ? "checked" : undefined))
+            input(type='checkbox' name="manager" checked=(true == false ? "checked" : undefined))
             |  Manager
      
         div(class="form-group" align="center")

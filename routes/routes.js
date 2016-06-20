@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
     if(err){
       console.log(err);
     } else {
-      res.render('routes', { routes: result, message: req.query.message, redirect: req.query.redirect });
+      res.render('routes', { routes: result });
     }
   });
 });

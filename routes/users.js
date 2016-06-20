@@ -7,6 +7,17 @@ var signedInUserRealname = '';
 var manager='';
 var signedInUserUID = 0;
 
+/* GET users page */
+router.get('/', function(req, res) {
+  queries.getAllUsers(function(err, result){
+    if(err){
+      res.redirect('/');
+    } else {          
+      res.render('users', { users: result });
+    }
+  });
+});
+
 /* GET login page. */
 router.get('/login', function(req, res) {
   res.render('login', { message: req.query.message, redirect: req.query.redirect, id: signedInUserUID, manager: manager });
@@ -82,7 +93,7 @@ router.post('/edit/:id', function(req, res){
     if(err){
       res.render('editAccount', { message: "Failed to edit account" });
     } else {
-      res.redirect('/login');
+      res.redirect('/users/login');
     }
   });
 });

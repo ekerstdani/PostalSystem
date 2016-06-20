@@ -1,23 +1,27 @@
 extends layout
 
 block content
-  table(class="table table-striped table-hover")
-    thead
-      tr(class="info")
-          th(width="30%") Username
-          th(width="40%") RealName
-          th(width="20%") Manager
-          th(width="10%") Actions
-    tbody
-      tr
-        td !{user.username}
-        td !{user.realname}
-        td !{user.manager}
-        td
-            if (user.manager)
-                a(class="btn btn-primary btn-xs", href="/users/edit/" + user.uid) Edit
-                a(class="btn btn-primary btn-xs", href="/users/delete/" + user.uid) Delete
-            else
-                span(class="label label-primary") Manager Account Needed
-  center
-      a(href="/users/edit") Back to Top
+  div(class="well" style="margin-left:15%; margin-right:15%;")
+    form.form-horizontal(action="/users/edit/" + user.id, method="post")
+      fieldset
+        legend Edit User
+        .form-group
+          label.col-lg-2.control-label(for='realname') Realname
+          .col-lg-10
+            input.form-control(type='text', placeholder="realname",
+            name="realname", value=user.realname)
+          label.col-lg-2.control-label(for='username') Username
+          .col-lg-10
+            input.form-control(type='text', placeholder="username",
+            name="username", value=user.username)
+          label.col-lg-2.control-label(for='password') Password
+          .col-lg-10
+            input.form-control(type='password', placeholder="********",
+            name="password", value=user.password)
+          label.col-lg-2.control-label(for='manager') Manager
+            input.form-control(type='checkbox' name="manager", checked=user.manager)
+
+        .form-group
+            .col-lg-10.col-lg-offset-2
+                button.btn.btn-default(type='reset') Cancel
+                button.btn.btn-primary(type='submit') Submit

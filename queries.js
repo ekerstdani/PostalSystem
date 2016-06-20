@@ -38,7 +38,7 @@ exports.getAllRoutes = function(callback){
       return;
     }
 
-    var query = "SELECT * FROM Routes" + ";";
+    var query = "SELECT * FROM Routes;";
     client.query(query, function (error, result) {
       done();
       if (error) {
@@ -51,7 +51,6 @@ exports.getAllRoutes = function(callback){
     });
   });
 }
-
 
 exports.addRoute = function(route, callback){
   pg.connect(database, function (err,client,done) {
@@ -327,6 +326,29 @@ exports.addMail = function(mail, callback){
   });
 }
 
+exports.getAllUsers = function(callback){
+  pg.connect(database, function (err, client, done) {
+    if (err) {
+      console.error('Could not connect to the database.');
+      console.error(err);
+      callback(err);
+      return;
+    }
+
+    var query = "SELECT * FROM Users;";
+    client.query(query, function (error, result) {
+      done();
+      if (error) {
+        console.error('Failed to execute query.');
+        console.error(error);
+        callback(error)
+        return;
+      }
+      callback(null, result.rows);
+    });
+  });
+}
+
 exports.login = function(username, password, callback){
   pg.connect(database, function (err, client, done) {
     if (err) {
@@ -402,6 +424,7 @@ exports.getAccountById = function(id, callback){
     });
   });
 }
+
 exports.editAccount = function(id, username, realname, password, manager, callback){
   pg.connect(database, function (err, client, done) {
     if (err) {
