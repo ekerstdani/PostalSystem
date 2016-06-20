@@ -15,11 +15,16 @@
     "fs": "0.0.2",
     "jade": "~1.11.0",
     "jade-bootstrap": "*",
+    "mocha": "^2.5.3",
     "morgan": "~1.6.1",
     "node-dijkstra": "^2.2.1",
     "pg": "*",
     "pg-native": "*",
     "serve-favicon": "~2.3.0",
     "xml2js": "^0.4.16"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "chai-http": "^1.0.0"
   }
 }
