@@ -1,10 +1,11 @@
 DROP TABLE Users;
 DROP TABLE Routes;
-DROP TABLE Locations;
+
 DROP TABLE Revenue;
 DROP TABLE Expenditure;
 DROP TABLE DeliveryTime;
 DROP TABLE Mail;
+DROP TABLE Locations;
 
 CREATE TABLE Locations (
   name VARCHAR(50) PRIMARY KEY
@@ -59,7 +60,7 @@ INSERT INTO Routes VALUES
 INSERT INTO Users (Username,Realname,Password,manager) VALUES
 ('admin','Sally Smith','admin','t');
 
-INSERT INTO Revenue(UID, revenue) VALUES (1, 100);
+INSERT INTO Revenue( revenue) VALUES (100);
 INSERT INTO Expenditure(expenditure) VALUES (10000);
 INSERT INTO DeliveryTime(Route, time) VALUES (1, 3.5);
 
