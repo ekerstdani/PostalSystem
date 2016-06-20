@@ -29,8 +29,7 @@ CREATE TABLE Mail (
 	volume NUMERIC
 );
 
-CREATE TABLE Users (
-  UID SERIAL PRIMARY KEY,
+CREATE TABLE Users ( 
   username VARCHAR(50),
   realname VARCHAR(100),
   password VARCHAR(50),

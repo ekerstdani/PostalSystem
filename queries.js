@@ -234,7 +234,7 @@ exports.addUser = function(user, callback){
       return;
     }
     console.log(user.username);
-    var query = `INSERT INTO Users VALUES ('${user.username}','${user.realname}','${user.password}','${user.manager}') RETURNING id;`;
+    var query = `INSERT INTO Users VALUES ('${user.username}','${user.realname}','${user.password}','${user.manager}') `;
 
 
     client.query(query, function(error, result){
