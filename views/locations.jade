@@ -12,8 +12,7 @@ block content
           tr
             td #{loc.name}
             td
-                if isManager
-                    a(class="btn btn-primary btn-xs", href="/locations/edit/" + loc.id) Edit
+                if isManager                    
                     form(action="/locations/delete/" + loc.id, method="post")
                       button(name="delete" value="delete") Delete
                 else
