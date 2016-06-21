@@ -43,7 +43,7 @@ router.get('/metrics', function(req, res){
   var revenue = 0;
   var expenditure = 0;
   var mail = 0;
-  var events = 0;
+  var totalEvent = 0;
   pg.connect(database, function (err, client, done) {
     if (err) {
         console.error('Could not connect to the database.');
@@ -78,7 +78,9 @@ router.get('/metrics', function(req, res){
     });
     
     
-    events = eventlogger.getNumberOfEvents();
+    eventlogger.getNumberOfEvents(function(total) {
+      totalEvent = total;
+    });
 
     var query = "SELECT * FROM Expenditure";
     client.query(query, function (error, result) {
@@ -103,7 +105,7 @@ router.get('/metrics', function(req, res){
       }
       else{
         revenue = result.rows[0].revenue;
-        res.render('metrics', {  numberofroutes:routes, totalRev:revenue,totalExpenditure:expenditure,totalMail: mail, totalEvent:events});
+        res.render('metrics', {  numberofroutes:routes, totalRev:revenue,totalExpenditure:expenditure,totalMail: mail, totalEvent:totalEvent});
       }
     });
   }); 

@@ -35,15 +35,15 @@ exports.logEvent = function(event, type) {
 exports.getNumberOfEvents = function(callback) {
   var total = 0;
   getAllMailEvents(function(err, result){
-    return result.length;
+    total += result.length;
+    getAllDiscontinueEvents(function(err, result){
+      total += result.length;
+      getAllCostEvents(function(err, result){
+        total+= result.length;
+        callback(total);
+      });
+    });
   });
-  total += getAllDiscontinueEvents(function(err, result){
-    return result.length;
-  });
-  total += getAllCostEvents(function(err, result){
-    return result.length;
-  });
-  return callback(null, total);
 }
 
 var getAllMailEvents = exports.getAllMailEvents = function(callback) {
