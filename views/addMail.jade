@@ -6,17 +6,17 @@ block content
       fieldset
         legend Add Mail
         .form-group
-          label.col-lg-2.control-label(for='inputOrigin') Route Origin
+          label.col-lg-2.control-label(for='inputOrigin') Date
           .col-lg-10
             input#inputDes.form-control(type='text', placeholder='Date' name="creation_date")         
 
-          label.col-lg-2.control-label(for='select')
-          .col-lg-10
+          label.col-lg-2.control-label(for='select') Origin
+          .col-lg-10 
             select#select.form-control(type='text' name="originID")
               option(hidden) Select Origin
               each val in locations
                 option  #{val.name}
-          label.col-lg-2.control-label(for='select')
+          label.col-lg-2.control-label(for='select') Destination
           .col-lg-10
             select#select.form-control(type='text' name="destinationID")
               option(hidden) Select Destination
@@ -33,9 +33,11 @@ block content
               option Domestic Air Priority (Same Price As Standard)
               option Domestic Standard Priority (Same Price As Air)
           .form-group
-          label.col-lg-2.control-label(for='inputOrigin') 
+          label.col-lg-2.control-label(for='inputOrigin') weight
           .col-lg-10
             input#inputDes.form-control(type='text', placeholder='Weight' name="weight")
+          label.col-lg-2.control-label(for='inputOrigin') Volume
+          .col-lg-10
             input#inputDes.form-control(type='text', placeholder='Volume' name="volume")
 
         .form-group

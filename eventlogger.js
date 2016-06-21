@@ -43,7 +43,7 @@ exports.getNumberOfEvents = function(callback) {
   total += getAllCostEvents(function(err, result){
     return result.length;
   });
-  return callback(err, total);
+  return callback(null, total);
 }
 
 var getAllMailEvents = exports.getAllMailEvents = function(callback) {
