@@ -16,7 +16,14 @@ router.get('/', function(req, res) {
 
 /* GET addRoute page. */
 router.get('/add', function(req, res) {
-  res.render('addRoute');
+  queries.getAllLocations(function(err, result){
+    if(err){
+      console.log(err);
+    } else {
+      console.log(result)
+      res.render('addRoute', { locations: result });
+    }
+  });
 });
 
 /* GET edit routes page. */

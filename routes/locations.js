@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
     if(err){
       console.log(err);
     } else {
+      console.log(result)
       res.render('locations', { locations: result });
     }
   });

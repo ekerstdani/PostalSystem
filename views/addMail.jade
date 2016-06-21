@@ -14,24 +14,14 @@ block content
           .col-lg-10
             select#select.form-control(type='text' name="originID")
               option(hidden) Select Origin
-              option Auckland
-              option Hamilton
-              option Rotorua
-              option Palmerston North
-              option Wellington
-              option Christchurch
-              option Dunedin
+              each val in locations
+                option  #{val.name}
           label.col-lg-2.control-label(for='select')
           .col-lg-10
             select#select.form-control(type='text' name="destinationID")
               option(hidden) Select Destination
-              option Auckland
-              option Hamilton
-              option Rotorua
-              option Palmerston North
-              option Wellington
-              option Christchurch
-              option Dunedin
+              each val in locations
+                option  #{val.name}
         
           form-group
           label.col-lg-2.control-label(for='select') Priority
