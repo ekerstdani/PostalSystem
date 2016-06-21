@@ -16,7 +16,14 @@ router.get('/', function(req, res) {
 
 /* GET addRoute page. */
 router.get('/add', function(req, res) {
-  res.render('addRoute');
+  queries.getAllLocations(function(err, result){
+    if(err){
+      console.log(err);
+    } else {
+      console.log(result)
+      res.render('addRoute', { locations: result });
+    }
+  });
 });
 
 /* GET edit routes page. */
@@ -38,9 +45,9 @@ router.post('/edit/:id', function(req, res) {
     id: req.params.id,
     origin_name: req.body.origin_name,
     destination_name: req.body.destination_name,
-    land: req.body.land,
-    sea: req.body.sea,
-    air: req.body.air,
+    land: req.body.Land,
+    sea: req.body.Sea,
+    air: req.body.Air,
     trans_weight_cost: req.body.trans_weight_cost,
     trans_volume_cost: req.body.trans_volume_cost,
     cust_weight_cost: req.body.cust_weight_cost,
@@ -58,17 +65,18 @@ router.post('/edit/:id', function(req, res) {
 
 /* POST add route */
 router.post('/add', function(req,res) {
+  console.log(req.body)
   var route = {
     id: req.params.id,
-    origin_name: req.body.origin_name,
-    destination_name: req.body.destination_name,
-    land: req.body.land,
-    sea: req.body.sea,
-    air: req.body.air,
+    origin_name: req.body.AddressOrigin,
+    destination_name: req.body.AddressDes,
+    land: req.body.Land,
+    sea: req.body.Sea,
+    air: req.body.Air,
     trans_weight_cost: req.body.trans_weight_cost,
     trans_volume_cost: req.body.trans_volume_cost,
     cust_weight_cost: req.body.cust_weight_cost,
-    cust_volume_cost: req.body.cust_volume_cost  
+    cust_volume_cost: req.body.cust_volume_cost
   };
 
   if (req.body.Land === null && req.body.Sea === null && req.body.Air === null) {

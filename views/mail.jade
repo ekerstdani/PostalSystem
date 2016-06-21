@@ -23,7 +23,6 @@ block content
             td #{val.volume}
             td
                 if isManager
-                  a(class="btn btn-primary btn-xs", href="/mail/edit/" + val.id) Edit
                   form(action="/mail/delete/" + val.id, method="post")
                     button(name="delete" value="delete") Delete
                 else

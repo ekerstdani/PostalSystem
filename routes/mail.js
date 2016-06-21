@@ -16,7 +16,14 @@ router.get('/', function(req, res) {
 
 /* GET add mail page. */
 router.get('/add', function(req, res) {
-	res.render('addMail');
+	queries.getAllLocations(function(err, result){
+		if(err){
+			console.log(err);
+		} else {
+			console.log(result)
+			res.render('addMail', { locations: result });
+		}
+	});
 });
 
 /* POST add mail */

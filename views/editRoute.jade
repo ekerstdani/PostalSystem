@@ -2,7 +2,7 @@ extends layout
 
 block content
   div(class="well" style="margin-left:15%; margin-right:15%;")
-    form.form-horizontal(action="/routes/edit" + route.id, method="post")
+    form.form-horizontal(action="/routes/edit/" + route.id, method="post")
       fieldset
         legend Edit Route
         .form-group

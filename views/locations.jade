@@ -12,8 +12,9 @@ block content
           tr
             td #{loc.name}
             td
-                if isManager                    
-                    form(action="/locations/delete/" + loc.id, method="post")
+                if isManager  
+                    a(class="btn btn-primary btn-xs", href="/locations/edit/" + loc.name) Edit                  
+                    form(action="/locations/delete/" + loc.name, method="post")
                       button(name="delete" value="delete") Delete
                 else
                     span(class="label label-primary") Manager Account Needed

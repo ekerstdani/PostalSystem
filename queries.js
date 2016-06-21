@@ -60,14 +60,19 @@ exports.addRoute = function(route, callback){
       callback(err);
       return;
     }
-
+    console.log(route)
+    console.log(route.Sea)
     var query = `INSERT INTO Routes (origin_name, destination_name, land,
-    sea, air,trans_weight_cost,trans_volume_cost,cust_weight_cost,cust_volume_cost) VALUES ('${route.AddressOrigin}', '${route.AddressDes}','`;
+    sea, air,trans_weight_cost,trans_volume_cost,cust_weight_cost,cust_volume_cost) VALUES ('${route.origin_name}', '${route.destination_name}','`;
 
-    route.Land!=null ? query += route.Land + "', '" : query += "f', '";
-    route.Sea!=null ? query += route.Sea + "', '" : query += "f', '";
-    route.Air!=null ? query += route.Air + "')" : query += "f')",
-    query += " RETURNING id;";
+    route.land !=null ? query += route.land + "', " : query += "f', '";
+    route.sea !=null ? query += route.sea + "', " : query += "f', '";
+    route.air !=null ? query += route.air + "', " : query += "f',";
+    query += `${route.trans_weight_cost},`
+    query += `${route.trans_volume_cost},`
+    query += `${route.cust_weight_cost},`
+    query += `${route.cust_volume_cost}`
+    query += ");";
 
     console.log(query);
 
@@ -310,7 +315,7 @@ exports.addMail = function(mail, callback){
     priority , weight , volume) 
     VALUES ('${mail.creationDate}', '${mail.originID}', 
     '${mail.destinationID}', '${mail.priority}', 
-    '${mail.weight}', '${mail.volume}') RETURNING id;`;
+    '${mail.weight}', '${mail.volume}') `;
 
     client.query(query, function(error, result){
       done();
@@ -484,7 +489,7 @@ exports.deleteLocation = function(name, callback){
       return;
     }
 
-    client.query("DELETE FROM Locations WHERE name=" + name+ ";", function (error, result) {
+    client.query("DELETE FROM Locations WHERE name='" + name + "';", function (error, result) {
       done();
       if (error) {
         console.error('Failed to execute query.');

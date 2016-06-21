@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
     if(err){
       console.log(err);
     } else {
+      console.log(result)
       res.render('locations', { locations: result });
     }
   });
@@ -57,10 +58,8 @@ router.post('/add', function(req,res) {
   });
 });
 
-
 router.post('/delete/:name', function(req,res) {
-   var id =req.params.name;
-  //  console.log(req);
+   var id = req.params.name;
     console.log('calling delete query' + id)
     queries.deleteLocation(id, function(err) {
       if(err){
