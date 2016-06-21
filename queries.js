@@ -1,7 +1,12 @@
+var config = require('config');
 var pg = require('pg');
+pg.defaults.ssl = true;
 var eventlogger = require('./eventlogger');
 
-var database = "postgres://postgres:postgres@localhost:5432/swen301";
+var database = "postgres://" + config.get('db.user') + ":"
+  + config.get('db.pass') + "@" + config.get('db.host')
+  + "/" + config.get('db.name');
+
 
 var signedInUser = '';
 var manager = false;

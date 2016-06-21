@@ -2,19 +2,15 @@ var express = require('express');
 var router = express.Router();
 var queries = require('../queries');
 var eventlogger = require('../eventlogger');
-//At Uni
-//var pg = require('pg').native;
-//var database = "postgres://depot:5432/Swen301";
 
-//At Home
+var config = require('config');
 var pg = require('pg');
-//Daniel
-//var database = "postgres://postgres:w2sybb57@localhost:5432/swen301";
-//Pas
-//var database = "postgres://postgres:pasi1105@localhost:5432/postgres";
-//Alex
-//var database = "postgres://postgres:123456@localhost:5432/swen301";
-var database = "postgres://postgres:postgres@localhost:5432/swen301";
+pg.defaults.ssl = true;
+
+var database = "postgres://" + config.get('db.user') + ":"
+  + config.get('db.pass') + "@" + config.get('db.host')
+  + "/" + config.get('db.name');
+
 pg.connect(database, function (err) {
   if (err) {
     console.error('Could not connect to the database.');
