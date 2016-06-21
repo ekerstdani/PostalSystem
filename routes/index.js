@@ -13,8 +13,8 @@ var pg = require('pg');
 //Pas
 //var database = "postgres://postgres:pasi1105@localhost:5432/postgres";
 //Alex
-//var database = "postgres://postgres:123456@localhost:5432/swen301";
-var database = "postgres://postgres:postgres@localhost:5432/swen301";
+var database = "postgres://postgres:123456@localhost:5432/swen301";
+//var database = "postgres://postgres:postgres@localhost:5432/swen301";
 pg.connect(database, function (err) {
   if (err) {
     console.error('Could not connect to the database.');

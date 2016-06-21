@@ -1,7 +1,7 @@
 var pg = require('pg');
 var eventlogger = require('./eventlogger');
 
-var database = "postgres://postgres:postgres@localhost:5432/swen301";
+var database = "postgres://postgres:123456@localhost:5432/swen301";
 
 var signedInUser = '';
 var manager = false;
@@ -60,14 +60,18 @@ exports.addRoute = function(route, callback){
       callback(err);
       return;
     }
-
+    console.log(route)
     var query = `INSERT INTO Routes (origin_name, destination_name, land,
-    sea, air,trans_weight_cost,trans_volume_cost,cust_weight_cost,cust_volume_cost) VALUES ('${route.AddressOrigin}', '${route.AddressDes}','`;
+    sea, air,trans_weight_cost,trans_volume_cost,cust_weight_cost,cust_volume_cost) VALUES ('${route.origin_name}', '${route.destination_name}','`;
 
-    route.Land!=null ? query += route.Land + "', '" : query += "f', '";
-    route.Sea!=null ? query += route.Sea + "', '" : query += "f', '";
-    route.Air!=null ? query += route.Air + "')" : query += "f')",
-    query += " RETURNING id;";
+    route.land!=null ? query += route.Land + "', '" : query += "f', '";
+    route.sea!=null ? query += route.Sea + "', '" : query += "f', '";
+    route.air!=null ? query += route.Air + "')" : query += "f',";
+    query += `${route.trans_weight_cost},`
+    query += `${route.trans_volume_cost},`
+    query += `${route.cust_weight_cost},`
+    query += `${route.cust_volume_cost}`
+    query += ")";
 
     console.log(query);
 

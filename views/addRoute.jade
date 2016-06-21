@@ -45,8 +45,24 @@ block content
               option Christchurch
               option Dunedin
 
+        .form-group
+          label.col-lg-2.control-label(for='trans_weight_cost') Route Weight cost
+          .col-lg-10.col-lg-offset-2
+            input(type="number" class="form-control input-sm" placeholder="Route Weight Cost" id="trans_weight_cost" name="trans_weight_cost")
 
+        .form-group
+          label.col-lg-2.control-label(for='trans_volume_cost') Route Volume cost
+          .col-lg-10.col-lg-offset-2
+            input(type="number" class="form-control input-sm" placeholder="Route Volume Cost" id="trans_volume_cost" name="trans_volume_cost")
 
+        .form-group
+          label.col-lg-2.control-label(for='cust_weight_cost') Customer Weight cost
+          .col-lg-10.col-lg-offset-2
+            input(type="number" class="form-control input-sm" placeholder="Cust Weight Cost" id="cust_weight_cost" name="cust_weight_cost")
+        .form-group
+          label.col-lg-2.control-label(for='cust_volume_cost') Customer weight Volume
+          .col-lg-10.col-lg-offset-2
+            input(type="number" class="form-control input-sm" placeholder="Cust Volume Cost" id="cust_volume_cost" name="cust_volume_cost")
             br
             span.help-block
               |What form of transportation were you after
@@ -64,8 +80,6 @@ block content
                 |  Air
 
 
-
-      
 
         .form-group
           .col-lg-10.col-lg-offset-2

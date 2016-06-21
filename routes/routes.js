@@ -58,17 +58,18 @@ router.post('/edit/:id', function(req, res) {
 
 /* POST add route */
 router.post('/add', function(req,res) {
+  console.log(req.body)
   var route = {
     id: req.params.id,
-    origin_name: req.body.origin_name,
-    destination_name: req.body.destination_name,
+    origin_name: req.body.AddressOrigin,
+    destination_name: req.body.AddressDes,
     land: req.body.land,
     sea: req.body.sea,
     air: req.body.air,
     trans_weight_cost: req.body.trans_weight_cost,
     trans_volume_cost: req.body.trans_volume_cost,
     cust_weight_cost: req.body.cust_weight_cost,
-    cust_volume_cost: req.body.cust_volume_cost  
+    cust_volume_cost: req.body.cust_volume_cost
   };
 
   if (req.body.Land === null && req.body.Sea === null && req.body.Air === null) {
