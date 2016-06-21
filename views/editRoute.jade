@@ -2,66 +2,44 @@ extends layout
 
 block content
   div(class="well" style="margin-left:15%; margin-right:15%;")
-    form.form-horizontal(action="/routes/edit/" + route.id, method="post")
+   form.form-horizontal(role=form method="post" action="/routes/edit/" + route.id)
       fieldset
         legend Edit Route
         .form-group
-          label.col-lg-2.control-label(for='origin_name') Route Origin
-          .col-lg-10
-            select.form-control(type='text', name="origin_name", id="slct1", onchange="populate(this.id,'slct2')")
-              option(hidden) Select your origin
-              each location in locations
-                option= location.name
-
+          label.col-lg-2.control-label(for='inputOrigin') Route Origin
           label.col-lg-2.control-label(for='select')
           .col-lg-10
-             select.form-control(type='text' name="RegionOrigin" id="slct2" onchange="populate(this.id,'slct4')")
-                option(hidden) Select your region
-                br
+            input(type='text' name="AddressOrigin" value=route.origin_name disabled="disbabled")
+              
 
         .form-group
-          label.col-lg-2.control-label(for='destination_name')
+          label.col-lg-2.control-label(for='inputDes') Route Destination
+          label.col-lg-2.control-label(for='select')
           .col-lg-10
-            select.form-control(type='text', name="destination_name", id="slct1", onchange="populate(this.id,'slct2')")
-              option(hidden) Select your destination
-              for location in locations
-                option= location.name
-
-            label.col-lg-2.control-label(for='select')
-            .col-lg-10
-                select.form-control(type='text' name="RegionDes",id="slct4")
-                    option(hidden) Select your region
-
-                br
-                span.help-block
-                    | What form of transportation were you after
-                .checkbox(name="transport")
-                    label
-                        input(type='checkbox' name="land", checked=(true == false ? "checked" : undefined))
-                        |  Land
-
-                    &nbsp
-                    label
-                        input(type='checkbox' name="sea", checked=(true == false ? "checked" : undefined))
-                        |  Sea
-                    &nbsp
-                    label
-                        input(type='checkbox' name="air",checked=(true == false ? "checked" : undefined))
-                        |  Air
-
-
+            input(type='text' name="AddressDes" value=route.destination_name disabled="disbabled")
 
         .form-group
-            label.col-lg-2.control-label(for='select') Priority
-            .col-lg-10
-                select#select.form-control(name="Priority")
-                    option(hidden) Select your priority
-                    option International Air Priority
-                    option International Standard Priority
-                    option Domestic Air Priority (Same Price As Standard)
-                    option Domestic Standard Priority (Same Price As Air)
+          label.col-lg-2.control-label(for='trans_weight_cost') Route Weight cost
+          .col-lg-10.col-lg-offset-2
+            input(type="number" class="form-control input-sm" placeholder="Route Weight Cost" id="trans_weight_cost" name="trans_weight_cost" value=route.trans_weight_cost)
 
         .form-group
-            .col-lg-10.col-lg-offset-2
-                button.btn.btn-default(type='reset') Cancel
-                button.btn.btn-primary(type='submit') Submit
+          label.col-lg-2.control-label(for='trans_volume_cost') Route Volume cost
+          .col-lg-10.col-lg-offset-2
+            input(type="number" class="form-control input-sm" placeholder="Route Volume Cost" id="trans_volume_cost" name="trans_volume_cost" value=route.trans_volume_cost)
+
+        .form-group
+          label.col-lg-2.control-label(for='cust_weight_cost') Customer Weight cost
+          .col-lg-10.col-lg-offset-2
+            input(type="number" class="form-control input-sm" placeholder="Cust Weight Cost" id="cust_weight_cost" name="cust_weight_cost" value=route.cust_weight_cost)
+        .form-group
+          label.col-lg-2.control-label(for='cust_volume_cost') Customer Weight Volume
+          .col-lg-10.col-lg-offset-2
+            input(type="number" class="form-control input-sm" placeholder="Cust Volume Cost" id="cust_volume_cost" name="cust_volume_cost" value=route.cust_volume_cost)
+
+        .form-group
+          .col-lg-10.col-lg-offset-2
+            button.btn.btn-default(type='reset') Cancel
+            button.btn.btn-primary(type='submit') Submit
+
+

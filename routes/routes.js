@@ -28,14 +28,12 @@ router.get('/add', function(req, res) {
 
 /* GET edit routes page. */
 router.get('/edit/:id', function(req, res) {
-  queries.getAllLocations(function(err, locations){
-    queries.getRouteById(req.params.id, function(err, route){
-      if(err){
-        res.redirect('/routes');
-      } else {
-        res.render('editRoute', { route: route, locations: locations });
-      }
-    });
+  queries.getRouteById(req.params.id, function(err, route){
+    if(err){
+      res.redirect('/routes');
+    } else {
+      res.render('editRoute', { route: route });
+    }
   });
 });
 
@@ -43,11 +41,6 @@ router.get('/edit/:id', function(req, res) {
 router.post('/edit/:id', function(req, res) {
   var route = {
     id: req.params.id,
-    origin_name: req.body.origin_name,
-    destination_name: req.body.destination_name,
-    land: req.body.Land,
-    sea: req.body.Sea,
-    air: req.body.Air,
     trans_weight_cost: req.body.trans_weight_cost,
     trans_volume_cost: req.body.trans_volume_cost,
     cust_weight_cost: req.body.cust_weight_cost,
@@ -56,9 +49,9 @@ router.post('/edit/:id', function(req, res) {
 
   queries.editRouteById(route, function(err){
     if(err){
-      res.render('editRoute', { route: route, locations: result });
+      res.render('editRoute', { route: route });
     } else {
-      res.redirect('/')
+      res.redirect('/routes')
     }
   });
 });

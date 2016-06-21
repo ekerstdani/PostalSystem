@@ -1,3 +1,35 @@
 extends layout
 
+append scripts
+  script(type='text/javascript').
+    function loadTable(){
+      var events = !{events}
+      var index = parseInt($('#index').text());
+      var event_table = $('#event_table');
+      var event = events[index];
+
+      $("#event_table").empty();
+
+      var tr = $('<tr/>').appendTo(event_table);
+      $.each(event, function(key, val) {
+        tr.append('<td>' + val + '</td>');
+      });
+    }
+
 block content
+  table(class="table table-striped table-hover")
+    thead
+      tr(class="info")
+        th(width="20%") Day
+        th(width="20%") Destination
+        th(width="20%") Origin
+        th(width="10%") Weight
+        th(width="10%") Volume
+        th(width="20%") Priority
+
+    tbody#event_table
+
+  center
+    button#prev Prev
+    span#index 0
+    button#next Next

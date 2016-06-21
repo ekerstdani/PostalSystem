@@ -97,13 +97,12 @@ exports.editRouteById = function(route, callback){
       return;
     }
 
-    var query = `UPDATE Routes SET AddressOrigin='${route.AddressOrigin}', 
-    SuburbOrigin='${route.SuburbOrigin}', RegionOrigin='${route.RegionOrigin}', 
-    CountryOrigin='${route.CountryOrigin}', AddressDes='${route.AddressDes}', 
-    SuburbDes='${route.SuburbDes}', CountryDes='${route.CountryDes}', 
-    Priority='${route.Priority}', Land='${route.Land}', Sea='${route.Sea}',
-    Air='${route.Air}'`;
-    query += 'WHERE uid=' + route.Id + ";"
+    var query = `UPDATE Routes SET  
+    trans_weight_cost='${route.trans_weight_cost}', 
+    trans_volume_cost='${route.trans_volume_cost}', 
+    cust_weight_cost='${route.cust_weight_cost}', 
+    cust_volume_cost='${route.cust_volume_cost}'`;
+    query += 'WHERE id=' + route.id + ";"
 
     client.query(query, function (error, result) {
       done();

@@ -53,8 +53,8 @@ INSERT INTO Locations VALUES
 ('Algeria'), ('Russia'), ('Hungary'), ('Quebec'), ('China'),('Auckland'), ('Hamilton'), ('Rotorua'), ('Palmerston North'), ('Wellington'), ('Christchurch'),('Dunedin');
 
 INSERT INTO Routes VALUES 
-(1, 'Algeria', 'Russia', TRUE, FALSE, FALSE), 
-(2, 'Russia', 'Algeria', TRUE, FALSE, FALSE);
+(1, 'Algeria', 'Russia', TRUE, FALSE, FALSE, 1, 2, 3, 4), 
+(2, 'Russia', 'Algeria', TRUE, FALSE, FALSE, 5, 6, 7, 8);
 
 INSERT INTO Users (Username,Realname,Password,manager) VALUES
 ('admin','Sally Smith','admin','t');
