@@ -32,20 +32,19 @@ exports.logEvent = function(event, type) {
   });
 }
 
-exports.getNumberOfEvents = function(callback) {
+exports.getNumberOfEvents = function() {
   var total = 0;
-  total += getAllMailEvents(function(err, result){
-    return result.length;
+   getAllMailEvents(function(err, result){
+    total += result.length;
+    
   });
-  total += getAllDiscontinueEvents(function(err, result){
-    return result.length;
+   getAllDiscontinueEvents(function(err, result){
+     total += result.length;
+  });  
+   getAllCostEvents(function(err, result){  
+     total += result.length;
   });
-  total += getAllPriceEvents(function(err, result){
-    return result.length;
-  });
-  total += getAllCostEvents(function(err, result){
-    return result.length;
-  });
+  console.log(total);
   return total;
 }
 
