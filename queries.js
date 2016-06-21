@@ -60,13 +60,12 @@ exports.addRoute = function(route, callback){
       callback(err);
       return;
     }
-    console.log(route)
-    console.log(route.Sea)
+
     var query = `INSERT INTO Routes (origin_name, destination_name, land,
     sea, air,trans_weight_cost,trans_volume_cost,cust_weight_cost,cust_volume_cost) VALUES ('${route.origin_name}', '${route.destination_name}','`;
 
-    route.land !=null ? query += route.land + "', " : query += "f', '";
-    route.sea !=null ? query += route.sea + "', " : query += "f', '";
+    route.land !=null ? query += route.land + "', '" : query += "f', '";
+    route.sea !=null ? query += route.sea + "', '" : query += "f', '";
     route.air !=null ? query += route.air + "', " : query += "f',";
     query += `${route.trans_weight_cost},`
     query += `${route.trans_volume_cost},`
