@@ -61,12 +61,13 @@ exports.addRoute = function(route, callback){
       return;
     }
     console.log(route)
+    console.log(route.Sea)
     var query = `INSERT INTO Routes (origin_name, destination_name, land,
     sea, air,trans_weight_cost,trans_volume_cost,cust_weight_cost,cust_volume_cost) VALUES ('${route.origin_name}', '${route.destination_name}','`;
 
-    route.land!=null ? query += route.Land + "', '" : query += "f', '";
-    route.sea!=null ? query += route.Sea + "', '" : query += "f', '";
-    route.air!=null ? query += route.Air + "')" : query += "f',";
+    route.land !=null ? query += route.land + "', '" : query += "f', '";
+    route.sea !=null ? query += route.sea + "', '" : query += "f', '";
+    route.air !=null ? query += route.air + "')" : query += "f',";
     query += `${route.trans_weight_cost},`
     query += `${route.trans_volume_cost},`
     query += `${route.cust_weight_cost},`
@@ -314,7 +315,7 @@ exports.addMail = function(mail, callback){
     priority , weight , volume) 
     VALUES ('${mail.creationDate}', '${mail.originID}', 
     '${mail.destinationID}', '${mail.priority}', 
-    '${mail.weight}', '${mail.volume}') RETURNING id;`;
+    '${mail.weight}', '${mail.volume}') `;
 
     client.query(query, function(error, result){
       done();
