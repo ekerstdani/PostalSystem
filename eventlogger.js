@@ -32,7 +32,7 @@ exports.logEvent = function(event, type) {
   });
 }
 
-exports.getNumberOfEvents = function(callback) {
+exports.getNumberOfEvents = function() {
   var total = 0;
   getAllMailEvents(function(err, result){
     return result.length;
