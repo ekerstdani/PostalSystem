@@ -42,7 +42,18 @@ block navbar
                li
                 a(href="/routes/add") Add Route   
           li
-            a(href="/events/mail") Events
+            div( class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+              ul(class="nav navbar-nav")
+               li(class ="dropdown")
+                a(href"/routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false") Events 
+                 span(class="caret")
+                ul(class="dropdown-menu" role="menu")
+                 li
+                  a(href="/events/mail") Mail Events
+                 li
+                  a(href="/events/cost") Cost Events
+                 li
+                  a(href="/events/discontinue") Discontinue Events
           li
             a(href="/metrics") Metrics
                                

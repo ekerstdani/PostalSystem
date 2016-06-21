@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var queries = require('../queries');
+var eventlogger = require('../eventlogger');
 
 /* GET routes page. */
 router.get('/', function(req, res) {
@@ -88,7 +89,10 @@ router.post('/add', function(req,res) {
 /* POST delete route */
 router.post('/delete/:id', function(req, res) {
   var id = req.params.id;
-  console.log(id)
+  queries.getRouteById(id, function(err, result){
+    console.log(result);
+    eventlogger.logEvent(result, 'discontinue');
+  });
   queries.removeRouteById(id, function(err) {
     if(err){
       res.render('deleteRoute', { message: "Failed to remove Route." });

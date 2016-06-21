@@ -20,18 +20,7 @@ router.get('/cost', function(req, res) {
     if(err){
       console.log(err);
     } else {
-      res.render('costevent', { events: result });
-    }
-  });
-});
-
-/* GET price event page. */
-router.get('/price', function(req, res) {
-  eventlogger.getAllPriceEvents(function(err, result){
-    if(err){
-      console.log(err);
-    } else {
-      res.render('priceevent', { events: result });
+      res.render('costevent', { events: JSON.stringify(result) });
     }
   });
 });
@@ -42,7 +31,7 @@ router.get('/discontinue', function(req, res) {
     if(err){
       console.log(err);
     } else {
-      res.render('discontinueevent', { events: result });
+      res.render('discontinueevent', { events: JSON.stringify(result) });
     }
   });
 });

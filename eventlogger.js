@@ -16,7 +16,7 @@ exports.logEvent = function(event, type) {
           result.simulation.cost.push(event);
           break;
         case 'discontinue': //discontinue route
-          result.simulation.price.push(event);
+          result.simulation.discontinue.push(event);
           break;
         default:
           console.log(err);
@@ -34,19 +34,16 @@ exports.logEvent = function(event, type) {
 
 exports.getNumberOfEvents = function(callback) {
   var total = 0;
-  total += getAllMailEvents(function(err, result){
+  getAllMailEvents(function(err, result){
     return result.length;
   });
   total += getAllDiscontinueEvents(function(err, result){
     return result.length;
   });
-  total += getAllPriceEvents(function(err, result){
-    return result.length;
-  });
   total += getAllCostEvents(function(err, result){
     return result.length;
   });
-  return total;
+  return callback(err, total);
 }
 
 var getAllMailEvents = exports.getAllMailEvents = function(callback) {

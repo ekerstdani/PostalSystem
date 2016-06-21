@@ -124,11 +124,6 @@ exports.removeRouteById = function(id, callback){
       return;
     }
 
-    getRouteById(id, function(err, result){
-      console.log(result);
-      eventlogger.logEvent(result, 'cost');
-    });
-
     client.query("DELETE FROM Routes WHERE id=" + id + ";", function (error, result) {
       done();
       if (error) {
@@ -155,7 +150,7 @@ exports.removeMail = function(id, callback){
       if (error) {
         console.error('Failed to execute query.');
         console.error(error);
-        callback(err);
+        callback(error);
         return;
       }
       callback(null);

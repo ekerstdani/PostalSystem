@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <simulation>
   <cost>
-    <company>Air NZ</company>
-    <to>Rome</to>
-    <from>Wellington</from>
-    <type>Air</type>
-    <weightcost>6</weightcost>
-    <volumecost>6</volumecost>
-    <maxWeight>350</maxWeight>
-    <maxVolume>50</maxVolume>
-    <duration>16</duration>
-    <frequency>36</frequency>
-    <day>Thursday</day>
+    <id>5</id>
+    <trans_weight_cost>5</trans_weight_cost>
+    <trans_volume_cost>5</trans_volume_cost>
+    <cust_weight_cost>1</cust_weight_cost>
+    <cust_volume_cost>2</cust_volume_cost>
   </cost>
   <mail>
     <creationDate>10/05/1995</creationDate>
@@ -22,9 +16,15 @@
     <volume>12</volume>
   </mail>
   <discontinue>
-    <company>Kelburn Airways</company>
-    <to>Sydney</to>
-    <from>Wellington</from>
-    <type>Air</type>
+    <id>4</id>
+    <origin_name>Hungary</origin_name>
+    <destination_name>Palmerston North</destination_name>
+    <land>true</land>
+    <sea>false</sea>
+    <air>false</air>
+    <trans_weight_cost>$12.00</trans_weight_cost>
+    <trans_volume_cost>$1.00</trans_volume_cost>
+    <cust_weight_cost>$5.00</cust_weight_cost>
+    <cust_volume_cost>$3.00</cust_volume_cost>
   </discontinue>
 </simulation>
