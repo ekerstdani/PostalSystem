@@ -35,6 +35,23 @@ exports.logEvent = function(event, type) {
   });
 }
 
+exports.getNumberOfEvents = function(callback) {
+  var total = 0;
+  total += getAllMailEvents(function(err, result){
+    return result.length;
+  });
+  total += getAllDiscontinueEvents(function(err, result){
+    return result.length;
+  });
+  total += getAllPriceEvents(function(err, result){
+    return result.length;
+  });
+  total += getAllCostEvents(function(err, result){
+    return result.length;
+  });
+  return total;
+}
+
 exports.getAllMailEvents = function(callback) {
   fs.readFile('event_log.xml', function(err, data) {
     parser.parseString(data, function (err, result) {
