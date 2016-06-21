@@ -71,7 +71,7 @@ exports.addRoute = function(route, callback){
     query += `${route.trans_volume_cost},`
     query += `${route.cust_weight_cost},`
     query += `${route.cust_volume_cost}`
-    query += ");";
+    query += ") RETURNING id;";
 
     console.log(query);
 
@@ -313,7 +313,7 @@ exports.addMail = function(mail, callback){
     priority , weight , volume) 
     VALUES ('${mail.creationDate}', '${mail.originID}', 
     '${mail.destinationID}', '${mail.priority}', 
-    '${mail.weight}', '${mail.volume}') `;
+    '${mail.weight}', '${mail.volume}') RETURNING id`;
 
     client.query(query, function(error, result){
       done();
