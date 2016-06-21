@@ -22,7 +22,7 @@ block content
                 else if route.air
                     p Air
             td
-                if isManager
+                if !isManager
                     a(class="btn btn-primary btn-xs", href="/routes/edit/" + route.id) Edit
                     form(action="/routes/delete/" + route.id, method="post")
                       button(name="delete" value="delete") Delete

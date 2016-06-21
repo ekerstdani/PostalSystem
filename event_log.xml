@@ -13,13 +13,6 @@
     <frequency>36</frequency>
     <day>Thursday</day>
   </cost>
-  <price>
-    <to>Rome</to>
-    <from>New Zealand</from>
-    <priority>International Air</priority>
-    <weightcost>6</weightcost>
-    <volumecost>8</volumecost>
-  </price>
   <mail>
     <creationDate>10/05/1995</creationDate>
     <originID>Auckland</originID>

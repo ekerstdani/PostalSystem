@@ -15,9 +15,6 @@ exports.logEvent = function(event, type) {
         case 'cost': //trans cost update
           result.simulation.cost.push(event);
           break;
-        case 'price': //cust price update
-          result.simulation.price.push(event);
-          break;
         case 'discontinue': //discontinue route
           result.simulation.price.push(event);
           break;
@@ -52,7 +49,7 @@ exports.getNumberOfEvents = function(callback) {
   return total;
 }
 
-exports.getAllMailEvents = function(callback) {
+var getAllMailEvents = exports.getAllMailEvents = function(callback) {
   fs.readFile('event_log.xml', function(err, data) {
     parser.parseString(data, function (err, result) {
       if(err){
@@ -64,7 +61,7 @@ exports.getAllMailEvents = function(callback) {
   });
 }
 
-exports.getAllCostEvents = function(callback) {
+var getAllCostEvents = exports.getAllCostEvents = function(callback) {
   fs.readFile('event_log.xml', function(err, data) {
     parser.parseString(data, function (err, result) {
       if(err){
@@ -76,19 +73,7 @@ exports.getAllCostEvents = function(callback) {
   });
 }
 
-exports.getAllPriceEvents = function(callback) {
-  fs.readFile('event_log.xml', function(err, data) {
-    parser.parseString(data, function (err, result) {
-      if(err){
-        callback(err);
-        return;
-      }
-      callback(null, result.simulation.price);
-    });
-  });
-}
-
-exports.getAllDiscontinueEvents = function(callback) {
+var getAllDiscontinueEvents = exports.getAllDiscontinueEvents = function(callback) {
   fs.readFile('event_log.xml', function(err, data) {
     parser.parseString(data, function (err, result) {
       if(err){

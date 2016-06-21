@@ -6,7 +6,7 @@ var database = "postgres://postgres:postgres@localhost:5432/swen301";
 var signedInUser = '';
 var manager = false;
 
-exports.getRouteById = function(id, callback){
+var getRouteById = exports.getRouteById = function(id, callback){
   pg.connect(database, function (err, client, done) {
     if (err) {
       console.error('Could not connect to the database.');
@@ -20,8 +20,7 @@ exports.getRouteById = function(id, callback){
       done();
       if (error) {
         console.error('Failed to execute query.');
-        console.error(error);
-        callback(err);
+        callback(error);
         return;
       }
       callback(null, result.rows[0]);
@@ -111,6 +110,7 @@ exports.editRouteById = function(route, callback){
         callback(err);
         return;
       }
+      eventlogger.logEvent(route, 'cost');
       callback(null);   
     });
   });
@@ -123,6 +123,11 @@ exports.removeRouteById = function(id, callback){
       console.error(err);
       return;
     }
+
+    getRouteById(id, function(err, result){
+      console.log(result);
+      eventlogger.logEvent(result, 'cost');
+    });
 
     client.query("DELETE FROM Routes WHERE id=" + id + ";", function (error, result) {
       done();
